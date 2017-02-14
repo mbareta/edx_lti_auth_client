@@ -77,7 +77,7 @@ router.get('/login', function(req, res, next){
 
 router.get('/info', function(req, res, next) {
   var token = req.session.authToken.token.access_token;
-  request.get({url: `${serverBaseUrl}:8000/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , function(error, response, body){
+  request.get({url: `${serverBaseUrl}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , function(error, response, body){
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
@@ -85,7 +85,7 @@ router.get('/info', function(req, res, next) {
 
 router.get('/courses', function(req, res, next){
   request.cookie = req.session.edxCookies;
-  request.get({url: `${serverBaseUrl}:8000/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , function(error, response, body){
+  request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , function(error, response, body){
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
