@@ -1,20 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var lti = require('ims-lti');
+const express = require('express');
+const router = express.Router();
+const lti = require('ims-lti');
 
 RedisNonceStore = require('../node_modules/ims-lti/lib/redis-nonce-store.js');
 client = require('redis').createClient();
 store = new RedisNonceStore('key', client);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
 // render LTI component
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
   provider = new lti.Provider('key', 'secret', store);
-  provider.valid_request(req, function(err, isValid){
+  provider.valid_request(req, (err, isValid) => {
     if(isValid) {
       req.session.ltiUserId = provider.userId;
       res.render('index', { title: 'Success', email: provider.userId });
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 });
 
 // submit from LTI component
-router.post('/submit', function(req, res, next){
+router.post('/submit', (req, res, next) => {
   provider = new lti.Provider('key', 'secret', store);
   res.render('index', { title: 'Sumbitted', email: req.session.ltiUserId });
 });
