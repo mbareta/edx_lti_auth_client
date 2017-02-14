@@ -20,13 +20,11 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  db.User.findOne().then(function (user) {
-    res.send(user);
-  });
-});
+router.get('/', (req, res, next) => 
+  db.User.findOne().then(user => res.send(user))
+);
 
-router.get('/auth', function(req, res, next){
+router.get('/auth', (req, res, next) => {
   // Authorization oauth2 URI
   const authorizationUri = oauth2.authorizationCode.authorizeURL({
     redirect_uri: `${serverBaseUrl}:3000/users/login`,
@@ -53,7 +51,7 @@ router.get('/auth', function(req, res, next){
   // });
 });
 
-router.get('/login', function(req, res, next){
+router.get('/login', (req, res, next) => {
   // Get the access token object (the authorization code is given from the previous step).
   console.log('req.params.code', req.query.code);
   const tokenConfig = {
@@ -75,17 +73,17 @@ router.get('/login', function(req, res, next){
   });
 });
 
-router.get('/info', function(req, res, next) {
-  var token = req.session.authToken.token.access_token;
-  request.get({url: `${serverBaseUrl}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , function(error, response, body){
+router.get('/info', (req, res, next) => {
+  const token = req.session.authToken.token.access_token;
+  request.get({url: `${serverBaseUrl}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
 });
 
-router.get('/courses', function(req, res, next){
+router.get('/courses', (req, res, next) => {
   request.cookie = req.session.edxCookies;
-  request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , function(error, response, body){
+  request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , (error, response, body) => {
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
