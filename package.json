@@ -1,6 +1,6 @@
 {
   "name": "fullstack",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "supervisor ./bin/www"
@@ -13,9 +13,9 @@
     "express-session": "^1.15.0",
     "ims-lti": "^3.0.2",
     "jade": "~1.11.0",
+    "mongodb": "^2.2.23",
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
-    "oauth": "^0.9.15",
     "pug": "^2.0.0-beta11",
     "react": "^15.4.2",
     "redis": "^2.6.5",

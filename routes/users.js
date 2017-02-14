@@ -3,13 +3,16 @@ var router = express.Router();
 var db = require('../models/index');
 var request = require('request').defaults({jar: true});
 
+var serverBaseUrl = 'http://54.208.243.8';
+// var serverBaseUrl = 'http://localhost';
+
 const credentials = {
   client: {
     id: 'id',
     secret: 'secret'
   },
   auth: {
-    tokenHost: 'http://localhost:8000',
+    tokenHost: serverBaseUrl,
     tokenPath: '/oauth2/access_token/',
     authorizePath: '/oauth2/authorize'
   }
@@ -26,7 +29,7 @@ router.get('/', function(req, res, next) {
 router.get('/auth', function(req, res, next){
   // Authorization oauth2 URI
   const authorizationUri = oauth2.authorizationCode.authorizeURL({
-    redirect_uri: 'http://localhost:3000/users/login',
+    redirect_uri: `${serverBaseUrl}:3000/users/login`,
     scope: 'openid profile email',
     // state: '<state>'
   });
@@ -55,7 +58,7 @@ router.get('/login', function(req, res, next){
   console.log('req.params.code', req.query.code);
   const tokenConfig = {
     code: req.query.code,
-    redirect_uri: 'http://localhost:3000'
+    redirect_uri: `${serverBaseUrl}:3000`
   };
 
   // Callbacks
@@ -74,7 +77,7 @@ router.get('/login', function(req, res, next){
 
 router.get('/info', function(req, res, next) {
   var token = req.session.authToken.token.access_token;
-  request.get({url: 'http://localhost:8000/oauth2/user_info', headers: {'Authorization': `Bearer ${token}`}} , function(error, response, body){
+  request.get({url: `${serverBaseUrl}:8000/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , function(error, response, body){
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
@@ -82,7 +85,7 @@ router.get('/info', function(req, res, next) {
 
 router.get('/courses', function(req, res, next){
   request.cookie = req.session.edxCookies;
-  request.get({url: 'http://localhost:8000/api/courses/v1/courses?username=honor', headers: {'Accept': 'application/json'}} , function(error, response, body){
+  request.get({url: `${serverBaseUrl}:8000/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , function(error, response, body){
     res.set('Content-Type', 'application/json');
     res.send(body);
   });
