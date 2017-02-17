@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
+app.use(skipRoutes(['/users/auth', 'users/login'], redirectAnonymous));
 app.use('/', index);
 app.use('/users', users);
 
@@ -44,5 +45,23 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function skipRoutes(routes, middleware) {
+  return (req, res, next) => {
+    if(routes.some(route => route === req.path)) {
+      return next();
+    } else {
+      return middleware(req, res, next);
+    } 
+  };
+}
+
+function redirectAnonymous(req, res, next) {
+  if (typeof req.session.authToken === "undefined"){
+    return res.redirect('/users/auth');
+  } else {
+    return next();
+  }
+}
 
 module.exports = app;
