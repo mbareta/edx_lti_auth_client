@@ -27,6 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 app.use(skipRoutes(['/users/auth', '/users/login', '/lti', '/lti/form', '/lti/form/submit'], redirectAnonymous));
 
+app.use((req, res, next) => {
+  req.email = getEmailFromSession(req);
+  next();
+});
+
 // routes
 app.use('/', index);
 app.use('/users', users);
@@ -68,6 +73,13 @@ function redirectAnonymous(req, res, next) {
   } else {
     return next();
   }
+}
+
+function getEmailFromSession(req) {
+  const oauthEmail = req.session.user && req.session.user.email;
+  const ltiEmail = req.session.lti && req.session.lti.email;
+
+  return oauthEmail || ltiEmail || undefined;
 }
 
 module.exports = app;
