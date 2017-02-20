@@ -1,4 +1,4 @@
-const env = require('./env.json');
+const env = require('./config.json');
 
 exports.get = () => {
     const node_env = process.env.NODE_ENV || 'development';
@@ -7,3 +7,5 @@ exports.get = () => {
     env_variables.client.secret = process.env.CLIENT_SECRET || env_variables.client.secret;
     return env_variables;
 };
+
+
