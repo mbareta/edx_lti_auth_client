@@ -3,9 +3,3 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  p #{email}
-  form(action='/submit', method='POST')
-    label Input
-    input(name='input')
-    input(type='hidden', value='#{email}')
-    input(type='submit')

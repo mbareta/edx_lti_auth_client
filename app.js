@@ -8,6 +8,9 @@ const session = require('express-session')
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const lti = require('./routes/lti/index');
+
+// const MongoConnectionPool = require('./lib/mongoConnectionPool');
 
 const app = express();
 
@@ -23,10 +26,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+// app.use(skipRoutes(['/users/auth', 'users/login'], redirectAnonymous));
 
-app.use(skipRoutes(['/users/auth', 'users/login'], redirectAnonymous));
+// routes
 app.use('/', index);
 app.use('/users', users);
+app.use('/lti', lti);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -52,12 +57,12 @@ function skipRoutes(routes, middleware) {
       return next();
     } else {
       return middleware(req, res, next);
-    } 
+    }
   };
 }
 
 function redirectAnonymous(req, res, next) {
-  if (typeof req.session.authToken === "undefined"){
+  if (typeof req.session.authToken === 'undefined'){
     return res.redirect('/users/auth');
   } else {
     return next();
