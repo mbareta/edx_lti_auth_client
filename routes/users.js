@@ -15,7 +15,7 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', (req, res, next) => 
+router.get('/', (req, res, next) =>
   db.User.findOne().then(user => res.send(user))
 );
 
@@ -63,7 +63,7 @@ router.get('/login', (req, res, next) => {
     else {
      const token = oauth2.accessToken.create(result);
      req.session.authToken = token;
-     res.redirect('info');
+     res.redirect('/');
     }
   });
 });
