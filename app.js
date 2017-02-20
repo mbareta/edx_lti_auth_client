@@ -9,6 +9,7 @@ const session = require('express-session')
 const index = require('./routes/index');
 const users = require('./routes/users');
 const lti = require('./routes/lti/index');
+const ltiForm = require('./routes/lti/form');
 
 const app = express();
 
@@ -24,12 +25,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
-app.use(skipRoutes(['/users/auth', '/users/login', '/lti'], redirectAnonymous));
+app.use(skipRoutes(['/users/auth', '/users/login', '/lti', '/lti/form', '/lti/form/submit'], redirectAnonymous));
 
 // routes
 app.use('/', index);
 app.use('/users', users);
 app.use('/lti', lti);
+app.use('/lti/form', ltiForm);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
