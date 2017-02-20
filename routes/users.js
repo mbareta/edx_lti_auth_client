@@ -15,11 +15,11 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', (req, res, next) => 
+router.get('/', (req, res, _) => 
   db.User.findOne().then(user => res.send(user))
 );
 
-router.get('/auth', (req, res, next) => {
+router.get('/auth', (req, res, _) => {
   // Authorization oauth2 URI
   const authorizationUri = oauth2.authorizationCode.authorizeURL({
     redirect_uri: `${serverBaseUrl}:${portfolioPort}/users/login`,
@@ -46,7 +46,7 @@ router.get('/auth', (req, res, next) => {
   // });
 });
 
-router.get('/login', (req, res, next) => {
+router.get('/login', (req, res, _) => {
   // Get the access token object (the authorization code is given from the previous step).
   console.log('req.params.code', req.query.code);
   const tokenConfig = {
@@ -73,7 +73,7 @@ router.get('/logout', (req, res, _) => {
   res.redirect('http://localhost:8000/logout');
 });
 
-router.get('/info', (req, res, next) => {
+router.get('/info', (req, res, _) => {
   const token = req.session.authToken.token.access_token;
   request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {
     res.set('Content-Type', 'application/json');
@@ -81,7 +81,7 @@ router.get('/info', (req, res, next) => {
   });
 });
 
-router.get('/courses', (req, res, next) => {
+router.get('/courses', (req, res, _) => {
   request.cookie = req.session.edxCookies;
   request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , (error, response, body) => {
     res.set('Content-Type', 'application/json');
