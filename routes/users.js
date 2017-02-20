@@ -68,6 +68,11 @@ router.get('/login', (req, res, next) => {
   });
 });
 
+router.get('/logout', (req, res, _) => {
+  req.session.destroy();
+  res.redirect('http://localhost:8000/logout');
+});
+
 router.get('/info', (req, res, next) => {
   const token = req.session.authToken.token.access_token;
   request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {

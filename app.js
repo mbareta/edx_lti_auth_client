@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
-app.use(skipRoutes(['/users/auth', 'users/login'], redirectAnonymous));
+app.use(skipRoutes(['/users/auth', '/users/login', '/lti'], redirectAnonymous));
 
 // routes
 app.use('/', index);
