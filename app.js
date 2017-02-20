@@ -10,8 +10,6 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const lti = require('./routes/lti/index');
 
-// const MongoConnectionPool = require('./lib/mongoConnectionPool');
-
 const app = express();
 
 // view engine setup
