@@ -60,7 +60,8 @@ function skipRoutes(routes, middleware) {
 }
 
 function redirectAnonymous(req, res, next) {
-  if (typeof req.session.authToken === 'undefined'){
+  if (typeof req.session.authToken === 'undefined' ||
+      req.session.authToken === null) {
     return res.redirect('/users/auth');
   } else {
     return next();
