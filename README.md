@@ -15,7 +15,7 @@ The code is still in early development process and serves as a prototype/proof o
 4. Go to Content, Unit and add LTI XBlock
 5. Set up LTI XBlock:
   - "LTI ID" is my_lti_client_id from passport from step 2
-  - "LTI URL" is the URL to our component in this app, currently "http://localhost:3000/"
+  - "LTI URL" is the URL to our component in this app, currently "http://localhost:3000/lti/form"
   - "Open in New Page" is False because we want it to render inside iframe
   - Request user's email and username is True because we want to save this to our session
   - "Scored" can be True so we can test the grading API
