@@ -1,21 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../models/index');
-var request = require('request').defaults({jar: true});
+const express = require('express');
+const router = express.Router();
+const db = require('../models/index');
+const request = require('request').defaults({jar: true});
 
-var serverBaseUrl = 'http://54.208.243.8';
-// var serverBaseUrl = 'http://localhost';
+const config = require('../config/main').get();
+const serverBaseUrl = config.baseUrl;
+const lmsPort = config.lmsPort
+const portfolioPort = config.portfolioPort
 
 const credentials = {
-  client: {
-    id: 'id',
-    secret: 'secret'
-  },
-  auth: {
-    tokenHost: serverBaseUrl,
-    tokenPath: '/oauth2/access_token/',
-    authorizePath: '/oauth2/authorize'
-  }
+  client: config.client,
+  auth: config.auth
 };
 const oauth2 = require('simple-oauth2').create(credentials);
 
@@ -27,7 +22,7 @@ router.get('/', (req, res, next) =>
 router.get('/auth', (req, res, next) => {
   // Authorization oauth2 URI
   const authorizationUri = oauth2.authorizationCode.authorizeURL({
-    redirect_uri: `${serverBaseUrl}:3000/users/login`,
+    redirect_uri: `${serverBaseUrl}:${portfolioPort}/users/login`,
     scope: 'openid profile email',
     // state: '<state>'
   });
@@ -56,7 +51,7 @@ router.get('/login', (req, res, next) => {
   console.log('req.params.code', req.query.code);
   const tokenConfig = {
     code: req.query.code,
-    redirect_uri: `${serverBaseUrl}:3000`
+    redirect_uri: `${serverBaseUrl}:${portfolioPort}`
   };
 
   // Callbacks
@@ -75,7 +70,7 @@ router.get('/login', (req, res, next) => {
 
 router.get('/info', (req, res, next) => {
   const token = req.session.authToken.token.access_token;
-  request.get({url: `${serverBaseUrl}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {
+  request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {
     res.set('Content-Type', 'application/json');
     res.send(body);
   });

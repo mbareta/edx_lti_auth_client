@@ -4,20 +4,39 @@
     "password": "root",
     "database": "fullstack",
     "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "baseUrl": "http://localhost",
+    "lmsPort": 8000,
+    "studioPort": 8001,
+    "portfolioPort": 3000,
+    "client": {
+      "id": "id",
+      "secret": "secret"
+    },
+    "auth": {
+      "tokenHost": "http://localhost:8000",
+      "authorizePath": "/oauth2/authorize",
+      "tokenPath": "/oauth2/access_token/"
+    }
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "baseUrl": "http://54.208.243.8",
+    "lmsPort": 80,
+    "studioPort": 18010,
+    "portfolioPort": 3000,
+    "client": {
+      "id": "id",
+      "secret": "secret"
+    },
+    "auth": {
+      "tokenHost": "http://localhost:80",
+      "authorizePath": "/oauth2/authorize",
+      "tokenPath": "/oauth2/access_token/"
+    }
   }
 }
