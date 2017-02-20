@@ -1,6 +1,9 @@
-div Welcome
-  = email
+extends ../../ltiLayout
 
-form(action='/lti/form/submit', method='POST')
-  input(type='text', name='text', placeholder='Say something...')
-  input(type='submit', value='Save it')
+block content
+  div Welcome
+    = email
+
+  form(action='/lti/form/submit', method='POST')
+    input(type='text', name='text', placeholder='Say something...')
+    input(type='submit', value='Save it')

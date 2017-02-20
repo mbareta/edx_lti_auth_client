@@ -1,10 +1,13 @@
-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-  thead
-    tr
-      td Email
-      td Text
-  tbody
-    each result in results
+extends ../../ltiLayout
+
+block content
+  table
+    thead
       tr
-        td= result.email
-        td= result.text
+        td Email
+        td Text
+    tbody
+      each result in results
+        tr
+          td= result.email
+          td= result.text
