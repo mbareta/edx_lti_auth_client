@@ -24,10 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// TODO: check what is express session secret
+// and replace keyboard cat with something normal
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 app.use(skipRoutes(['/', '/users/auth', '/users/login', '/lti'], redirectAnonymous));
 
-app.use((req, res, next) => {
+app.use((req, _, next) => {
   req.email = getEmailFromSession(req);
   next();
 });
@@ -39,14 +41,14 @@ app.use('/lti', lti);
 app.use('/lti/form', ltiForm);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((_, _, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
