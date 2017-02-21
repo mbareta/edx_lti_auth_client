@@ -1,3 +1,5 @@
+//@flow
+
 const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
@@ -15,11 +17,11 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', (req, res, next) =>
-  db.User.findOne().then(user => res.send(user))
+router.get('/', (req, res, _) => 
+  db.User.findOne().then((user: User) => res.send(user))
 );
 
-router.get('/auth', (req, res, next) => {
+router.get('/auth', (req, res, _) => {
   // Authorization oauth2 URI
   const authorizationUri = oauth2.authorizationCode.authorizeURL({
     redirect_uri: `${serverBaseUrl}:${portfolioPort}/users/login`,
@@ -46,7 +48,7 @@ router.get('/auth', (req, res, next) => {
   // });
 });
 
-router.get('/login', (req, res, next) => {
+router.get('/login', (req, res, _) => {
   // Get the access token object (the authorization code is given from the previous step).
   const tokenConfig = {
     code: req.query.code,
@@ -72,6 +74,11 @@ router.get('/login', (req, res, next) => {
       });
     }
   });
+});
+
+router.get('/logout', (req, res, _) => {
+  req.session.destroy();
+  res.redirect(`${serverBaseUrl}:${lmsPort}/logout`);
 });
 
 // router.get('/courses', (req, res, next) => {

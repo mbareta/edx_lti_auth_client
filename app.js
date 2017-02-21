@@ -1,3 +1,5 @@
+// @flow
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -61,7 +63,7 @@ app.use((err, req, res, _) => {
   res.render('error');
 });
 
-function skipRoutes(routes, middleware) {
+function skipRoutes(routes: Array<string>, middleware: Function) {
   return (req, res, next) => {
     if(routes.some(route => route === req.path)) {
       return next();
