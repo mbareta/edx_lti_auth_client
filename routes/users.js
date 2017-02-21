@@ -70,7 +70,7 @@ router.get('/login', (req, res, _) => {
   });
 });
 
-router.get('/logout', (req, res, _) => {
+router.all('/logout', (req, res, _) => {
   req.session.destroy();
   res.redirect('http://localhost:8000/logout');
 });
