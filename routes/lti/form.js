@@ -43,7 +43,7 @@ router.post('/submit', (req, res, _) => {
 
 // get email or throw error
 function getEmail(req) {
-  const email = req.session.lti && req.session.lti.email;
+  const email = req.email;
   if(email) {
     return email
   }
