@@ -65,7 +65,7 @@ router.get('/login', (req, res, _) => {
       // create token and store in session
       const token = oauth2.accessToken.create(result);
       req.session.authToken = token;
-      
+
       // request user info so we know user's email etc.
       const access_token = req.session.authToken.token.access_token;
       request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${access_token}`}} , (error, response, body) => {
