@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "check": "flow; test $? -eq 0 -o $? -eq 2",
-    "start": "npm run check && supervisor ./bin/www"
+    "start": "supervisor ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.16.0",

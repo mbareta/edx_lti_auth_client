@@ -18,7 +18,7 @@ const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
 router.get('/', (req, res, _) => 
-  db.User.findOne().then(user => res.send(user))
+  db.User.findOne().then((user: User) => res.send(user))
 );
 
 router.get('/auth', (req, res, _) => {

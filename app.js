@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-function skipRoutes(routes: Array<string>, middleware) {
+function skipRoutes(routes: Array<string>, middleware: Function) {
   return (req, res, next) => {
     if(routes.some(route => route === req.path)) {
       return next();
