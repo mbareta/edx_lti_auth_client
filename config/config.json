@@ -17,6 +17,10 @@
       "tokenHost": "http://localhost:8000",
       "authorizePath": "/oauth2/authorize",
       "tokenPath": "/oauth2/access_token/"
+    },
+    "lti": {
+      "key": "key",
+      "secret": "secret"
     }
   },
   "production": {
@@ -34,9 +38,13 @@
       "secret": "secret"
     },
     "auth": {
-      "tokenHost": "http://localhost:80",
+      "tokenHost": "http://54.208.243.8",
       "authorizePath": "/oauth2/authorize",
       "tokenPath": "/oauth2/access_token/"
+    },
+    "lti": {
+      "key": "key",
+      "secret": "secret"
     }
   }
 }
