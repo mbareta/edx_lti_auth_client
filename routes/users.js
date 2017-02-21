@@ -15,7 +15,7 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', (req, res, next) => 
+router.get('/', (req, res, next) =>
   db.User.findOne().then(user => res.send(user))
 );
 
@@ -48,7 +48,6 @@ router.get('/auth', (req, res, next) => {
 
 router.get('/login', (req, res, next) => {
   // Get the access token object (the authorization code is given from the previous step).
-  console.log('req.params.code', req.query.code);
   const tokenConfig = {
     code: req.query.code,
     redirect_uri: `${serverBaseUrl}:${portfolioPort}`
@@ -61,27 +60,26 @@ router.get('/login', (req, res, next) => {
       res.send('Access Token Error ' + error.message);
     }
     else {
-     const token = oauth2.accessToken.create(result);
-     req.session.authToken = token;
-     res.redirect('info');
+      // create token and store in session
+      const token = oauth2.accessToken.create(result);
+      req.session.authToken = token;
+
+      // request user info so we know user's email etc.
+      const access_token = req.session.authToken.token.access_token;
+      request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${access_token}`}} , (error, response, body) => {
+        req.session.user = JSON.parse(body);
+        res.redirect('/');
+      });
     }
   });
 });
 
-router.get('/info', (req, res, next) => {
-  const token = req.session.authToken.token.access_token;
-  request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${token}`}} , (error, response, body) => {
-    res.set('Content-Type', 'application/json');
-    res.send(body);
-  });
-});
-
-router.get('/courses', (req, res, next) => {
-  request.cookie = req.session.edxCookies;
-  request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , (error, response, body) => {
-    res.set('Content-Type', 'application/json');
-    res.send(body);
-  });
-});
+// router.get('/courses', (req, res, next) => {
+//   request.cookie = req.session.edxCookies;
+//   request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , (error, response, body) => {
+//     res.set('Content-Type', 'application/json');
+//     res.send(body);
+//   });
+// });
 
 module.exports = router;

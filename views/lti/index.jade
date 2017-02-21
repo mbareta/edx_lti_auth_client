@@ -1,22 +1,7 @@
 extends ../layout
 
 block content
-  h1 LTI component responses
-
-  form(action='/lti', method='POST')
-    input(type='text', name='text', placeholder='Say something...')
-    input(type='submit', value='Save it')
-
-  br
-  br
-
-  table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-    thead
-      tr
-        td ID
-        td Text
-    tbody
-      each result in results
-        tr
-          td= result['_id']
-          td= result.text
+  h1 Available LTI components
+  ul.mdl-list
+    li.mdl-list__item
+      a(href='/lti/form') Simple Form

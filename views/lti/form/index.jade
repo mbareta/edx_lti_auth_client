@@ -1,0 +1,13 @@
+extends ../../ltiLayout
+
+block content
+  table
+    thead
+      tr
+        td Email
+        td Text
+    tbody
+      each result in results
+        tr
+          td= result.email
+          td= result.text
