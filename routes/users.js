@@ -74,11 +74,10 @@ router.get('/login', (req, res, _) => {
       });
     }
   });
-  
-  router.get('/logout', (req, res, _) => {
-    req.session.destroy();
-    res.redirect('http://localhost:8000/logout');
-  });
+
+router.get('/logout', (req, res, _) => {
+  req.session.destroy();
+  res.redirect(`${serverBaseUrl}:${lmsPort}/logout`);
 });
 
 // router.get('/courses', (req, res, next) => {
