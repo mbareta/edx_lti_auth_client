@@ -74,6 +74,7 @@ router.get('/login', (req, res, _) => {
       });
     }
   });
+});
 
 router.get('/logout', (req, res, _) => {
   req.session.destroy();
