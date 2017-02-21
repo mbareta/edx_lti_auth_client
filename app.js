@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+const RedisStore = require('connect-redis')(session);
 
 const config = require('./config/main').get();
 
