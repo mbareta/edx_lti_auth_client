@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+require('flow-remove-types/register')({all: true});
+
 const app = require('../app');
 const debug = require('debug')('fullstack:server');
 const http = require('http');
