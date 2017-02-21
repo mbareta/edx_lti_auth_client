@@ -21,7 +21,10 @@
     "lti": {
       "key": "key",
       "secret": "secret"
-    }
+    },
+    "cookieSecret": "fasttrac",
+    "cookieMaxAge": 60000,
+    "whitelistRoutes": ["/", "/users/auth", "/users/login", "/lti"]
   },
   "production": {
     "username": "root",
@@ -45,6 +48,9 @@
     "lti": {
       "key": "key",
       "secret": "secret"
-    }
+    },
+    "cookieSecret": "fasttrac",
+    "cookieMaxAge": 60000,
+    "whitelistRoutes": ["/", "/users/auth", "/users/login", "/lti"]
   }
 }
