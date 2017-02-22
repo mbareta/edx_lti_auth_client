@@ -6,7 +6,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+
 const config = require('./config/main').get();
 
 const index = require('./routes/index');
@@ -31,8 +34,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // TODO: check what is express session secret
 // and replace keyboard cat with something normal
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
-app.use(skipRoutes(['/', '/users/auth', '/users/login', '/lti'], redirectAnonymous));
+app.use(session({
+  secret: config.cookieSecret,
+  cookie: { maxAge: config.cookieMaxAge },
+  store: new RedisStore()
+}));
+app.use(skipRoutes(config.whitelistRoutes, redirectAnonymous));
 
 app.use((req, _, next) => {
   app.locals.email = req.email = getEmailFromSession(req);
