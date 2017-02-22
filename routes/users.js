@@ -17,7 +17,7 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 /* GET users listing. */
-router.get('/', (req, res, _) => 
+router.get('/', (req, res, _) =>
   db.User.findOne().then((user: User) => res.send(user))
 );
 
@@ -78,7 +78,12 @@ router.get('/login', (req, res, _) => {
 
 router.get('/logout', (req, res, _) => {
   req.session.destroy();
-  res.redirect(`${serverBaseUrl}:${lmsPort}/logout`);
+  if(params.query && params.query.no_redirect) {
+    res.send('OK');
+  }
+  else {
+    res.redirect(`${serverBaseUrl}:${lmsPort}/logout`);
+  }
 });
 
 // router.get('/courses', (req, res, next) => {
