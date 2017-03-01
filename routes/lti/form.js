@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
 const ltiProvider = require('../../lib/ltiProvider');
+const form = require('../../models/lti/form');
+const {ltiTypes} = require('../../models/lti/types');
+
 const mongoDbName = 'form_responses';
 const componentLocation = 'lti/form';
 
@@ -9,8 +12,15 @@ const componentLocation = 'lti/form';
 router.get('/', (req, res, _) => {
   const email = getEmail(req);
 
-  mongoConnectionPool.db.collection(mongoDbName).find({email: email}).toArray()
-    .then(results => res.render(`${componentLocation}/index`, {email: email, results: results}));
+  form.getResponsesByEmail(email)
+    .then(results => res.render(`${componentLocation}/index`, {email, results}));
+});
+
+router.get('/deliverable', (req, res, next) => {
+  const email = getEmail(req);
+
+  form.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
+   .then(results => res.render(`${componentLocation}/index`, {email, results}));
 });
 
 // LTI view
@@ -36,8 +46,7 @@ router.post('/', (req, res, _) => {
 // LTI submit
 router.post('/submit', (req, res, _) => {
   const email = getEmail(req);
-  mongoConnectionPool.db.collection(mongoDbName)
-    .insertOne({text: req.body.text, email: email})
+  form.saveResponse(email, ltiTypes.SUBDELIVERABLE, req.body.text, null)
     .then(result => res.redirect(`/${componentLocation}`));
 });
 

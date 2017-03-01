@@ -1,7 +1,30 @@
 'use strict';
 
-export default class FormResponses {
-    init() {
+const mongoConnectionPool = require('../../lib/mongoConnectionPool');
+const mongoDbName = 'form_responses';
 
+class Form {
+    saveResponse(email, type, data, metadata) {
+        return mongoConnectionPool.db.collection(mongoDbName)
+          .insertOne({
+              email,
+              type,
+              data,
+              metadata
+          });
+    }
+
+    getResponsesByEmail(email) {
+        return mongoConnectionPool.db.collection(mongoDbName)
+          .find({email})
+          .toArray();
+    }
+
+    getDeliverableByType(email, type='subDeliverable') {
+        return mongoConnectionPool.db.collection(mongoDbName)
+          .find({$and:[{email, type}]})
+          .toArray();
     }
 }
+
+module.exports = new Form();
