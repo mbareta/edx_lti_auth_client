@@ -1,7 +1,8 @@
+const Promise = require('bluebird');
 const express = require('express');
 const router = express.Router();
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
-const ltiProvider = require('../../lib/ltiProvider');
+const {validateLtiRequest} = require('../../middlewares/lti');
 const form = require('../../models/lti/form');
 const {ltiTypes} = require('../../models/lti/types');
 
@@ -16,7 +17,7 @@ router.get('/', (req, res, _) => {
     .then(results => res.render(`${componentLocation}/index`, {email, results}));
 });
 
-router.get('/deliverable', (req, res, next) => {
+router.get('/deliverable', (req, res, _) => {
   const email = getEmail(req);
 
   form.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
@@ -24,23 +25,8 @@ router.get('/deliverable', (req, res, next) => {
 });
 
 // LTI view
-router.post('/', (req, res, _) => {
-  // validate LTI request
-  ltiProvider.valid_request(req, (err, isValid) => {
-    if(isValid) {
-      // store user data in session
-      req.session.lti = {
-        email: ltiProvider.body.lis_person_contact_email_primary,
-        username: ltiProvider.username,
-        id: ltiProvider.userId
-      }
-
-      res.render(`${componentLocation}/form`, {email: req.session.lti.email});
-    }
-    else {
-      throw err;
-    }
-  });
+router.post('/', validateLtiRequest, (req, res, _) => {
+  res.render(`${componentLocation}/form`, {email: req.session.lti.email});
 });
 
 // LTI submit
