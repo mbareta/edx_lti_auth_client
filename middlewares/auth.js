@@ -1,4 +1,5 @@
-const request = require('request').defaults({jar: true});
+const Promise = require('bluebird');
+const request = Promise.promisifyAll(require('request').defaults({jar: true}));
 
 const config = require('../config/main').get();
 const serverBaseUrl = config.baseUrl;
@@ -30,13 +31,32 @@ module.exports.getAccessToken = (req, res, next) => {
   .then(result => {
     req.session.authToken = oauth2.accessToken.create(result);
     const accessToken = req.session.authToken.token.access_token;
-
-    request.get({url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`, headers: {'Authorization': `Bearer ${accessToken}`}}, (error, response, body) => {
-      req.session.user = JSON.parse(body);
-      res.redirect('/');
-    });
+    let options = {
+      url: `${serverBaseUrl}:${lmsPort}/oauth2/user_info`,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
+    
+    return request.getAsync(options);
   })
-  .catch(error => res.send(`Access Token Error ${error.message}`));
+  .then((response) => {
+    req.session.user = JSON.parse(response.body);
+    res.redirect('/');
+  })
+  .catch(error => {
+    res.send(`Access Token Error ${error.message}`)
+  });
+};
+
+module.exports.logout = (req, res, _) => {
+  req.session.destroy();
+  if(req.params.query && req.params.query.no_redirect) {
+    res.send('OK');
+  }
+  else {
+    res.redirect(`${serverBaseUrl}:${lmsPort}/logout`);
+  }
 };
 
 // Password Credentials Flow
