@@ -40,10 +40,10 @@ router.post('/submit', (req, res, _) => {
 function getEmail(req) {
   const email = req.email;
   if(email) {
-    return email
+    return email;
   }
   else {
-    throw new Error('Not Authorized')
+    throw new Error('Not Authorized');
   }
 }
 
