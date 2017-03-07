@@ -11,6 +11,7 @@
     "connect-redis": "^3.2.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
+    "edx-oauth-middleware": "0.0.5",
     "express": "~4.14.1",
     "express-session": "^1.15.0",
     "flow-remove-types": "^1.2.0",

@@ -1,6 +1,6 @@
 const env = require('./config.json');
 
-exports.get = () => {
+module.exports = (() => {
     const node_env = process.env.NODE_ENV || 'development';
     const env_variables = env[node_env];
 
@@ -13,6 +13,6 @@ exports.get = () => {
     env_variables.lti.secret = process.env.LTI_SECRET || env_variables.lti.secret;
 
     return env_variables;
-};
+})();
 
 

@@ -3,18 +3,22 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
-const request = require('request').defaults({jar: true});
-const {authorize, getAccessToken, logout} = require('../middlewares/auth');
-const config = require('../config/main').get();
-const serverBaseUrl = config.baseUrl;
+const {getUserInfo} = require('../middlewares/auth');
+const config = require('../config/main');
 const lmsPort = config.lmsPort;
 const portfolioPort = config.portfolioPort;
-
-const credentials = {
+const loginUrl = `${config.baseUrl}:${config.portfolioPort}/users/login`;
+const redirectOnLoginUrl = `${config.baseUrl}:${config.portfolioPort}`;
+const lmsUrl = `${config.baseUrl}:${config.lmsPort}`;
+const edxLogoutUrl = `${config.baseUrl}:${config.lmsPort}/logout`;
+const {authorize, storeAccessToken, logout} = require('edx-oauth-middleware').init({
+  loginUrl,
+  redirectOnLoginUrl,
+  lmsUrl,
+  edxLogoutUrl,
   client: config.client,
   auth: config.auth
-};
-const oauth2 = require('simple-oauth2').create(credentials);
+});
 
 /* GET users listing. */
 router.get('/', (req, res, _) =>
@@ -23,16 +27,8 @@ router.get('/', (req, res, _) =>
 
 router.get('/auth', authorize);
 
-router.get('/login', getAccessToken);
+router.get('/login', storeAccessToken, getUserInfo);
 
 router.get('/logout', logout);
-
-// router.get('/courses', (req, res, next) => {
-//   request.cookie = req.session.edxCookies;
-//   request.get({url: `${serverBaseUrl}/api/courses/v1/courses`, headers: {'Accept': 'application/json'}} , (error, response, body) => {
-//     res.set('Content-Type', 'application/json');
-//     res.send(body);
-//   });
-// });
 
 module.exports = router;
