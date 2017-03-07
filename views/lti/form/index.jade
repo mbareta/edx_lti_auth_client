@@ -12,6 +12,5 @@ block content
           td= result.email
           td= result.data
           td  
-              form(action=`/lti/form/update/${result._id}`, method='POST')
-                input(type='text', name='text', placeholder=result.data)
-                input(type='submit', value='Save')
+              - var form= {action: `/lti/form/update/${result._id}`, placeholder: result.data}
+              include form

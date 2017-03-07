@@ -21,7 +21,14 @@ router.get('/deliverable', renderDeliverableForUser);
 
 // LTI view
 router.post('/', validateLtiRequest, (req, res) => {
-  res.render(`${componentLocation}/form`, {email: req.session.lti.email});
+  res.render(`${componentLocation}/createResponse`,
+  {
+    email: req.session.lti.email,
+    form: {
+      action: '/lti/form/submit',
+      placeholder: 'Say something...'
+    }
+  });
 });
 
 // LTI update
