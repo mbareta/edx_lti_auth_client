@@ -3,7 +3,7 @@ html
   head
     title Portfolio
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans:300,400,500,700')
-    link(rel='stylesheet', href='https://code.getmdl.io/1.3.0/material.teal-red.min.css')
+    link(rel='stylesheet', href='https://code.getmdl.io/1.3.0/material.deep_orange-indigo.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
   body
@@ -20,6 +20,7 @@ html
             a.mdl-navigation__link(href='/', onclick=`javascript:event.target.port=${config.lmsPort}`) LMS
             a.mdl-navigation__link(href='/', onclick=`javascript:event.target.port=${config.studioPort}`) Studio
             a.mdl-navigation__link(href='/lti') LTI
+            a.mdl-navigation__link(href='/users/auth', onclick='javascript:event.target.port=3001') Survey Gizmo
             if email
               a.mdl-navigation__link(href='/users/logout')
                 = email
@@ -33,6 +34,7 @@ html
           a.mdl-navigation__link(href='/', onclick=`javascript:event.target.port=${config.lmsPort}`) LMS
           a.mdl-navigation__link(href='/', onclick=`javascript:event.target.port=${config.studioPort}`) Studio
           a.mdl-navigation__link(href='/lti') LTI
+          a.mdl-navigation__link(href='/users/auth', onclick='javascript:event.target.port=3001') Survey Gizmo
           if email
               a.mdl-navigation__link(href='/users/logout')
                 = email
