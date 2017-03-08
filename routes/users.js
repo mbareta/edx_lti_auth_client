@@ -6,7 +6,6 @@ const db = require('../models/index');
 const {getUserInfo} = require('../middlewares/auth');
 const config = require('../config/main');
 const lmsPort = config.lmsPort;
-const portfolioPort = config.portfolioPort;
 const loginUrl = `${config.baseUrl}:${config.portfolioPort}/users/login`;
 const redirectOnLoginUrl = `${config.baseUrl}:${config.portfolioPort}`;
 const lmsUrl = `${config.baseUrl}:${config.lmsPort}`;
