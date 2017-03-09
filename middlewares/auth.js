@@ -14,7 +14,7 @@ module.exports.getUserInfo = (req, res, next) => {
   request.getAsync(options)
   .then(response => {
     req.session.user = JSON.parse(response.body);
-    res.redirect('/');
+    res.redirect(req.session.redirectToUrl || '/');
   })
   .catch(error => res.send(`Access Token Error ${error.message}`));
 };

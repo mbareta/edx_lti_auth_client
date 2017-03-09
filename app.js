@@ -16,6 +16,8 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const lti = require('./routes/lti/index');
 const ltiForm = require('./routes/lti/form');
+const { storeRequestOriginUrl, redirectAnonymous } = require('./middlewares/general');
+const { skipRoutes, getEmailFromSession, applyForAnonymous } = require('./lib/helpers');
 
 const app = express();
 
@@ -39,6 +41,10 @@ app.use(session({
   cookie: { maxAge: config.cookieMaxAge },
   store: new RedisStore()
 }));
+app.use(skipRoutes(
+  ['/users/auth', '/users/login', '/users/logout'],
+  applyForAnonymous(storeRequestOriginUrl))
+);
 app.use(skipRoutes(config.whitelistRoutes, redirectAnonymous));
 
 app.use((req, _, next) => {
@@ -69,30 +75,5 @@ app.use((err, req, res, _) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-function skipRoutes(routes: Array<string>, middleware: Function) {
-  return (req, res, next) => {
-    if(routes.some(route => route === req.path)) {
-      return next();
-    } else {
-      return middleware(req, res, next);
-    }
-  };
-}
-
-function redirectAnonymous(req, res, next) {
-  if (getEmailFromSession(req)) {
-    next();
-  } else {
-    res.redirect('/users/auth');
-  }
-}
-
-function getEmailFromSession(req) {
-  const oauthEmail = req.session.user && req.session.user.email;
-  const ltiEmail = req.session.lti && req.session.lti.email;
-
-  return oauthEmail || ltiEmail || undefined;
-}
 
 module.exports = app;
