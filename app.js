@@ -6,7 +6,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
@@ -17,7 +16,8 @@ const users = require('./routes/users');
 const lti = require('./routes/lti/index');
 const ltiForm = require('./routes/lti/form');
 const { storeRequestOriginUrl, redirectAnonymous } = require('./middlewares/general');
-const { skipRoutes, getEmailFromSession, applyForAnonymous } = require('./lib/helpers');
+const { skipRoutes, getEmailFromSession } = require('./lib/helpers');
+
 
 const app = express();
 
@@ -41,10 +41,8 @@ app.use(session({
   cookie: { maxAge: config.cookieMaxAge },
   store: new RedisStore()
 }));
-app.use(skipRoutes(
-  ['/users/auth', '/users/login', '/users/logout'],
-  applyForAnonymous(storeRequestOriginUrl))
-);
+
+app.use(skipRoutes(['/users/auth', '/users/login', '/users/logout'], storeRequestOriginUrl));
 app.use(skipRoutes(config.whitelistRoutes, redirectAnonymous));
 
 app.use((req, _, next) => {
