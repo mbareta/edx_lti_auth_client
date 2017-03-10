@@ -1,5 +1,3 @@
-// @flow
-
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -16,7 +14,12 @@ const users = require('./routes/users');
 const lti = require('./routes/lti/index');
 const ltiForm = require('./routes/lti/form');
 const { storeRequestOriginUrl, redirectAnonymous } = require('./middlewares/general');
-const { skipRoutes, getEmailFromSession } = require('./lib/helpers');
+const {
+  excludesRequestRoute,
+  skipWhitelistedRoutes,
+  intercept,
+  getEmailFromSession
+} = require('./lib/helpers');
 
 
 const app = express();
@@ -42,8 +45,10 @@ app.use(session({
   store: new RedisStore()
 }));
 
-app.use(skipRoutes(['/users/auth', '/users/login', '/users/logout'], storeRequestOriginUrl));
-app.use(skipRoutes(config.whitelistRoutes, redirectAnonymous));
+const ignoreOnRedirect = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout']);
+app.use(intercept(ignoreOnRedirect, storeRequestOriginUrl));
+
+app.use(skipWhitelistedRoutes(redirectAnonymous));
 
 app.use((req, _, next) => {
   app.locals.email = req.email = getEmailFromSession(req);

@@ -1,5 +1,3 @@
-//@flow
-
 const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
@@ -21,7 +19,7 @@ const {authorize, storeAccessToken, logout} = require('edx-oauth-middleware').in
 
 /* GET users listing. */
 router.get('/', (req, res, _) =>
-  db.User.findOne().then((user: User) => res.send(user))
+  db.User.findOne().then(user => res.send(user))
 );
 
 router.get('/auth', authorize);
