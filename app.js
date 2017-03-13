@@ -46,7 +46,7 @@ app.use(session({
 }));
 
 const ignoreOnRedirect = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout']);
-app.use(intercept(ignoreOnRedirect, storeRequestOriginUrl));
+app.use(intercept(excludesRequestRoute(ignoreOnRedirect), storeRequestOriginUrl));
 
 app.use(skipWhitelistedRoutes(redirectAnonymous));
 
