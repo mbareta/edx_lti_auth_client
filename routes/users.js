@@ -1,14 +1,14 @@
 const express = require('express');
-const router = express.Router();
 const db = require('../models/index');
-const {getUserInfo} = require('../middlewares/auth');
+const { getUserInfo } = require('../middlewares/auth');
 const config = require('../config/main');
-const lmsPort = config.lmsPort;
+
+const router = express.Router();
 const loginUrl = `${config.baseUrl}:${config.portfolioPort}/users/login`;
 const redirectOnLoginUrl = `${config.baseUrl}:${config.portfolioPort}`;
 const lmsUrl = `${config.baseUrl}:${config.lmsPort}`;
 const edxLogoutUrl = `${config.baseUrl}:${config.lmsPort}/logout`;
-const {authorize, storeAccessToken, logout} = require('edx-oauth-middleware').init({
+const { authorize, storeAccessToken, logout } = require('edx-oauth-middleware').init({
   loginUrl,
   redirectOnLoginUrl,
   lmsUrl,
@@ -18,7 +18,7 @@ const {authorize, storeAccessToken, logout} = require('edx-oauth-middleware').in
 });
 
 /* GET users listing. */
-router.get('/', (req, res, _) =>
+router.get('/', (req, res) =>
   db.User.findOne().then(user => res.send(user))
 );
 

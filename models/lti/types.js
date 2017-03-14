@@ -4,4 +4,4 @@ const ltiTypes = {
   DELIVERABLE: 'DELIVERABLE'
 };
 
-module.exports = { ltiTypes }
+module.exports = { ltiTypes };

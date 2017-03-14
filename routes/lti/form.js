@@ -4,8 +4,8 @@ const router = express.Router();
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
 
 const {
-  validateLtiRequest, 
-  renderResponsesForUser, 
+  validateLtiRequest,
+  renderResponsesForUser,
   renderDeliverableForUser,
   addResponse,
   updateResponse
@@ -22,13 +22,13 @@ router.get('/deliverable', renderDeliverableForUser);
 // LTI view
 router.post('/', validateLtiRequest, (req, res) => {
   res.render(`${componentLocation}/createResponse`,
-  {
-    email: req.session.lti.email,
-    form: {
-      action: '/lti/form/submit',
-      placeholder: 'Say something...'
-    }
-  });
+    {
+      email: req.session.lti.email,
+      form: {
+        action: '/lti/form/submit',
+        placeholder: 'Say something...'
+      }
+    });
 });
 
 // LTI update

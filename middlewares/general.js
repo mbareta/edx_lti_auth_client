@@ -2,8 +2,8 @@ const { getEmailFromSession } = require('../lib/helpers');
 
 module.exports.storeRequestOriginUrl = (req, res, next) => {
   req.session.redirectToUrl = req.originalUrl;
-  next();  
-}
+  next();
+};
 
 module.exports.redirectAnonymous = (req, res, next) => {
   if (getEmailFromSession(req)) {
@@ -11,4 +11,4 @@ module.exports.redirectAnonymous = (req, res, next) => {
   } else {
     res.redirect('/users/auth');
   }
-}
+};

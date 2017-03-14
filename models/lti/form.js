@@ -2,6 +2,7 @@
 
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
 const ObjectId = require('mongodb').ObjectID;
+
 const mongoDbName = 'form_responses';
 
 class Form {
@@ -16,17 +17,17 @@ class Form {
   }
   getResponsesByEmail(email) {
     return mongoConnectionPool.db.collection(mongoDbName)
-      .find({email})
+      .find({ email })
       .toArray();
   }
-  getDeliverableByType(email, type='subDeliverable') {
+  getDeliverableByType(email, type = 'subDeliverable') {
     return mongoConnectionPool.db.collection(mongoDbName)
-      .find({$and:[{email, type}]})
+      .find({ $and: [{ email, type }] })
       .toArray();
   }
   updateResponse(id, data, metadata) {
     return mongoConnectionPool.db.collection(mongoDbName)
-      .update({_id: ObjectId(id)}, {$set: {data, metadata}});
+      .update({ _id: ObjectId(id) }, { $set: { data, metadata } });
   }
 }
 
