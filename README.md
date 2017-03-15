@@ -1,3 +1,10 @@
+# Setup
+1. Install latest NodeJS, preferably with NVM
+2. ```npm install```
+3. ```npm start```
+4. Go to http://localhost:3000
+5. Set up local edX instance and have LMS running - we need it as OAuth provider
+
 # edx_lti_auth_client
 This is a client that provides LTI components for edX and handles sessions with OAuth2 connection.
 
