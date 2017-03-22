@@ -3,4 +3,5 @@ extends ../../ltiLayout
 block content
   div Welcome
     = email
+  - var form= {action: `/lti/form/submit`, placeholder: { data: 'Content' }}
   include form
