@@ -1,4 +1,3 @@
-// const Promise = require('bluebird');
 const express = require('express');
 const router = express.Router();
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
@@ -8,7 +7,8 @@ const {
   renderResponsesForUser,
   renderDeliverableForUser,
   addResponse,
-  updateResponse
+  updateResponse,
+  gradeResponse
 } = require('../../middlewares/lti');
 
 const mongoDbName = 'form_responses';
@@ -33,6 +33,8 @@ router.post('/', validateLtiRequest, (req, res) => {
 
 // LTI update
 router.post('/update/:id', updateResponse);
+
+router.post('/grade/:id', gradeResponse);
 
 // LTI submit
 router.post('/submit', addResponse);

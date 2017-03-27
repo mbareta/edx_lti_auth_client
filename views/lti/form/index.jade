@@ -11,6 +11,9 @@ block content
         tr
           td= result.email
           td= result.data
-          td  
-              - var form= {action: `/lti/form/update/${result._id}`, placeholder: result.data}
+          td
+              - var form= {action: `/lti/form/update/${result._id}`, placeholder: { data: result.data }}
               include form
+              form(action=`/lti/form/grade/${result._id}`, method='POST')
+                input(type='number', name='grade', min='0.0', max='1.0', step='0.01', placeholder= result.metadata && result.metadata.grade)
+                input(type='submit', value='Grade')
