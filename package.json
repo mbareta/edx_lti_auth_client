@@ -35,6 +35,8 @@
   "devDependencies": {
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.41.0"
   }
 }
