@@ -7,9 +7,17 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "nodemon",
+            "runtimeExecutable": "nodemon",
+            "runtimeArgs": [
+                "--debug=3000"
+            ],
             "program": "${workspaceRoot}/bin/www",
-            "cwd": "${workspaceRoot}"
+            "restart": true,
+            "port": 3000,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector"
         }
     ]
 }
