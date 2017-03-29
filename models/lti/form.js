@@ -1,5 +1,6 @@
 'use strict';
 
+const Promise = require('bluebird');
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
 const ObjectId = require('mongodb').ObjectID;
 
@@ -39,23 +40,26 @@ class Form {
       .update({ _id }, { $set: { email, type, data, metadata, lti } });
   }
 
-  // exists(...queryParameters) {
-  //   return mongoConnectionPool.db.collection(mongoDbName)
-  //     .findOne({ email: 'staff@example.com' })
-  //     .then(queryResult => queryResult ? true : false);
-  // }
+  anyWithLti(lti) {
+    if (!lti) {
+      return Promise.resolve(false);
+    }
 
-  // upsert(id, email, type, data, metadata) {
-  //   return this.exists(email)
-  //   .then(result => {
-  //     if (result) {
-  //       return this.updateResponse(id, data, metadata);
-  //     }
-  //     else {
-  //       return this.saveResponse(email, type, data, metadata);
-  //     }
-  //   });
-  // }
+    const { outcomeServiceSourcedId } = lti;
+    return mongoConnectionPool.db.collection(mongoDbName)
+      .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId })
+      .then(queryResult => !!queryResult);
+  }
+
+  upsert(formResponse) {
+    return this.anyWithLti(formResponse.lti)
+    .then(exists => {
+      if (exists) {
+        return this.updateResponse(formResponse);
+      }
+      return this.saveResponse(formResponse);
+    });
+  }
 }
 
 module.exports = new Form();

@@ -23,7 +23,7 @@ const renderResponsesForUser = (req, res) => {
   const email = getEmail(req);
 
   form.getResponsesByEmail(email)
-  .then(results => res.render(`${componentLocation}/index`, { email, results }))
+  .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
 const renderDeliverableForUser = (req, res) => {
@@ -43,7 +43,7 @@ const addResponse = (req, res) => {
     lti: null
   };
 
-  form.saveResponse(formResponse)
+  form.upsert(formResponse)
   .then(() => res.redirect(`/${componentLocation}`));
 };
 
@@ -54,7 +54,7 @@ const updateResponse = (req, res) => {
   .then(formResponse => {
     formResponse.data = text;
 
-    return form.updateResponse(formResponse)
+    return form.upsert(formResponse);
   })
   .then(() => res.redirect(`/${componentLocation}`));
 };
@@ -62,7 +62,7 @@ const updateResponse = (req, res) => {
 const gradeResponse = (req, res) => {
   const responseId = req.params.id;
   const grade = parseFloat(req.body.grade);
-  const { token, outcomeServiceUrl, outcomeServiceSourcedId } = req.session;
+  const { outcomeServiceUrl, outcomeServiceSourcedId } = req.session;
   const outcomeService = outcomeServiceFactory(outcomeServiceUrl, outcomeServiceSourcedId);
 
   Promise.all([
@@ -70,11 +70,11 @@ const gradeResponse = (req, res) => {
     form.getResponseById(responseId)
   ])
   .then(([isSuccess, formResponse]) => {
-    if(isSuccess) {
-      formResponse.lti = { outcomeServiceUrl, outcomeServiceSourcedId }
-      formResponse.metadata = { grade }
+    if (isSuccess) {
+      formResponse.lti = { outcomeServiceUrl, outcomeServiceSourcedId };
+      formResponse.metadata = { grade, gradedAt: Date.now() };
 
-      return formResponse
+      return formResponse;
     }
     else {
       throw new Error('Grading failed!');
@@ -122,4 +122,4 @@ module.exports = {
   updateResponse,
   addResponse,
   gradeResponse
-}
+};
