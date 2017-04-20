@@ -29,6 +29,11 @@ class Form {
       .toArray();
   }
 
+  getDeliverableTypesByEmail(email) {
+    return mongoConnectionPool.db.collection(mongoDbName)
+      .distinct('type', { email });
+  }
+
   getDeliverableByType(email, type = 'subDeliverable') {
     return mongoConnectionPool.db.collection(mongoDbName)
       .find({ $and: [{ email, type }] })

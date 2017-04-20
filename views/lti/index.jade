@@ -1,6 +1,11 @@
 extends ../layout
 
 block content
+  h1 Deliverables
+  div#deliverables
+    each result in results
+      a(href='/lti/form/deliverable').deliverable
+        h5= result
   h1 Available LTI components
   ul.mdl-list
     li.mdl-list__item

@@ -1,7 +1,4 @@
 const express = require('express');
-const router = express.Router();
-const mongoConnectionPool = require('../../lib/mongoConnectionPool');
-
 const {
   validateLtiRequest,
   renderResponsesForUser,
@@ -11,12 +8,11 @@ const {
   gradeResponse
 } = require('../../middlewares/lti');
 
-const mongoDbName = 'form_responses';
+const router = express.Router();
 const componentLocation = 'lti/form';
 
 // view results
 router.get('/', renderResponsesForUser);
-
 router.get('/deliverable', renderDeliverableForUser);
 
 // LTI view
