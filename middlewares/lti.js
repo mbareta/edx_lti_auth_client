@@ -31,7 +31,7 @@ const renderDeliverablesForUser = (req, res) => {
   const email = getEmail(req);
 
   form.getDeliverableTypesByEmail(email)
-  .then(results => res.render('lti/index', { email, results }));
+  .then(results => res.render('lti/deliverables', { email, results }));
 };
 
 const renderDeliverableForUser = (req, res) => {
@@ -93,7 +93,9 @@ const gradeResponse = (req, res) => {
 };
 
 function getUserDataFromLti(ltiProvider) {
-  if (ltiProvider.userId === 'student') {
+  const { userId, body, username } = ltiProvider;
+
+  if (userId === 'student') {
     return {
       email: 'studio@user',
       username: 'studioUser',
@@ -101,9 +103,9 @@ function getUserDataFromLti(ltiProvider) {
     };
   }
   return {
-    email: ltiProvider.body.lis_person_contact_email_primary,
-    username: ltiProvider.username,
-    id: ltiProvider.userId
+    email: body.lis_person_contact_email_primary,
+    username,
+    id: userId
   };
 }
 

@@ -6,7 +6,12 @@
   margin-right: 10vw;
 }
 
-#deliverables .deliverable {
+.deliverables {
+  display: inline-table;
+}
+
+#deliverables .deliverable,
+.deliverables .deliverable {
     display: inline-flex;
     width: 260px;
     height: 200px;
@@ -23,16 +28,19 @@
     transition: box-shadow 0.1s ease-in-out;
 }
 
-#deliverables .deliverable:hover {
+#deliverables .deliverable:hover,
+.deliverables .deliverable:hover {
     cursor: pointer;
 
     box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
 }
 
-#deliverables .deliverable h5 {
+#deliverables .deliverable h5,
+.deliverables .deliverable h5 {
   vertical-align: middle;
 }
 
-#deliverables a.deliverable {
+#deliverables a.deliverable,
+.deliverables a.deliverable {
   text-decoration: none;
 }
