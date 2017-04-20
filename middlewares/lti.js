@@ -13,9 +13,7 @@ const validateLtiRequest = (req, res, next) => {
       const { outcome_service: { service_url, source_did } } = ltiProvider;
       // store user data in session
       req.session.lti = getUserDataFromLti(ltiProvider);
-
       req.session.outcomeServiceUrl = service_url; // eslint-disable-line
-
       req.session.outcomeServiceSourcedId = source_did; // eslint-disable-line
       next();
     }
