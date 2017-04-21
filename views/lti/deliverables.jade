@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Portfolio
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans:300,400,500,700')
+    link(rel='stylesheet', href='https://code.getmdl.io/1.3.0/material.deep_orange-indigo.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/lti.css')
+    script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
+  body
+    div.deliverables
+      each result in results
+        a(href='/lti/form/deliverable').deliverable
+          h5= result

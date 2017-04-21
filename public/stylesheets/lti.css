@@ -1,3 +1,48 @@
-body {
-  padding: 4em;
+#deliverables {
+  display: inline-table;
+  width: 96%;
+  width: 67vw;
+
+  margin-right: 10vw;
+
+  background-color: #fff;
+}
+
+.deliverables {
+  display: inline-table;
+}
+
+#deliverables .deliverable,
+.deliverables .deliverable {
+    display: inline-flex;
+    width: 260px;
+    height: 200px;
+
+    margin: 26px;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: #F76B1C;
+    color: #4F463D;
+
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.15);
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+#deliverables .deliverable:hover,
+.deliverables .deliverable:hover {
+    cursor: pointer;
+
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+
+#deliverables .deliverable h5,
+.deliverables .deliverable h5 {
+  vertical-align: middle;
+}
+
+#deliverables a.deliverable,
+.deliverables a.deliverable {
+  text-decoration: none;
 }

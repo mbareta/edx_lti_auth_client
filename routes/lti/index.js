@@ -1,9 +1,12 @@
 const express = require('express');
+const {
+  renderLtiDashboard,
+  renderUserDeliverables
+} = require('../../middlewares/lti');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('lti/index');
-});
+router.get('/', renderLtiDashboard);
+router.get('/deliverables', renderUserDeliverables);
 
 module.exports = router;

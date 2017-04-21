@@ -10,23 +10,33 @@ const validateLtiRequest = (req, res, next) => {
   ltiProvider.valid_requestAsync(req)
   .then(isValid => {
     if (isValid) {
+      const { outcome_service: { service_url, source_did } } = ltiProvider;
       // store user data in session
       req.session.lti = getUserDataFromLti(ltiProvider);
-      req.session.outcomeServiceUrl = ltiProvider.outcome_service && ltiProvider.outcome_service.service_url;
-      req.session.outcomeServiceSourcedId = ltiProvider.outcome_service && ltiProvider.outcome_service.source_did;
+      req.session.outcomeServiceUrl = service_url; // eslint-disable-line
+      req.session.outcomeServiceSourcedId = source_did; // eslint-disable-line
       next();
     }
-  })
+  });
 };
 
-const renderResponsesForUser = (req, res) => {
+const renderUserResponses = (req, res) => {
   const email = getEmail(req);
 
   form.getResponsesByEmail(email)
   .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
-const renderDeliverableForUser = (req, res) => {
+const renderUserDeliverables = (view = 'lti/deliverables') => (req, res) => {
+  const email = getEmail(req);
+
+  form.getDeliverableTypesByEmail(email)
+  .then(results => res.render(view, { email, results }));
+};
+
+const renderLtiDashboard = renderUserDeliverables('lti/index');
+
+const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
 
   form.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
@@ -85,23 +95,20 @@ const gradeResponse = (req, res) => {
 };
 
 function getUserDataFromLti(ltiProvider) {
-  let userData;
-  if (ltiProvider.userId === 'student') {
-    userData = {
+  const { userId, body, username } = ltiProvider;
+
+  if (userId === 'student') {
+    return {
       email: 'studio@user',
       username: 'studioUser',
       id: 'studioUserId'
     };
   }
-  else {
-    userData = {
-      email: ltiProvider.body.lis_person_contact_email_primary,
-      username: ltiProvider.username,
-      id: ltiProvider.userId
-    };
-  }
-
-  return userData;
+  return {
+    email: body.lis_person_contact_email_primary,
+    username,
+    id: userId
+  };
 }
 
 // get email or throw error
@@ -110,15 +117,15 @@ function getEmail(req) {
   if (email) {
     return email;
   }
-  else {
-    throw new Error('Not Authorized');
-  }
+  throw new Error('Not Authorized');
 }
 
 module.exports = {
   validateLtiRequest,
-  renderResponsesForUser,
-  renderDeliverableForUser,
+  renderUserResponses,
+  renderLtiDashboard,
+  renderUserDeliverables,
+  renderUserDeliverable,
   updateResponse,
   addResponse,
   gradeResponse

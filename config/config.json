@@ -24,7 +24,7 @@
     },
     "cookieSecret": "fasttrac",
     "cookieMaxAge": 60000,
-    "whitelistRoutes": ["/", "/users/auth", "/users/login", "/lti", "/lti/form"]
+    "whitelistRoutes": ["/", "/users/auth", "/users/login", "/lti", "/lti/form", "/favicon.ico"]
   },
   "production": {
     "username": "root",
