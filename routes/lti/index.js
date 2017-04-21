@@ -1,9 +1,12 @@
 const express = require('express');
-const { renderDeliverablesForUser } = require('../../middlewares/lti');
+const {
+  renderLtiDashboard,
+  renderUserDeliverables
+} = require('../../middlewares/lti');
 
 const router = express.Router();
 
-router.get('/', renderDeliverablesForUser);
-router.get('/deliverables', renderDeliverablesForUser);
+router.get('/', renderLtiDashboard);
+router.get('/deliverables', renderUserDeliverables);
 
 module.exports = router;

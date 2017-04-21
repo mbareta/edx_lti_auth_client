@@ -20,21 +20,23 @@ const validateLtiRequest = (req, res, next) => {
   });
 };
 
-const renderResponsesForUser = (req, res) => {
+const renderUserResponses = (req, res) => {
   const email = getEmail(req);
 
   form.getResponsesByEmail(email)
   .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
-const renderDeliverablesForUser = (req, res) => {
+const renderDeliverablesForUser = view => (req, res) => {
   const email = getEmail(req);
 
   form.getDeliverableTypesByEmail(email)
-  .then(results => res.render('lti/deliverables', { email, results }));
+  .then(results => res.render(view, { email, results }));
 };
+const renderLtiDashboard = renderDeliverablesForUser('lti/index');
+const renderUserDeliverables = renderDeliverablesForUser('lti/deliverables');
 
-const renderDeliverableForUser = (req, res) => {
+const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
 
   form.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
@@ -120,9 +122,10 @@ function getEmail(req) {
 
 module.exports = {
   validateLtiRequest,
-  renderResponsesForUser,
-  renderDeliverablesForUser,
-  renderDeliverableForUser,
+  renderUserResponses,
+  renderLtiDashboard,
+  renderUserDeliverables,
+  renderUserDeliverable,
   updateResponse,
   addResponse,
   gradeResponse
