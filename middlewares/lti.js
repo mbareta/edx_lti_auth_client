@@ -27,14 +27,14 @@ const renderUserResponses = (req, res) => {
   .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
-const renderUserDeliverables = (view = 'lti/deliverables') => (req, res) => {
+const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (req, res) => {
   const email = getEmail(req);
 
   form.getDeliverableTypesByEmail(email)
   .then(results => res.render(view, { email, results }));
 };
-
-const renderLtiDashboard = renderUserDeliverables('lti/index');
+const renderUserDeliverables = renderUserDeliverablesCurried();
+const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 
 const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
