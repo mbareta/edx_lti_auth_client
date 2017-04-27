@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
-const form = require('../models/lti/form');
+const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
 const { ltiTypes } = require('../models/lti/types');
 
@@ -23,14 +23,14 @@ const validateLtiRequest = (req, res, next) => {
 const renderUserResponses = (req, res) => {
   const email = getEmail(req);
 
-  form.getResponsesByEmail(email)
+  responsesRepository.getResponsesByEmail(email)
   .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
 const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (req, res) => {
   const email = getEmail(req);
 
-  form.getDeliverableTypesByEmail(email)
+  responsesRepository.getDeliverableTypesByEmail(email)
   .then(results => res.render(view, { email, results }));
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
@@ -39,7 +39,7 @@ const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
 
-  form.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
+  responsesRepository.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
   .then(results => res.render(`${componentLocation}/index`, { email, results }));
 };
 
@@ -53,18 +53,18 @@ const addResponse = (req, res) => {
     lti: null
   };
 
-  form.upsert(formResponse)
+  responsesRepository.upsert(formResponse)
   .then(() => res.redirect(`/${componentLocation}`));
 };
 
 const updateResponse = (req, res) => {
   const { id } = req.params;
   const { text } = req.body;
-  form.getResponseById(id)
+  responsesRepository.getResponseById(id)
   .then(formResponse => {
     formResponse.data = text;
 
-    return form.upsert(formResponse);
+    return responsesRepository.upsert(formResponse);
   })
   .then(() => res.redirect(`/${componentLocation}`));
 };
@@ -77,7 +77,7 @@ const gradeResponse = (req, res) => {
 
   Promise.all([
     outcomeService.send_replace_resultAsync(grade),
-    form.getResponseById(responseId)
+    responsesRepository.getResponseById(responseId)
   ])
   .then(([isSuccess, formResponse]) => {
     if (isSuccess) {
@@ -86,11 +86,9 @@ const gradeResponse = (req, res) => {
 
       return formResponse;
     }
-    else {
-      throw new Error('Grading failed!');
-    }
+    throw new Error('Grading failed!');
   })
-  .then(formResponse => form.updateResponse(formResponse))
+  .then(formResponse => responsesRepository.updateResponse(formResponse))
   .then(() => res.redirect(`/${componentLocation}`));
 };
 
