@@ -8,7 +8,12 @@ html
     link(rel='stylesheet', href='/stylesheets/lti.css')
     script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
   body
-    div.deliverables
+    div.deliverables-container
       each result in results
-        a(href='/lti/form/deliverable').deliverable
-          h5= result
+        div.deliverable-wrapper
+          a(href='/lti/form/deliverable')
+            div.deliverable
+              h5.title= result
+              p Placeholder text for this paragraph!
+          div.activities
+            p.title Activities

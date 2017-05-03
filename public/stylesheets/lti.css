@@ -1,48 +1,59 @@
-#deliverables {
-  display: inline-table;
+h5, p {
+  color: #4F463D;
+  margin-left: 13px;
+}
+
+.deliverables-container {
+  display: block;
   width: 96%;
   width: 67vw;
 
   margin-right: 10vw;
 
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 
-.deliverables {
-  display: inline-table;
-}
-
-#deliverables .deliverable,
-.deliverables .deliverable {
-    display: inline-flex;
-    width: 260px;
-    height: 200px;
+.deliverable-wrapper {
+    width: 258px;
+    height: 225px;
 
     margin: 26px;
-
-    align-items: center;
-    justify-content: center;
-
-    background-color: #F76B1C;
-    color: #4F463D;
+    border: 0.1px solid #EFEFEF;
 
     box-shadow: 0px 1px 2px rgba(0,0,0,0.15);
     transition: box-shadow 0.1s ease-in-out;
 }
 
-#deliverables .deliverable:hover,
-.deliverables .deliverable:hover {
-    cursor: pointer;
-
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+.deliverable {
+  height: 55%;
 }
 
-#deliverables .deliverable h5,
-.deliverables .deliverable h5 {
-  vertical-align: middle;
+.deliverable-wrapper:hover .deliverable {
+  cursor: default;
 }
 
-#deliverables a.deliverable,
-.deliverables a.deliverable {
-  text-decoration: none;
+.deliverables-container .title {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.deliverable-wrapper:hover .deliverable .title {
+  color: #F76B1C;
+}
+
+.deliverables-container .activities {
+  display: block;
+  position: relative;
+  bottom: 3px;
+
+  width: 100%;
+  height: 35%;
+
+  background-color: #FBFBFB;
+  border-top: 0.2px solid #EFEFEF
+}
+
+.deliverables-container .activities p {
+  position: relative;
+  top: 5px;
 }

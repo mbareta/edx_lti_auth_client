@@ -2,10 +2,15 @@ extends ../layout
 
 block content
   h1 Deliverables
-  div#deliverables
-    each result in results
-      a(href='/lti/form/deliverable').deliverable
-        h5= result
+  div.deliverables-container
+      each result in results
+        div.deliverable-wrapper
+          a(href='/lti/form/deliverable')
+            div.deliverable
+              h5.title= result
+              p Placeholder text for this paragraph!
+          div.activities
+            p.title Activities
   h1 Available LTI components
   ul.mdl-list
     li.mdl-list__item
