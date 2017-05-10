@@ -33,7 +33,7 @@ const responsesRepository = () => {
 
     return mongoConnectionPool.db.collection(mongoDbName)
       .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId })
-      .then(queryResult => !!queryResult);
+      .then(queryResult => queryResult);
   };
 
   const getResponseById = (id) => mongoConnectionPool.db.collection(mongoDbName)
@@ -53,6 +53,7 @@ const responsesRepository = () => {
   const upsert = (formResponse) => anyWithLti(formResponse.lti)
     .then(exists => {
       if (exists) {
+        formResponse._id = exists._id;
         return updateResponse(formResponse);
       }
       return saveResponse(formResponse);
