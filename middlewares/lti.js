@@ -91,7 +91,7 @@ const gradeResponse = (req, res) => {
 
 function getUserDataFromLtiAndReq(ltiProvider, req) {
   const { userId, body, username, outcome_service: { service_url, source_did } } = ltiProvider;
-  const { body: { context_id }  } = req;
+  const { body: { context_id, lis_person_contact_email_primary }  } = req;
 
   if (userId === 'student') {
     return {
@@ -104,7 +104,7 @@ function getUserDataFromLtiAndReq(ltiProvider, req) {
     };
   }
   return {
-    email: body.lis_person_contact_email_primary,
+    email: lis_person_contact_email_primary,
     username,
     id: userId,
     courseId: context_id,
