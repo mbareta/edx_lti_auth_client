@@ -13,6 +13,9 @@ const validateLtiRequest = (req, res, next) => {
       const { outcome_service: { service_url, source_did } } = ltiProvider;
       // store user data in session
       req.session.lti = getUserDataFromLti(ltiProvider);
+      req.session.lti.courseId = req.body.context_id;
+      req.session.lti.outcomeServiceUrl = service_url;
+
       req.session.outcomeServiceUrl = service_url; // eslint-disable-line
       req.session.outcomeServiceSourcedId = source_did; // eslint-disable-line
       next();
@@ -50,8 +53,10 @@ const addResponse = (req, res) => {
     type: ltiTypes.SUBDELIVERABLE,
     data: req.body.text,
     metadata: null,
-    lti: null
+    lti: req.session.lti
   };
+
+  console.log(formResponse.lti);
 
   responsesRepository.upsert(formResponse)
   .then(() => res.redirect(`/${componentLocation}`));

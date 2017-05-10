@@ -25,11 +25,12 @@ const responsesRepository = () => {
       });
 
   const anyWithLti = (lti) => {
-    if (!lti) {
+    const { outcomeServiceSourcedId } = lti;
+
+    if (!outcomeServiceSourcedId) {
       return Promise.resolve(false);
     }
 
-    const { outcomeServiceSourcedId } = lti;
     return mongoConnectionPool.db.collection(mongoDbName)
       .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId })
       .then(queryResult => !!queryResult);
