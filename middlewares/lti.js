@@ -10,14 +10,8 @@ const validateLtiRequest = (req, res, next) => {
   ltiProvider.valid_requestAsync(req)
   .then(isValid => {
     if (isValid) {
-      const { outcome_service: { service_url, source_did } } = ltiProvider;
       // store user data in session
-      req.session.lti = getUserDataFromLti(ltiProvider);
-      req.session.lti.courseId = req.body.context_id;
-      req.session.lti.outcomeServiceUrl = service_url;
-
-      req.session.outcomeServiceUrl = service_url; // eslint-disable-line
-      req.session.outcomeServiceSourcedId = source_did; // eslint-disable-line
+      req.session.lti = getUserDataFromLtiAndReq(ltiProvider, req);
       next();
     }
   });
@@ -56,8 +50,6 @@ const addResponse = (req, res) => {
     lti: req.session.lti
   };
 
-  console.log(formResponse.lti);
-
   responsesRepository.upsert(formResponse)
   .then(() => res.redirect(`/${componentLocation}`));
 };
@@ -77,7 +69,7 @@ const updateResponse = (req, res) => {
 const gradeResponse = (req, res) => {
   const responseId = req.params.id;
   const grade = parseFloat(req.body.grade);
-  const { outcomeServiceUrl, outcomeServiceSourcedId } = req.session;
+  const { outcomeServiceUrl, outcomeServiceSourcedId } = req.session.lti;
   const outcomeService = outcomeServiceFactory(outcomeServiceUrl, outcomeServiceSourcedId);
 
   Promise.all([
@@ -97,20 +89,27 @@ const gradeResponse = (req, res) => {
   .then(() => res.redirect(`/${componentLocation}`));
 };
 
-function getUserDataFromLti(ltiProvider) {
-  const { userId, body, username } = ltiProvider;
+function getUserDataFromLtiAndReq(ltiProvider, req) {
+  const { userId, body, username, outcome_service: { service_url, source_did } } = ltiProvider;
+  const { body: { context_id }  } = req;
 
   if (userId === 'student') {
     return {
       email: 'studio@user',
       username: 'studioUser',
-      id: 'studioUserId'
+      id: 'studioUserId',
+      courseId: 'context_id',
+      outcomeServiceUrl: 'service_url',
+      outcomeServiceSourcedId: 'source_did'
     };
   }
   return {
     email: body.lis_person_contact_email_primary,
     username,
-    id: userId
+    id: userId,
+    courseId: context_id,
+    outcomeServiceUrl: service_url,
+    outcomeServiceSourcedId: source_did
   };
 }
 
