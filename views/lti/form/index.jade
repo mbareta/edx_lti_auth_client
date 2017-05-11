@@ -6,6 +6,7 @@ block content
       tr
         td Email
         td Text
+        td LMS URL
     tbody
       each result in results
         tr
@@ -17,3 +18,6 @@ block content
               form(action=`/lti/form/grade/${result._id}`, method='POST')
                 input(type='number', name='grade', min='0.0', max='1.0', step='0.01', placeholder= result.metadata && result.metadata.grade)
                 input(type='submit', value='Grade')
+          td
+            a(href=`${result.lti && result.lti.outcomeServiceUrl.replace('/xblock/', '/jump_to/').split('/handler')[0]}`)
+              = 'Open in LMS'
