@@ -46,7 +46,7 @@ const responsesRepository = () => {
   const getDeliverableTypesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
       .distinct('type', { email });
 
-  const getDeliverableByType = (email, type = 'subDeliverable') => mongoConnectionPool.db.collection(mongoDbName)
+  const getDeliverableByType = (email, type) => mongoConnectionPool.db.collection(mongoDbName)
       .find({ $and: [{ email, type }] })
       .toArray();
 
