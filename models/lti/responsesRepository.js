@@ -14,9 +14,10 @@ const responsesRepository = () => {
         { $set: { email, type, data, metadata, lti } }
       );
 
-  const saveResponse = ({ email, type, data, metadata, lti }) =>
+  const saveResponse = ({ name, email, type, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .insertOne({
+        name,
         email,
         type,
         data,

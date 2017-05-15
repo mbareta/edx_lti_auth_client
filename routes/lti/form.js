@@ -2,7 +2,6 @@ const express = require('express');
 const {
   validateLtiRequest,
   renderUserResponses,
-  renderUserDeliverable,
   addResponse,
   updateResponse,
   gradeResponse
@@ -13,7 +12,6 @@ const componentLocation = 'lti/form';
 
 // view results
 router.get('/', renderUserResponses);
-router.get('/deliverable', renderUserDeliverable);
 
 // LTI view
 router.post('/', validateLtiRequest, (req, res) => {
@@ -33,6 +31,6 @@ router.post('/update/:id', updateResponse);
 router.post('/grade/:id', gradeResponse);
 
 // LTI submit
-router.post('/submit', addResponse);
+router.post('/submit/:type/:name', addResponse);
 
 module.exports = router;

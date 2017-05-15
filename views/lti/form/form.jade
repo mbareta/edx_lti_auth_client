@@ -1,6 +1,4 @@
-h3 ACTION: Form
-
 .form
   form(action=form.action, method='POST')
-    input(type='text', name='text', placeholder=form.placeholder.data)
+    input(type='text', name='text', value=form.data)
     input(type='submit', value='Save it')

@@ -1,6 +1,7 @@
 h2 SUBDELIVERABLE: Executive Summary
 
-- var form = sveIkad.find(ista => ista.type === 'primjer').form
+- var executiveSummary = results.find(result => result.name === 'ventureDescription')
+- var form = executiveSummary ? {action: `/lti/form/update/${executiveSummary._id}`, data: executiveSummary.data } : {action: `/lti/form/submit/businessPlan/ventureDescription`, data: '' }
 include ../form/form.jade
 
 - var form = {action: 'sranje',placeholder: {data: 'Jel ovo radi opet?'}}

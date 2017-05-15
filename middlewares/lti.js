@@ -4,7 +4,7 @@ const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
 const { ltiTypes } = require('../models/lti/types');
 
-const componentLocation = 'lti/form';
+const componentLocation = 'lti';
 
 const validateLtiRequest = (req, res, next) => {
   ltiProvider.valid_requestAsync(req)
@@ -34,20 +34,24 @@ const renderUserDeliverables = renderUserDeliverablesCurried();
 const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 
 const renderUserDeliverable = (req, res) => {
+  const { type } = req.params;
   const email = getEmail(req);
 
-  responsesRepository.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
-  .then(results => res.render(`${componentLocation}/index`, { email, results }));
+  responsesRepository.getDeliverableByType(email, type)
+  .then(results => res.render(`${componentLocation}/deliverables/${type}`, { email, results }));
 };
 
 const addResponse = (req, res) => {
+  const { name, type } = req.params;
   const email = getEmail(req);
+
   const formResponse = {
+    name,
     email,
-    type: ltiTypes.SUBDELIVERABLE,
+    type,
     data: req.body.text,
     metadata: null,
-    lti: req.session.lti
+    lti: req.session.lti || {}
   };
 
   responsesRepository.upsert(formResponse)
