@@ -43,15 +43,18 @@ const renderUserDeliverable = (req, res) => {
   const { type } = req.params;
   const email = getEmail(req);
 
-  responsesRepository
-    .getDeliverableByType(email, type)
-    .then(results =>
-      res.render(`${componentLocation}/deliverables/${type}`, {
-        email,
-        results,
-        activityResults: `${results.filter(result => !!result.data).length}/${results.length}`
-      })
-    );
+  responsesRepository.getDeliverableByType(email, type).then(results => {
+    const activitiesTotalCount = results.length;
+    const solvedActivitiesCount = results
+      .filter(result => !!result.data)
+      .length;
+
+    res.render(`${componentLocation}/deliverables/${type}`, {
+      email,
+      results,
+      activityResults: `${solvedActivitiesCount}/${activitiesTotalCount}`
+    });
+  });
 };
 
 const addResponse = (req, res) => {
