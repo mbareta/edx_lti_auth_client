@@ -14,9 +14,10 @@ const responsesRepository = () => {
         { $set: { email, type, data, metadata, lti } }
       );
 
-  const saveResponse = ({ email, type, data, metadata, lti }) =>
+  const saveResponse = ({ name, email, type, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .insertOne({
+        name,
         email,
         type,
         data,
@@ -45,7 +46,7 @@ const responsesRepository = () => {
   const getDeliverableTypesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
       .distinct('type', { email });
 
-  const getDeliverableByType = (email, type = 'subDeliverable') => mongoConnectionPool.db.collection(mongoDbName)
+  const getDeliverableByType = (email, type) => mongoConnectionPool.db.collection(mongoDbName)
       .find({ $and: [{ email, type }] })
       .toArray();
 

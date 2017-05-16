@@ -45,7 +45,7 @@ app.use(session({
   store: new RedisStore()
 }));
 
-const ignoreOnRedirectRoutes = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout']);
+const ignoreOnRedirectRoutes = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout', '/favicon.ico']);
 app.use(intercept(excludesRequestRoute(ignoreOnRedirectRoutes), storeRequestOriginUrl));
 
 app.use(skipWhitelistedRoutes(redirectAnonymous));

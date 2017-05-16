@@ -1,4 +1,4 @@
 .form
   form(action=form.action, method='POST')
-    input(type='text', name='text', placeholder=form.placeholder.data)
+    textarea(type='text', name='text')= form.data
     input(type='submit', value='Save it')
