@@ -1,8 +1,8 @@
+/* eslint-disable */
 const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
-const { ltiTypes } = require('../models/lti/types');
 
 const componentLocation = 'lti';
 
@@ -52,7 +52,8 @@ const renderUserDeliverable = (req, res) => {
     res.render(`${componentLocation}/deliverables/${type}`, {
       email,
       results,
-      activityResults: `${solvedActivitiesCount}/${activitiesTotalCount}`
+      solvedActivitiesCount,
+      activitiesTotalCount
     });
   });
 };

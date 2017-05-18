@@ -10,14 +10,15 @@
             "name": "nodemon",
             "runtimeExecutable": "nodemon",
             "runtimeArgs": [
-                "--debug=3000"
+                "--inspect=3000"
             ],
             "program": "${workspaceRoot}/bin/www",
             "restart": true,
             "port": 3000,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "preLaunchTask": "postinstall"
         }
     ]
 }

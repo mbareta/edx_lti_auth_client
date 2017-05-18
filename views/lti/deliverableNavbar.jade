@@ -1,0 +1,30 @@
+div.deliverable-navbar
+  div.deliverable-navbar-header
+    h4 Outline
+
+  div.deliverable-navbar-content
+    ul.deliverable-content-list
+      - results.forEach((result, index) => {
+        li
+          - if (index === 0) {
+              a.active(href=`#${result.name.toLowerCase()}`)= result.name
+          - } else {
+            a(href=`#${result.name.toLowerCase()}`)= result.name
+          - }
+      - })
+
+script
+  :babel
+    document.addEventListener('DOMContentLoaded', () => {
+      const navItems = document.querySelectorAll('.deliverable-content-list li a')
+      navItems.forEach(initializeNavItemEvents)
+
+      function initializeNavItemEvents(navItem) {
+        navItem.addEventListener('click', event => changeActiveNavItem(event.target))
+      }
+
+      function changeActiveNavItem(navItem) {
+        navItems.forEach(navItem => navItem.classList.remove('active'))
+        event.target.classList.add('active')
+      }
+    })

@@ -27,3 +27,6 @@ benchmarks/graphs
 
 # Editors
 .idea
+
+# Assets
+public/assets

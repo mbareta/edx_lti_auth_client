@@ -1,6 +1,6 @@
-h5, p {
-  color: #4F463D;
-  margin-left: 13px;
+.lti-dashboard {
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .deliverables-container {
@@ -26,6 +26,7 @@ h5, p {
 
 .deliverable {
   height: 55%;
+  margin-left: 12px;
 }
 
 .deliverable-wrapper:hover .deliverable {
@@ -56,4 +57,5 @@ h5, p {
 .deliverables-container .activities p {
   position: relative;
   top: 5px;
+  margin-left: 12px;
 }
