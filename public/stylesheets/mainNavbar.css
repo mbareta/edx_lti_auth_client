@@ -10,7 +10,7 @@
 
   align-items: center;
 
-  background: linear-gradient(to right bottom, #ffbb96 49%, transparent 50%);
+  background: linear-gradient(to right bottom, #50473D 49%, transparent 50%);
 }
 
 .toggle-deliverable-navbar-btn .main-navbar-text {
@@ -43,4 +43,8 @@
   margin-right: 7%;
 
   color: #b5b5b5;
+}
+
+.main-navbar-item.active {
+  color: #555;
 }
