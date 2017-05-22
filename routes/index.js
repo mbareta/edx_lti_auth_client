@@ -1,5 +1,5 @@
 const express = require('express');
-const EdxCourseApi = require('../lib/edxCourseApi');
+const edxCourseApi = require('../lib/edxCourseApi');
 
 const router = express.Router();
 
@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/blocks', (req, res) => {
-  EdxCourseApi.getDisabledBlocks(req.session.user, req.session.token.access_token)
-  .then(results => res.send(results))
+  edxCourseApi.getDisabledBlocks(req.session.user, req.session.token.access_token)
+  .then(results => res.send(results));
 });
 
 module.exports = router;
