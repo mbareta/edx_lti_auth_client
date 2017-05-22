@@ -1,13 +1,14 @@
 h2.subdeliverable-title
-  span Executive Summary
+  span= getTitle('executivesummary')
 p.subdeliverable-description An executive summary is often considered the most important part of a business plan. This is a summary of the key points you want your audience to tune into. You’ll want to fill this out last after you’ve had a chance to go through each section. Depending on which audience you are presenting your plan to, you’ll want to tailor this section to be most relevant to them . . .
 
+- var addActionLink = '/lti/form/submit/businessplan/executivesummary'
 div.activity-container#venturedescription
-  h3.activity-title Venture description
+  h3.activity-title Venture Description
   p.activity-description What business is your venture in, and what is the current stage of development? Current stage of development may be start-up, initial operations, expansion, rapid growth, or stable operations. Briefly describe your business model. What is unique about the product/service, and what proprietary rights does the business have?
 
   - var ventureDescription = results.find(result => result.name === 'venturedescription')
-  - var form = ventureDescription ? {action: `/lti/form/update/${ventureDescription._id}`, data: ventureDescription.data } : {action: `/lti/form/submit/businessplan/venturedescription`, data: '' }
+  - var form = ventureDescription ? {action: `/lti/form/update/${ventureDescription._id}`, data: ventureDescription.data } : {action: `${addActionLink}/venturedescription`, data: '' }
   include ../form/form.jade
 
 div.activity-container#managementandorganizationplan
@@ -15,7 +16,7 @@ div.activity-container#managementandorganizationplan
   p.activity-description What form of organization does the business operate under, and why? Who are the key management team members and what skills do they have to help the business? Who are the key support groups for your management team, including accountants, attorneys, consultants, board of directors, and advisory board members?
 
   - var managementAndOrganizationPlan = results.find(result => result.name === 'managementAndOrganizationPlan')
-  - var form = managementAndOrganizationPlan ? {action: `lti/form/update${managementAndOrganizationPlan._id}`, data: managementAndOrganizationPlan.data} : {action: `/lti/form/submit/businessplan/managementandorganizationplan`, data: '' }
+  - var form = managementAndOrganizationPlan ? {action: `lti/form/update/${managementAndOrganizationPlan._id}`, data: managementAndOrganizationPlan.data} : {action: `/lti/form/submit/businessplan/managementandorganizationplan`, data: '' }
   include ../form/form.jade
 
 div.activity-container#marketingplan
@@ -23,7 +24,7 @@ div.activity-container#marketingplan
   p.activity-description What is the market like in terms of the industry, the customer, customer needs, product benefits, the venture’s target markets, and the market penetration plan? Who are the major competitors, and what are their strengths and weaknesses? What are your market penetration plans? Include specific facts and figures from your market research.
 
   - var marketingPlan = results.find(result => result.name === 'marketingplan')
-  - var form = marketingPlan ? {action: `lti/form/update${marketingPlan._id}`, data: marketingPlan.data} : {action: `/lti/form/submit/businessplan/marketingplan`, data: '' }
+  - var form = marketingPlan ? {action: `lti/form/update/${marketingPlan._id}`, data: marketingPlan.data} : {action: `/lti/form/submit/businessplan/marketingplan`, data: '' }
   include ../form/form.jade
 
 div.activity-container#financialplan
@@ -31,5 +32,5 @@ div.activity-container#financialplan
   p.activity-description What will it cost to start this business? What are the projections for sales and net profit? How much cash will be needed to start and operate this business? What sources of financing have been, and will be, sought? How much money has been contributed by the entrepreneur? What is your exit strategy?
 
   - var financialPlan = results.find(result => result.name === 'financialplan')
-  - var form = financialPlan ? {action: `lti/form/update${financialPlan._id}`, data: financialPlan.data} : {action: `/lti/form/submit/businessplan/financialplan`, data: '' }
+  - var form = financialPlan ? {action: `lti/form/update/${financialPlan._id}`, data: financialPlan.data} : {action: `/lti/form/submit/businessplan/financialplan`, data: '' }
   include ../form/form.jade

@@ -3,6 +3,7 @@ const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
+const getTitle = require('../lib/titleProvider');
 
 const componentLocation = 'lti';
 
@@ -34,7 +35,7 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
 
   responsesRepository
     .getDeliverableTypesByEmail(email)
-    .then(results => res.render(view, { email, results }));
+    .then(results => res.render(view, { email, results, getTitle }));
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
 const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
@@ -53,20 +54,22 @@ const renderUserDeliverable = (req, res) => {
       email,
       results,
       solvedActivitiesCount,
-      activitiesTotalCount
+      activitiesTotalCount,
+      getTitle
     });
   });
 };
 
 const addResponse = (req, res) => {
-  const { name, type } = req.params;
+  const { name, type, subType } = req.params;
   const email = getEmail(req);
 
   const formResponse = {
     name,
     email,
     type,
-    data: req.body.text,
+    data: req.body.data,
+    subType,
     metadata: null,
     lti: req.session.lti || {}
   };

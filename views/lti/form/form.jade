@@ -1,4 +1,4 @@
 .form
   form(action=form.action, method='POST')
-    textarea(type='editor', class='editor', id=form.action, rows='10', cols='80')= form.data
-    input(type='submit', value='Save it')
+    textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
+    input(type='submit', value='Save')

@@ -94,6 +94,16 @@
   padding-top: 25px;
 }
 
+.subdeliverable-resources {
+  margin-left: 6%;
+  margin-right: 8%;
+  white-space: pre;
+}
+
+.subdeliverable-resources-links {
+  list-style: none;
+}
+
 .activity-container {
   margin-left: 8%;
   margin-right: 8%;

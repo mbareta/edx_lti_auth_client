@@ -4,27 +4,66 @@ div.deliverable-navbar
 
   div.deliverable-navbar-content
     ul.deliverable-content-list
-      - results.forEach((result, index) => {
-        li
-          - if (index === 0) {
-              a.active(href=`#${result.name.toLowerCase()}`)= result.name
-          - } else {
-            a(href=`#${result.name.toLowerCase()}`)= result.name
-          - }
+      - const isUnique = (value, index, self) => self.indexOf(value) === index
+      - const subTypes = results.map(result => result.subType).filter(isUnique)
+      - subTypes.forEach((subType, subTypeIndex) => {
+        - let navSubTypeClass
+        - let iconClass
+        - if (subTypeIndex === 0) {
+            - navSubTypeClass = 'opened'
+            - iconClass = 'fa fa-chevron-up'
+        - } else {
+            - navSubTypeClass = ''
+            - iconClass = 'fa fa-chevron-down'
+        - }
+            div(class=`navSubType ${navSubTypeClass}`)
+              div.navItemHeader
+                h5= getTitle(subType)
+                i(class=`navSubTypeIcon ${iconClass}`)
+              - const resultsBySubType = results.filter(result => result.subType === subType)
+              ul.activities
+                - results.forEach((result, resultIndex) => {
+                  li
+                    - if (subTypeIndex === 0 && resultIndex === 0) {
+                        a.active(href=`#${result.name.toLowerCase()}`)= getTitle(result.name)
+                    - } else {
+                      a(href=`#${result.name.toLowerCase()}`)= getTitle(result.name)
+                    - }
+                - })
       - })
 
 script
   :babel
     document.addEventListener('DOMContentLoaded', () => {
       const navItems = document.querySelectorAll('.deliverable-content-list li a')
+      const navSubTypes = document.querySelectorAll('.deliverable-content-list .navSubType')
       navItems.forEach(initializeNavItemEvents)
+      navSubTypes.forEach(initializeNavSubTypeEvents)
 
       function initializeNavItemEvents(navItem) {
-        navItem.addEventListener('click', event => changeActiveNavItem(event.target))
+        navItem.addEventListener('click', () => changeActiveNavItem(navItem))
+      }
+
+      function initializeNavSubTypeEvents(navSubType) {
+        navSubType
+          .querySelector('.navItemHeader')
+          .addEventListener('click', () => changeOpenedNavSubType(navSubType))
       }
 
       function changeActiveNavItem(navItem) {
         navItems.forEach(navItem => navItem.classList.remove('active'))
-        event.target.classList.add('active')
+        navItem.classList.add('active')
+      }
+
+      function changeOpenedNavSubType(navSubType) {
+        const navSubTypeIcon = navSubType.querySelector('.navSubTypeIcon')
+        if (navSubTypeIcon.classList.contains('fa-chevron-up')) {
+          navSubTypeIcon.classList.remove('fa-chevron-up')
+          navSubTypeIcon.classList.add('fa-chevron-down')
+        } else {
+          navSubTypeIcon.classList.remove('fa-chevron-down')
+          navSubTypeIcon.classList.add('fa-chevron-up')
+        }
+        navSubType.classList.toggle('opened')
       }
     })

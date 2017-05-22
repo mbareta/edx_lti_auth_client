@@ -9,8 +9,7 @@
   width: 52px;
 
   align-items: center;
-
-  background: linear-gradient(to right bottom, #50473D 49%, transparent 50%);
+  background: linear-gradient(to right bottom, #9F9A93 49%, transparent 50%);
 }
 
 .toggle-deliverable-navbar-btn .main-navbar-text {
