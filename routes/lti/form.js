@@ -17,6 +17,6 @@ router.post('/update/:id', updateResponse);
 router.post('/grade/:id', gradeResponse);
 
 // LTI submit
-router.post('/submit/:type/:name', addResponse);
+router.post('/submit/:type/:subType/:name', addResponse);
 
 module.exports = router;

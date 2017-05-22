@@ -2,12 +2,13 @@ h2.subdeliverable-title
   span Product / Service Plan
 p.subdeliverable-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur ultricies nisi in semper. Nam sollicitudin facilisis augue et semper. Phasellus congue sem odio, varius ultrices nisl fermentum vel. Integer porttitor, tortor at aliquet efficitur, nisl tellus blandit nunc, quis malesuada leo metus in ex.
 
+- var addActionLink = '/lti/form/submit/businessplan/productplan'
 div.activity-container#purposeofproduct
   h3.activity-title Purpose of Product/Service
   p.activity-description What is the purpose of the product/service? How does the product/service benefit the customer? Does it solve a problem or address an opportunity? Is it a luxury item or a needed good?
 
   - var purposeOfProduct = results.find(result => result.name === 'purposeofproduct')
-  - var form = purposeOfProduct ? {action: `/lti/form/update/${purposeOfProduct._id}`, data: purposeOfProduct.data } : {action: `/lti/form/submit/businessplan/purposeofproduct`, data: '' }
+  - var form = purposeOfProduct ? {action: `/lti/form/update/${purposeOfProduct._id}`, data: purposeOfProduct.data } : {action: `${addActionLink}/purposeofproduct`, data: '' }
   include ../form/form.jade
 
 div.activity-container#features
@@ -15,7 +16,7 @@ div.activity-container#features
   p.activity-description What are the unique features of the product/service, such as cost, design, quality, and capabilities? What benefits does the customer receive? What problem is solved for the customer?
 
   - var features = results.find(result => result.name === 'features')
-  - var form = features ? {action: `/lti/form/update/${features._id}`, data: features.data} : {action: `/lti/form/submit/businessplan/features`, data: '' }
+  - var form = features ? {action: `/lti/form/update/${features._id}`, data: features.data} : {action: `${addActionLink}/features`, data: '' }
   include ../form/form.jade
 
 div.activity-container#stageofdevelopment
@@ -23,7 +24,7 @@ div.activity-container#stageofdevelopment
   p.activity-description What is the history of product/service development? At what stage of development is the product/service (model stage, working prototype, small production runs, full manufacturing/ production, or other)? When do you plan to achieve other stages of development? At what life cycle stage is the product/service (conception, introduction, growth, maturity, innovation, or decline)?
 
   - var stageOfDevelopment = results.find(result => result.name === 'stageofdevelopment')
-  - var form = stageOfDevelopment ? {action: `/lti/form/update/${stageOfDevelopment._id}`, data: stageOfDevelopment.data} : {action: `/lti/form/submit/businessplan/stageofdevelopment`, data: '' }
+  - var form = stageOfDevelopment ? {action: `/lti/form/update/${stageOfDevelopment._id}`, data: stageOfDevelopment.data} : {action: `${addActionLink}/stageofdevelopment`, data: '' }
   include ../form/form.jade
 
 div.activity-container#productlimitations
@@ -31,7 +32,7 @@ div.activity-container#productlimitations
   p.activity-description What are the inherent product/service limitations, if any? Include perishability, limited shelf life, installation needs, legal restrictions, staff availability, or other relevant limitations.
 
   - var productLimitations = results.find(result => result.name === 'productlimitations')
-  - var form = productLimitations ? {action: `/lti/form/update/${productLimitations._id}`, data: productLimitations.data} : {action: `/lti/form/submit/businessplan/productlimitations`, data: '' }
+  - var form = productLimitations ? {action: `/lti/form/update/${productLimitations._id}`, data: productLimitations.data} : {action: `${addActionLink}/productlimitations`, data: '' }
   include ../form/form.jade
 
 div.activity-container#intellectualproperty
@@ -39,7 +40,7 @@ div.activity-container#intellectualproperty
   p.activity-description How will you protect intellectual property? What patents, trademarks, or copyrights have been obtained or which ones will be pursued? What license or royalty agreements are associated with the product/service, and what plans have been made for future agreements? What distribution rights have been obtained or given away?
 
   - var intellectualProperty = results.find(result => result.name === 'intellectualproperty')
-  - var form = intellectualProperty ? {action: `/lti/form/update/${intellectualProperty._id}`, data: compensationAndOwnership.data} : {action: `/lti/form/submit/businessplan/intellectualproperty`, data: '' }
+  - var form = intellectualProperty ? {action: `/lti/form/update/${intellectualProperty._id}`, data: compensationAndOwnership.data} : {action: `${addActionLink}/intellectualproperty`, data: '' }
   include ../form/form.jade
 
 div.activity-container#governmentapprovals
@@ -47,5 +48,5 @@ div.activity-container#governmentapprovals
   p.activity-description What governmental agencies regulate businesses in your industry? What governmental approvals are necessary, and what is the status of such approvals? Some examples of agencies providing governmental approvals include the FDA, EPA, FCC, USDA, OSHA, IRS, secretary of state, State Department of Revenue and Taxation, Workers’ Compensation Division, health departments, planning and zoning commissions.
 
   - var governmentApprovals = results.find(result => result.name === 'governmentapprovals')
-  - var form = governmentApprovals ? {action: `/lti/form/update/${governmentApprovals._id}`, data: governmentApprovals.data} : {action: `/lti/form/submit/businessplan/governmentapprovals`, data: '' }
+  - var form = governmentApprovals ? {action: `/lti/form/update/${governmentApprovals._id}`, data: governmentApprovals.data} : {action: `${addActionLink}/governmentapprovals`, data: '' }
   include ../form/form.jade

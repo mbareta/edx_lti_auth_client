@@ -15,7 +15,7 @@
 
 .deliverable-navbar-header {
   width: 100%;
-  background: #F76B1C;
+  background: #50473D;
 
   text-transform: uppercase;
 }
@@ -26,12 +26,13 @@
   }
 
 .deliverable-content-list {
-  list-style: none;
+  width: 100%;
   margin-top: 15px;
   margin-left: 30px;
   margin-right: 6px;
   margin-bottom: 6px;
 
+  list-style: none;
 }
 
 .deliverable-navbar-header {
@@ -45,6 +46,33 @@
 }
 
 .deliverable-content-list a:hover,
-.deliverable-content-list a.active {
+.deliverable-content-list a.active,
+.deliverable-content-list .navSubType.opened h5,
+.deliverable-content-list .navSubType.opened .navSubTypeIcon {
   color: #555;
+}
+
+.deliverable-content-list .activities {
+  list-style: none;
+  margin-left: 14px;
+}
+
+.deliverable-content-list .navSubType {
+  cursor: pointer;
+  width: 100%;
+}
+
+.deliverable-content-list .navSubType:not(.opened) .activities {
+  display: none;
+}
+
+.deliverable-content-list .navSubTypeIcon,
+.deliverable-content-list .navSubType h5 {
+  display: inline-block;
+}
+
+.deliverable-content-list .navSubTypeIcon {
+  float: right;
+  margin-top: 27px;
+  margin-right: 17px;
 }

@@ -8,20 +8,21 @@ p.subdeliverable-description
   | Optionally/if relevant to you, cover:
   | Other characteristics - What other key facts and figures are important to your industry. For example, what seasonal issues affect your industry?
   | Distribution Channels: How is your product or service currently distributed?
-p.subdeliverable-resources
-  | [Resources*] Need help?
-  | Courseware:
-  a(href="http://example.com") Section 2 > Module 1 > Topic 5
-  | Reality Check:
-  a(href="http://example.com")
-  | Know Your Industry
+  div.subdeliverable-resources
+    p.resources-title [Resources*] Need help?
+    ul.subdeliverable-resources-links
+      li Courseware:
+        a(href="http://example.com")  Section 2 > Module 1 > Topic 5
+      li Reality Check:
+        a(href="http://example.com")  Know Your Industry
 
+- var addActionLink = '/lti/form/submit/businessplan/marketingplan'
 div.activity-container#industryprofile
   h3.activity-title Industry Profile
   p.activity-description What legal form has been selected? What are the major reasons for this selection? What is the state of incorporation (corporations) or organization (LLCs)? In which states will it be necessary to be authorized to do business? Some legal forms allow for special elections for tax purposes. What, if any, tax treatment elections will you request?
 
   - var industryProfile = results.find(result => result.name === 'industryprofile')
-  - var form = industryProfile ? {action: `/lti/form/update/${industryProfile._id}`, data: industryProfile.data } : {action: `/lti/form/submit/businessplan/industryprofile`, data: '' }
+  - var form = industryProfile ? {action: `/lti/form/update/${industryProfile._id}`, data: industryProfile.data } : {action: `${addActionLink}/industryprofile`, data: '' }
   include ../form/form.jade
 
 div.activity-container#competitiveanalysis
@@ -34,7 +35,7 @@ div.activity-container#competitiveanalysis
   | Competitive Analysis - What is your competitive advantage? Include a competitive analysis chart and summarize key points. How will your product/service compete in the areas of price, quality, unique features, distribution system, marketing/advertising, geographic location, and strengths/weaknesses?
 
   - var competitiveAnalysis = results.find(result => result.name === 'competitiveanalysis')
-  - var form = competitiveAnalysis ? {action: `/lti/form/update/${competitiveAnalysis._id}`, data: competitiveAnalysis.data} : {action: `/lti/form/submit/businessplan/competitiveanalysis`, data: '' }
+  - var form = competitiveAnalysis ? {action: `/lti/form/update/${competitiveAnalysis._id}`, data: competitiveAnalysis.data} : {action: `${addActionLink}/competitiveanalysis`, data: '' }
   include ../form/form.jade
 
 div.activity-container#marketanalysis
@@ -42,7 +43,7 @@ div.activity-container#marketanalysis
   p.activity-description (Not yet written) (e.g.) Your target market profile, customer profile and future markets...
 
   - var marketAnalysis = results.find(result => result.name === 'marketanalysis')
-  - var form = marketAnalysis ? {action: `/lti/form/update/${marketAnalysis._id}`, data: marketAnalysis.data} : {action: `/lti/form/submit/businessplan/marketanalysis`, data: '' }
+  - var form = marketAnalysis ? {action: `/lti/form/update/${marketAnalysis._id}`, data: marketAnalysis.data} : {action: `${addActionLink}/marketanalysis`, data: '' }
   include ../form/form.jade
 
 div.activity-container#pricing
@@ -50,7 +51,7 @@ div.activity-container#pricing
   p.activity-description What is your plan to find and hire self-motivated people for your business? What are the required qualifications, the duties to be performed, and the interview and hiring guidelines to be followed?
 
   - var pricing = results.find(result => result.name === 'pricing')
-  - var form = pricing ? {action: `/lti/form/update/${pricing._id}`, data: pricing.data} : {action: `/lti/form/submit/businessplan/pricing`, data: '' }
+  - var form = pricing ? {action: `/lti/form/update/${pricing._id}`, data: pricing.data} : {action: `${addActionLink}/pricing`, data: '' }
   include ../form/form.jade
 
 div.activity-container#marketpenetration
@@ -58,5 +59,5 @@ div.activity-container#marketpenetration
   p.activity-description (Not yet written) (e.g.) Your company image, customer service, location and sales tactics...
 
   - var marketPenetration = results.find(result => result.name === 'marketpenetration')
-  - var form = marketPenetration ? {action: `/lti/form/update/${marketPenetration._id}`, data: marketPenetration.data} : {action: `/lti/form/submit/businessplan/marketpenetration`, data: '' }
+  - var form = marketPenetration ? {action: `/lti/form/update/${marketPenetration._id}`, data: marketPenetration.data} : {action: `${addActionLink}/marketpenetration`, data: '' }
   include ../form/form.jade

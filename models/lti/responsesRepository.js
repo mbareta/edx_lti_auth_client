@@ -7,19 +7,20 @@ const ObjectId = require('mongodb').ObjectID;
 const mongoDbName = 'lti_responses';
 
 const responsesRepository = () => {
-  const updateResponse = ({ _id, email, type, data, metadata, lti }) =>
+  const updateResponse = ({ _id, email, type, subType, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .update(
         { _id },
-        { $set: { email, type, data, metadata, lti } }
+        { $set: { email, type, subType, data, metadata, lti } }
       );
 
-  const saveResponse = ({ name, email, type, data, metadata, lti }) =>
+  const saveResponse = ({ name, email, type, subType, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .insertOne({
         name,
         email,
         type,
+        subType,
         data,
         metadata,
         lti
