@@ -68,8 +68,8 @@ const addResponse = (req, res) => {
     name,
     email,
     type,
+    data: req.body.data,
     subType,
-    data: req.body.text,
     metadata: null,
     lti: req.session.lti || {}
   };

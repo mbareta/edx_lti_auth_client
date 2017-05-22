@@ -30,4 +30,12 @@ block content
             buttonIcon.classList.add('fa-long-arrow-left')
           }
         })
+
+        initializeCKEditor()
       })
+
+      function initializeCKEditor() {
+        const editors = document.querySelectorAll('.editor')
+
+        editors.forEach(editor => CKEDITOR.replace(editor.id))
+      }
