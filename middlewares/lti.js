@@ -81,11 +81,11 @@ const addResponse = (req, res) => {
 
 const updateResponse = (req, res) => {
   const { id } = req.params;
-  const { text } = req.body;
+  const { data } = req.body;
   responsesRepository
     .getResponseById(id)
     .then(formResponse => {
-      formResponse.data = text;
+      formResponse.data = data;
 
       return responsesRepository.upsert(formResponse);
     })
