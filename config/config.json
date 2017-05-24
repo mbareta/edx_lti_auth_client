@@ -32,7 +32,7 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "baseUrl": "http://54.208.243.8",
+    "baseUrl": "http://52.90.208.190",
     "lmsPort": 80,
     "studioPort": 18010,
     "portfolioPort": 3000,
@@ -41,7 +41,7 @@
       "secret": "secret"
     },
     "auth": {
-      "tokenHost": "http://54.208.243.8",
+      "tokenHost": "http://52.90.208.190",
       "authorizePath": "/oauth2/authorize",
       "tokenPath": "/oauth2/access_token/"
     },
