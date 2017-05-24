@@ -66,3 +66,19 @@
   text-transform: uppercase;
   background-color: transparent;
 }
+
+#confirm-modal {
+  position: fixed;
+  left: 39%;
+  height: 400px;
+  width: 400px;
+  bottom: 18%;
+  background: white;
+  border-top: 2px solid #F76B1C;
+  white-space: pre;
+  z-index: 5;
+}
+
+#confirm-modal.hidden {
+  display: none;
+}

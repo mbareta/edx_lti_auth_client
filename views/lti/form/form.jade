@@ -1,5 +1,17 @@
 .form
-  form(action=form.action, method='POST')
+  div#confirm-modal.hidden
+    h4.modal-title
+      | Are you sure?
+    p.modal-content
+      | Saving your changes here will overwrite your courseware
+      | answers. Are you sure you still want to save this current
+      | answer?
+    div.confirm-button
+      | Yes
+    div.cancel-button
+      | No
+
+  form#form(action=form.action, method='POST')
     textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
     div.form-control-container
       div.view-in-course-link
@@ -7,4 +19,14 @@
         i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
-        input.save-button(type='submit', value='Save')
+        input#save-button.save-button(type='button', value='yes')
+
+  script
+    :babel
+      document.addEventListener('DOMContentLoaded', () => {
+        const saveButton = document.querySelector('#save-button')
+        saveButton.addEventListener('click', () => {
+          const modal = document.querySelector('#confirm-modal')
+          modal.classList.remove('hidden')
+        })
+      })
