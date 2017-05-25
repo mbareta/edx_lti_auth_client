@@ -1,5 +1,18 @@
 .form
-  form(action=form.action, method='POST')
+  form(action=form.action, method='POST', id=`${form.action}-form` class='activity-form')
+    div.confirm-modal-wrapper.hidden
+      div.confirm-modal
+        h4.modal-title
+          | Are you sure?
+        p.modal-content
+          | Saving your changes here will overwrite your courseware
+          | answers. Are you sure you still want to save this current
+          | answer?
+        div.cancel-button
+          | No
+        div.confirm-button
+          | Yes
+
     textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
     div.form-control-container
       div.view-in-course-link
@@ -7,4 +20,30 @@
         i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
-        input.save-button(type='submit', value='Save')
+        input.save-button(type='button', value='yes')
+
+  script
+    :babel
+      document.addEventListener('DOMContentLoaded', () => {
+        const forms = document.querySelectorAll('.activity-form')
+
+        forms.forEach(form => {
+          const modal = form.querySelector('.confirm-modal-wrapper')
+          const saveButton = form.querySelector('.save-button-wrapper')
+          const confirmButton = form.querySelector('.confirm-button')
+          const cancelButton = form.querySelector('.cancel-button')
+
+          saveButton.addEventListener('click', () => {
+            modal.classList.remove('hidden')
+          })
+
+          confirmButton.addEventListener('click', () => {
+            form.submit()
+            modal.classList.add('hidden')
+          })
+
+          cancelButton.addEventListener('click', () => {
+            modal.classList.add('hidden')
+          })
+        })
+      })
