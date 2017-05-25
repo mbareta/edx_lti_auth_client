@@ -54,6 +54,7 @@ const responsesRepository = () => {
   const upsert = (formResponse) => getByLti(formResponse.lti)
     .then(existingResponse => {
       if (existingResponse) {
+        formResponse._id = existingResponse._id;
         return updateResponse(formResponse);
       }
       return saveResponse(formResponse);
