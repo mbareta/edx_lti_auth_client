@@ -20,6 +20,7 @@
     "flow-remove-types": "^1.2.0",
     "ims-lti": "^3.0.2",
     "jade": "~1.11.0",
+    "jstransformer-babel": "^2.1.0",
     "mongodb": "^2.2.23",
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
@@ -40,6 +41,7 @@
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.41.0",
     "font-awesome": "^4.7.0"
