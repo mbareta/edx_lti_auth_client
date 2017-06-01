@@ -1,0 +1,63 @@
+h2.subdeliverable-title
+  span Marketing Plan
+p.subdeliverable-description
+  | Your industry profile gives an at-a-glance look at the industry you are in as a whole. When creating your profile, make sure to cover the following:
+  | Current size - What is the current size of your industry? How much is spent annually?
+  | Growth potential - How much is the industry growing, stabilizing or declining?
+  | Industry trends - What are the trends in the industry?
+  | Optionally/if relevant to you, cover:
+  | Other characteristics - What other key facts and figures are important to your industry. For example, what seasonal issues affect your industry?
+  | Distribution Channels: How is your product or service currently distributed?
+  div.subdeliverable-resources
+    p.resources-title [Resources*] Need help?
+    ul.subdeliverable-resources-links
+      li Courseware:
+        a(href="http://example.com")  Section 2 > Module 1 > Topic 5
+      li Reality Check:
+        a(href="http://example.com")  Know Your Industry
+
+- var addActionLink = '/lti/form/submit/businessplan/marketingplan'
+div.activity-container#industryprofile
+  h3.activity-title Industry Profile
+  p.activity-description What legal form has been selected? What are the major reasons for this selection? What is the state of incorporation (corporations) or organization (LLCs)? In which states will it be necessary to be authorized to do business? Some legal forms allow for special elections for tax purposes. What, if any, tax treatment elections will you request?
+
+  - var industryProfile = results.find(result => result.name === 'industryprofile')
+  - var form = industryProfile ? {action: `/lti/form/update/${industryProfile._id}`, data: industryProfile.data } : {action: `${addActionLink}/industryprofile`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#competitiveanalysis
+  h3.activity-title Competitive Analysis
+  p.activity-description
+  | This part of your marketing plan should highlight that you understand and have researched who your competitors are. Make sure to address your:
+  | Direct Competition - What direct competition exists for your product/service? What companies sell similar products/services to the same target market?
+  | Indirect Competition - What indirect competition exists for your product/service? What companies sell different products/services that fill the same need as your product/service?
+  | Future Competition - What future competition do you expect to have for your product/service?
+  | Competitive Analysis - What is your competitive advantage? Include a competitive analysis chart and summarize key points. How will your product/service compete in the areas of price, quality, unique features, distribution system, marketing/advertising, geographic location, and strengths/weaknesses?
+
+  - var competitiveAnalysis = results.find(result => result.name === 'competitiveanalysis')
+  - var form = competitiveAnalysis ? {action: `/lti/form/update/${competitiveAnalysis._id}`, data: competitiveAnalysis.data} : {action: `${addActionLink}/competitiveanalysis`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#marketanalysis
+  h3.activity-title Market Analysis
+  p.activity-description (Not yet written) (e.g.) Your target market profile, customer profile and future markets...
+
+  - var marketAnalysis = results.find(result => result.name === 'marketanalysis')
+  - var form = marketAnalysis ? {action: `/lti/form/update/${marketAnalysis._id}`, data: marketAnalysis.data} : {action: `${addActionLink}/marketanalysis`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#pricing
+  h3.activity-title Pricing
+  p.activity-description What is your plan to find and hire self-motivated people for your business? What are the required qualifications, the duties to be performed, and the interview and hiring guidelines to be followed?
+
+  - var pricing = results.find(result => result.name === 'pricing')
+  - var form = pricing ? {action: `/lti/form/update/${pricing._id}`, data: pricing.data} : {action: `${addActionLink}/pricing`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#marketpenetration
+  h3.activity-title Market Penetration
+  p.activity-description (Not yet written) (e.g.) Your company image, customer service, location and sales tactics...
+
+  - var marketPenetration = results.find(result => result.name === 'marketpenetration')
+  - var form = marketPenetration ? {action: `/lti/form/update/${marketPenetration._id}`, data: marketPenetration.data} : {action: `${addActionLink}/marketpenetration`, data: '' }
+  include ../form/form.jade

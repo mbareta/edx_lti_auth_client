@@ -45,7 +45,7 @@ app.use(session({
   store: new RedisStore()
 }));
 
-const ignoreOnRedirectRoutes = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout']);
+const ignoreOnRedirectRoutes = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout', '/favicon.ico']);
 app.use(intercept(excludesRequestRoute(ignoreOnRedirectRoutes), storeRequestOriginUrl));
 
 app.use(skipWhitelistedRoutes(redirectAnonymous));
@@ -63,7 +63,7 @@ app.use('/lti/form', ltiForm);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error('Not Found');
+  const err = new Error('404: Not Found');
   err.status = 404;
   next(err);
 });

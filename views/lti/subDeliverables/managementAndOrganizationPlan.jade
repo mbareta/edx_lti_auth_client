@@ -1,0 +1,77 @@
+span#managementandorganizationplan
+h2.subdeliverable-title
+  span Management and Organization Plan
+p.subdeliverable-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur ultricies nisi in semper. Nam sollicitudin facilisis augue et semper. Phasellus congue sem odio, varius ultrices nisl fermentum vel. Integer porttitor, tortor at aliquet efficitur, nisl tellus blandit nunc, quis malesuada leo metus in ex. Sed lobortis auctor libero sed gravida. Pellentesque iaculis nisi orci, eu volutpat purus vulputate in. Morbi suscipit magna at velit blandit ultrices. Aenean viverra lectus eget aliquam euismod. Nullam vel pharetra libero, quis condimentum dolor. In egestas magna sed magna tempor, quis rutrum tellus ornare.
+
+- var addActionLink = '/lti/form/submit/businessplan/managementandorganizationplan'
+div.activity-container#legalformofbusiness
+  h3.activity-title Legal Form of Business
+  p.activity-description What legal form has been selected? What are the major reasons for this selection? What is the state of incorporation (corporations) or organization (LLCs)? In which states will it be necessary to be authorized to do business? Some legal forms allow for special elections for tax purposes. What, if any, tax treatment elections will you request?
+
+  - var legalFormOfBusiness = results.find(result => result.name === 'legalformofbusiness')
+  - var form = legalFormOfBusiness ? {action: `/lti/form/update/${legalFormOfBusiness._id}`, data: legalFormOfBusiness.data } : {action: `${addActionLink}/legalformofbusiness`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#managementteam
+  h3.activity-title Management Team
+  p.activity-description What is the contribution of the entrepreneur? Who are the key management team members, and what are their job descriptions and prior experiences? What offices or titles, such as president or chief financial officer, will each hold? What experience and qualifications are desired for future management positions? When and how will these be filled?
+
+  - var managementTeam = results.find(result => result.name === 'managementteam')
+  - var form = managementTeam ? {action: `/lti/form/update/${managementTeam._id}`, data: managementTeam.data} : {action: `${addActionLink}/managementteam`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#advisoryboard
+  h3.activity-title Board of Directors/Advisory Board
+  p.activity-description Who are the board of directors or advisory board members? Include names, compensation, and any ownership in the company. What are their qualifications related to the business?
+
+  - var advisoryBoard = results.find(result => result.name === 'advisoryboard')
+  - var form = advisoryBoard ? {action: `/lti/form/update/${advisoryBoard._id}`, data: advisoryBoard.data} : {action: `${addActionLink}/advisoryboard`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#recruitment
+  h3.activity-title Recruitment and Selection of Employees
+  p.activity-description What is your plan to find and hire self-motivated people for your business? What are the required qualifications, the duties to be performed, and the interview and hiring guidelines to be followed?
+
+  - var recruitment = results.find(result => result.name === 'recruitment')
+  - var form = recruitment ? {action: `/lti/form/update/${recruitment._id}`, data: recruitment.data} : {action: `${addActionLink}/recruitment`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#compensationandownership
+  h3.activity-title Compensation and Ownership
+  p.activity-description What is the compensation package for the entrepreneur and other key management team members? What are their salaries, benefits, and bonuses? What portion of the business is owned by the entrepreneur and management team?
+
+  - var compensationAndOwnership = results.find(result => result.name === 'compensationandownership')
+  - var form = compensationAndOwnership ? {action: `/lti/form/update/${compensationAndOwnership._id}`, data: compensationAndOwnership.data} : {action: `${addActionLink}/compensationandownership`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#incentiveplan
+  h3.activity-title Employee Reward and Incentive Plan
+  p.activity-description What system for employee rewards and incentives will be in effect? What is the incentive plan? Include special recognition awards, lump sum awards, bonuses, stock options, profit sharing, deferred compensation, commissions, teamwork, and flexible hours.
+
+  - var incentivePlan = results.find(result => result.name === 'incentiveplan')
+  - var form = recruitment ? {action: `/lti/form/update/${incentivePlan._id}`, data: incentivePlan.data} : {action: `${addActionLink}/incentiveplan`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#communication
+  h3.activity-title Communication
+  p.activity-description How will you communicate your business values and expectations? What system will you use to assure clarity of communication throughout your business?
+
+  - var communication = results.find(result => result.name === 'communication')
+  - var form = communication ? {action: `/lti/form/update/${communication._id}`, data: communication.data} : {action: `${addActionLink}/communication`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#infrastructure
+  h3.activity-title Infrastructure
+  p.activity-description Who are the key advisers? Include names and compensation of accountants, lawyers, bankers, and consultants. What expertise will they provide? Include strategic alliances, computer technology, management, marketing, and specialists in product or service issues.
+
+  - var infrastructure = results.find(result => result.name === 'infrastructure')
+  - var form = infrastructure ? {action: `/lti/form/update/${infrastructure._id}`, data: infrastructure.data} : {action: `${addActionLink}/infrastructure`, data: '' }
+  include ../form/form.jade
+
+div.activity-container#operationsplan
+  h3.activity-title Operations Plan
+  p.activity-description What are the operational systems that are needed for your business to function smoothly?
+
+  - var operationsPlan = results.find(result => result.name === 'operationsplan')
+  - var form = operationsPlan ? {action: `/lti/form/update/${operationsPlan._id}`, data: operationsPlan.data} : {action: `${addActionLink}/operationsplan`, data: '' }
+  include ../form/form.jade

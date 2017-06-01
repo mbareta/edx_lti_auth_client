@@ -7,51 +7,57 @@ const ObjectId = require('mongodb').ObjectID;
 const mongoDbName = 'lti_responses';
 
 const responsesRepository = () => {
-  const updateResponse = ({ _id, email, type, data, metadata, lti }) =>
+  const updateResponse = ({ _id, email, type, subType, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .update(
         { _id },
-        { $set: { email, type, data, metadata, lti } }
+        { $set: { email, type, subType, data, metadata, lti } }
       );
 
-  const saveResponse = ({ email, type, data, metadata, lti }) =>
+  const saveResponse = ({ name, email, type, subType, data, metadata, lti }) =>
     mongoConnectionPool.db.collection(mongoDbName)
       .insertOne({
+        name,
         email,
         type,
+        subType,
         data,
         metadata,
         lti
       });
 
-  const anyWithLti = (lti) => {
-    if (!lti) {
+  const getByLti = lti => {
+    const { outcomeServiceSourcedId } = lti;
+
+    if (!outcomeServiceSourcedId) {
       return Promise.resolve(false);
     }
 
-    const { outcomeServiceSourcedId } = lti;
     return mongoConnectionPool.db.collection(mongoDbName)
-      .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId })
-      .then(queryResult => !!queryResult);
+      .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId });
   };
 
   const getResponseById = (id) => mongoConnectionPool.db.collection(mongoDbName)
       .findOne({ _id: ObjectId(id) });
 
-  const getResponsesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
+  const getResponsesByEmail = email => mongoConnectionPool.db.collection(mongoDbName)
       .find({ email })
       .toArray();
 
-  const getDeliverableTypesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
+  const getResponseByEmail = (name, email) => mongoConnectionPool.db.collection(mongoDbName)
+      .findOne({ name, email });
+
+  const getDeliverableTypesByEmail = email => mongoConnectionPool.db.collection(mongoDbName)
       .distinct('type', { email });
 
-  const getDeliverableByType = (email, type = 'subDeliverable') => mongoConnectionPool.db.collection(mongoDbName)
+  const getDeliverableByType = (email, type) => mongoConnectionPool.db.collection(mongoDbName)
       .find({ $and: [{ email, type }] })
       .toArray();
 
-  const upsert = (formResponse) => anyWithLti(formResponse.lti)
-    .then(exists => {
-      if (exists) {
+  const upsert = formResponse => getByLti(formResponse.lti)
+    .then(existingResponse => {
+      if (existingResponse) {
+        formResponse._id = existingResponse._id;
         return updateResponse(formResponse);
       }
       return saveResponse(formResponse);
@@ -60,9 +66,10 @@ const responsesRepository = () => {
   return {
     updateResponse,
     saveResponse,
-    anyWithLti,
+    getByLti,
     getResponseById,
     getResponsesByEmail,
+    getResponseByEmail,
     getDeliverableTypesByEmail,
     getDeliverableByType,
     upsert

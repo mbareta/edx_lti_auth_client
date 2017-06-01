@@ -11,9 +11,9 @@ html
     div.deliverables-container
       each result in results
         div.deliverable-wrapper
-          a(href='/lti/form/deliverable')
+          a(href=`/lti/deliverable/${result}`)
             div.deliverable
-              h5.title= result
+              h5.title= getTitle(result)
               p Placeholder text for this paragraph!
           div.activities
             p.title Activities

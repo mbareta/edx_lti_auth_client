@@ -1,19 +1,20 @@
 extends ../layout
 
 block content
-  h1 Deliverables
-  div.deliverables-container
-      each result in results
-        div.deliverable-wrapper
-          a(href='/lti/form/deliverable')
-            div.deliverable
-              h5.title= result
-              p Placeholder text for this paragraph!
-          div.activities
-            p.title Activities
-  h1 Available LTI components
-  ul.mdl-list
-    li.mdl-list__item
-      a(href='/lti/form') Simple Form
-    li.mdl-list__item.deliverable
-      a(href='/lti/form/deliverable') Simple Form Deliverable
+  div.lti-dashboard
+    h1 Deliverables
+    div.deliverables-container
+        each result in results
+          div.deliverable-wrapper
+            a(href=`/lti/deliverable/${result}`)
+              div.deliverable
+                h5.title= getTitle(result)
+                p Placeholder text for this paragraph!
+            div.activities
+              p.title Activities
+    h1 Available LTI components
+    ul.mdl-list
+      li.mdl-list__item
+        a(href='/lti/form') Simple Form
+      li.mdl-list__item.deliverable
+        a(href='/lti/form/deliverable') Simple Form Deliverable

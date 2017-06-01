@@ -1,0 +1,24 @@
+extends ../ltiLayout.jade
+block content
+  div.activity-container
+    - if(activity) {
+        div.activity-container
+        h3.activity-title= getTitle(activity.name)
+        p.activity-description Activity description placeholder
+
+    - }
+
+    - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
+    include ./form/form.jade
+
+  script
+    :babel
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeCKEditor()
+      })
+
+      function initializeCKEditor() {
+        const editors = document.querySelectorAll('.editor')
+
+        editors.forEach(editor => CKEDITOR.replace(editor.id))
+      }

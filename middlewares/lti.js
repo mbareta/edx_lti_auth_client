@@ -1,20 +1,17 @@
+/* eslint-disable */
 const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
-const { ltiTypes } = require('../models/lti/types');
+const getTitle = require('../lib/titleProvider');
 
-const componentLocation = 'lti/form';
+const componentLocation = 'lti';
 
 const validateLtiRequest = (req, res, next) => {
-  ltiProvider.valid_requestAsync(req)
-  .then(isValid => {
+  ltiProvider.valid_requestAsync(req).then(isValid => {
     if (isValid) {
-      const { outcome_service: { service_url, source_did } } = ltiProvider;
       // store user data in session
-      req.session.lti = getUserDataFromLti(ltiProvider);
-      req.session.outcomeServiceUrl = service_url; // eslint-disable-line
-      req.session.outcomeServiceSourcedId = source_did; // eslint-disable-line
+      req.session.lti = getUserDataFromLtiAndReq(ltiProvider, req);
       next();
     }
   });
@@ -23,89 +20,143 @@ const validateLtiRequest = (req, res, next) => {
 const renderUserResponses = (req, res) => {
   const email = getEmail(req);
 
-  responsesRepository.getResponsesByEmail(email)
-  .then(results => res.render(`${componentLocation}/index`, { email, results }));
+  responsesRepository
+    .getResponsesByEmail(email)
+    .then(results =>
+      res.render(`${componentLocation}/form/index`, { email, results })
+    );
 };
 
-const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (req, res) => {
+const renderUserResponse = (req, res, next) => {
+  const email = getEmail(req);
+  const name = req.params.name;
+
+  responsesRepository
+    .getResponseByEmail(name, email)
+    .then(response =>
+      res.render(`${componentLocation}/activity`, {
+        activity: response,
+        createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
+        getTitle
+      })
+    );
+};
+
+const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
+  req,
+  res
+) => {
   const email = getEmail(req);
 
-  responsesRepository.getDeliverableTypesByEmail(email)
-  .then(results => res.render(view, { email, results }));
+  responsesRepository
+    .getDeliverableTypesByEmail(email)
+    .then(results => res.render(view, { email, results, getTitle }));
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
 const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 
 const renderUserDeliverable = (req, res) => {
+  const { type } = req.params;
   const email = getEmail(req);
 
-  responsesRepository.getDeliverableByType(email, ltiTypes.SUBDELIVERABLE)
-  .then(results => res.render(`${componentLocation}/index`, { email, results }));
+  responsesRepository.getDeliverableByType(email, type).then(results => {
+    const activitiesTotalCount = results.length;
+    const solvedActivitiesCount = results.filter(result => !!result.data)
+      .length;
+
+    res.render(`${componentLocation}/deliverables/${type}`, {
+      email,
+      results,
+      solvedActivitiesCount,
+      activitiesTotalCount,
+      getTitle
+    });
+  });
 };
 
 const addResponse = (req, res) => {
+  const { name, type, subType } = req.params;
   const email = getEmail(req);
+
   const formResponse = {
+    name,
     email,
-    type: ltiTypes.SUBDELIVERABLE,
-    data: req.body.text,
+    type,
+    data: req.body.data,
+    subType,
     metadata: null,
-    lti: null
+    lti: req.session.lti || {}
   };
 
-  responsesRepository.upsert(formResponse)
-  .then(() => res.redirect(`/${componentLocation}`));
+  responsesRepository
+    .upsert(formResponse)
+    .then(() => res.redirect(`/${componentLocation}`));
 };
 
 const updateResponse = (req, res) => {
   const { id } = req.params;
-  const { text } = req.body;
-  responsesRepository.getResponseById(id)
-  .then(formResponse => {
-    formResponse.data = text;
+  const { data } = req.body;
+  responsesRepository
+    .getResponseById(id)
+    .then(formResponse => {
+      formResponse.data = data;
 
-    return responsesRepository.upsert(formResponse);
-  })
-  .then(() => res.redirect(`/${componentLocation}`));
+      return responsesRepository.upsert(formResponse);
+    })
+    .then(() => res.redirect(`/${componentLocation}`));
 };
 
 const gradeResponse = (req, res) => {
   const responseId = req.params.id;
   const grade = parseFloat(req.body.grade);
-  const { outcomeServiceUrl, outcomeServiceSourcedId } = req.session;
-  const outcomeService = outcomeServiceFactory(outcomeServiceUrl, outcomeServiceSourcedId);
+  const { outcomeServiceUrl, outcomeServiceSourcedId } = req.session.lti;
+  const outcomeService = outcomeServiceFactory(
+    outcomeServiceUrl,
+    outcomeServiceSourcedId
+  );
 
   Promise.all([
     outcomeService.send_replace_resultAsync(grade),
     responsesRepository.getResponseById(responseId)
   ])
-  .then(([isSuccess, formResponse]) => {
-    if (isSuccess) {
-      formResponse.lti = { outcomeServiceUrl, outcomeServiceSourcedId };
-      formResponse.metadata = { grade, gradedAt: Date.now() };
+    .then(([isSuccess, formResponse]) => {
+      if (isSuccess) {
+        formResponse.lti = { outcomeServiceUrl, outcomeServiceSourcedId };
+        formResponse.metadata = { grade, gradedAt: Date.now() };
 
-      return formResponse;
-    }
-    throw new Error('Grading failed!');
-  })
-  .then(formResponse => responsesRepository.updateResponse(formResponse))
-  .then(() => res.redirect(`/${componentLocation}`));
+        return formResponse;
+      }
+      throw new Error('Grading failed!');
+    })
+    .then(formResponse => responsesRepository.updateResponse(formResponse))
+    .then(() => res.redirect(`/${componentLocation}`));
 };
 
-function getUserDataFromLti(ltiProvider) {
-  const { userId, body, username } = ltiProvider;
+function getUserDataFromLtiAndReq(ltiProvider, req) {
+  const {
+    userId,
+    username,
+    outcome_service: { service_url, source_did }
+  } = ltiProvider;
+  const { body: { context_id, lis_person_contact_email_primary } } = req;
 
   if (userId === 'student') {
     return {
       email: 'studio@user',
       username: 'studioUser',
-      id: 'studioUserId'
+      id: 'studioUserId',
+      courseId: 'context_id',
+      outcomeServiceUrl: 'service_url',
+      outcomeServiceSourcedId: 'source_did'
     };
   }
   return {
-    email: body.lis_person_contact_email_primary,
+    email: lis_person_contact_email_primary,
     username,
-    id: userId
+    id: userId,
+    courseId: context_id,
+    outcomeServiceUrl: service_url,
+    outcomeServiceSourcedId: source_did
   };
 }
 
@@ -121,6 +172,7 @@ function getEmail(req) {
 module.exports = {
   validateLtiRequest,
   renderUserResponses,
+  renderUserResponse,
   renderLtiDashboard,
   renderUserDeliverables,
   renderUserDeliverable,

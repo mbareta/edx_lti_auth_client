@@ -1,31 +1,21 @@
 const express = require('express');
 const {
-  validateLtiRequest,
   renderUserResponses,
-  renderUserDeliverable,
+  renderUserResponse,
   addResponse,
   updateResponse,
-  gradeResponse
+  gradeResponse,
+  validateLtiRequest
 } = require('../../middlewares/lti');
 
 const router = express.Router();
-const componentLocation = 'lti/form';
 
 // view results
 router.get('/', renderUserResponses);
-router.get('/deliverable', renderUserDeliverable);
 
-// LTI view
-router.post('/', validateLtiRequest, (req, res) => {
-  res.render(`${componentLocation}/createResponse`,
-    {
-      email: req.session.lti.email,
-      form: {
-        action: '/lti/form/submit',
-        placeholder: 'Say something...'
-      }
-    });
-});
+// view individual
+router.post('/:name', validateLtiRequest, renderUserResponse);
+router.get('/:name', renderUserResponse);
 
 // LTI update
 router.post('/update/:id', updateResponse);
@@ -33,6 +23,6 @@ router.post('/update/:id', updateResponse);
 router.post('/grade/:id', gradeResponse);
 
 // LTI submit
-router.post('/submit', addResponse);
+router.post('/submit/:type/:subType/:name', addResponse);
 
 module.exports = router;

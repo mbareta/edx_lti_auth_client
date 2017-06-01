@@ -27,3 +27,7 @@ benchmarks/graphs
 
 # Editors
 .idea
+
+# Assets
+public/assets/*
+!public/assets/ckeditor

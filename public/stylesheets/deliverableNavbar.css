@@ -1,0 +1,78 @@
+.deliverable-navbar {
+  display: inline-flex;
+  width: 300px;
+  height: 100%;
+  flex-wrap: wrap;
+  vertical-align: top;
+  transition: all .1s;
+}
+
+.deliverable-navbar.closed,
+.deliverable-navbar.closed .deliverable-navbar-content {
+  position: absolute;
+  transform: translateX(-100%);
+}
+
+.deliverable-navbar-header {
+  width: 100%;
+  background: #50473D;
+
+  text-transform: uppercase;
+}
+
+.deliverable-navbar-header h4 {
+  margin-left: 20px;
+  color: white;
+  }
+
+.deliverable-content-list {
+  width: 100%;
+  margin-top: 15px;
+  margin-left: 30px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+
+  list-style: none;
+}
+
+.deliverable-navbar-header {
+  display: flex;
+  height: 65px;
+  align-items: center;
+}
+
+.deliverable-content-list a {
+  color: #b5b5b5;
+}
+
+.deliverable-content-list a:hover,
+.deliverable-content-list a.active,
+.deliverable-content-list .navSubType.opened h5,
+.deliverable-content-list .navSubType.opened .navSubTypeIcon {
+  color: #555;
+}
+
+.deliverable-content-list .activities {
+  list-style: none;
+  margin-left: 14px;
+}
+
+.deliverable-content-list .navSubType {
+  cursor: pointer;
+  width: 100%;
+}
+
+.deliverable-content-list .navSubType:not(.opened) .activities {
+  display: none;
+}
+
+.deliverable-content-list .navSubTypeIcon,
+.deliverable-content-list .navSubType h5 {
+  display: inline-block;
+}
+
+.deliverable-content-list .navSubTypeIcon {
+  float: right;
+  margin-top: 27px;
+  margin-right: 17px;
+}

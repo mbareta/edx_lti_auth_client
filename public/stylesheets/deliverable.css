@@ -1,0 +1,107 @@
+.deliverable-view {
+  display: table;
+}
+
+.deliverable-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: calc(100% - 301px);
+
+  border-left: 1px solid #ddd;
+}
+
+.deliverable-container.expanded {
+  width: 100%;
+  border-left: none;
+
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.deliverable-title,
+.activities-data-title,
+.solved-activity-count,
+.subdeliverable-title span,
+.activity-title {
+  color: black;
+}
+
+.deliverable-info {
+  margin-left: 6%;
+  margin-right: 8%;
+}
+.deliverable-title, .deliverable-icon {
+  font-size: 48px;
+}
+
+.deliverable-title {
+  display: inline-block;
+  margin-left: 18px;
+}
+
+.deliverable-icon {
+  color: #f76b1c;
+}
+
+.activities-data,
+.activities-data-title,
+.activities-data-required {
+  text-transform: uppercase;
+}
+
+.activities-data {
+  display: table;
+}
+
+.activities-data-title,
+.activities-data-required {
+  display: inline-block;
+}
+
+.activities-data-required {
+  margin-left: 16px;
+  font-size: 20px;
+}
+
+.subdeliverable-title {
+   width: 100%;
+   padding-top: 40px;
+   text-align: left;
+   border-bottom: 1px solid #ddd;
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+
+.subdeliverable-title span {
+  margin-left: 5.52%;
+  margin-right: 6%;
+  background:#fff;
+  padding:0 3px;
+  font-size: 32px;
+}
+
+.subdeliverable-description {
+  margin-left: 6%;
+  margin-right: 8%;
+  padding-top: 25px;
+}
+
+.subdeliverable-resources {
+  margin-left: 6%;
+  margin-right: 8%;
+  white-space: pre;
+}
+
+.subdeliverable-resources-links {
+  list-style: none;
+}
+
+.activity-container {
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.activity-title {
+  font-size: 22px;
+  margin-bottom: 12px;
+}

@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "cp -R node_modules/font-awesome/fonts ./public/assets/font-awesome && cp -R node_modules/font-awesome/css ./public/assets/font-awesome",
     "check": "flow; test $? -eq 0 -o $? -eq 2",
     "dev": "nodemon --debug ./bin/www localhost 3000",
-    "start": "nodemon ./bin/www localhost 3000"
+    "start": "npm run postinstall && nodemon ./bin/www localhost 3000"
   },
   "dependencies": {
+    "babel-preset-env": "^1.4.0",
     "bluebird": "^3.5.0",
     "body-parser": "~1.16.0",
     "connect-redis": "^3.2.0",
@@ -17,8 +19,10 @@
     "express": "~4.14.1",
     "express-session": "^1.15.0",
     "flow-remove-types": "^1.2.0",
+    "font-awesome": "4.7.0",
     "ims-lti": "^3.0.2",
     "jade": "~1.11.0",
+    "jstransformer-babel": "^2.1.0",
     "mongodb": "^2.2.23",
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
@@ -33,10 +37,12 @@
     "simple-oauth2": "^1.0.3"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.41.0"
   }

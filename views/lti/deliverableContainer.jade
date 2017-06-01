@@ -1,0 +1,41 @@
+extends ../layout.jade
+
+block content
+  div.deliverable-view
+    include deliverableNavbar
+    div.deliverable-container
+      include mainNavbar
+      block deliverable
+
+  script
+    :babel
+      document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.querySelector('.deliverable-navbar')
+        const deliverableContainer = document.querySelector('.deliverable-container')
+        const button = document.querySelector('.toggle-deliverable-navbar-btn')
+        const buttonText = button.querySelector('.main-navbar-text')
+        const buttonIcon = button.querySelector('.main-navbar-btn-icon')
+
+        button.addEventListener('click', () => {
+          const isClosed = navbar.classList.toggle('closed')
+          deliverableContainer.classList.toggle('expanded')
+
+          if (isClosed) {
+            buttonText.innerHTML = 'Open'
+            buttonIcon.classList.remove('fa-long-arrow-left')
+            buttonIcon.classList.add('fa-long-arrow-right')
+          } else {
+            buttonText.innerHTML = 'Close'
+            buttonIcon.classList.remove('fa-long-arrow-right')
+            buttonIcon.classList.add('fa-long-arrow-left')
+          }
+        })
+
+        initializeCKEditor()
+      })
+
+      function initializeCKEditor() {
+        const editors = document.querySelectorAll('.editor')
+
+        editors.forEach(editor => CKEDITOR.replace(editor.id))
+      }
