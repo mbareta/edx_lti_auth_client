@@ -26,7 +26,7 @@ const responsesRepository = () => {
         lti
       });
 
-  const getByLti = (lti) => {
+  const getByLti = lti => {
     const { outcomeServiceSourcedId } = lti;
 
     if (!outcomeServiceSourcedId) {
@@ -40,18 +40,21 @@ const responsesRepository = () => {
   const getResponseById = (id) => mongoConnectionPool.db.collection(mongoDbName)
       .findOne({ _id: ObjectId(id) });
 
-  const getResponsesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
+  const getResponsesByEmail = email => mongoConnectionPool.db.collection(mongoDbName)
       .find({ email })
       .toArray();
 
-  const getDeliverableTypesByEmail = (email) => mongoConnectionPool.db.collection(mongoDbName)
+  const getResponseByEmail = (name, email) => mongoConnectionPool.db.collection(mongoDbName)
+      .findOne({ name, email });
+
+  const getDeliverableTypesByEmail = email => mongoConnectionPool.db.collection(mongoDbName)
       .distinct('type', { email });
 
   const getDeliverableByType = (email, type) => mongoConnectionPool.db.collection(mongoDbName)
       .find({ $and: [{ email, type }] })
       .toArray();
 
-  const upsert = (formResponse) => getByLti(formResponse.lti)
+  const upsert = formResponse => getByLti(formResponse.lti)
     .then(existingResponse => {
       if (existingResponse) {
         formResponse._id = existingResponse._id;
@@ -66,6 +69,7 @@ const responsesRepository = () => {
     getByLti,
     getResponseById,
     getResponsesByEmail,
+    getResponseByEmail,
     getDeliverableTypesByEmail,
     getDeliverableByType,
     upsert

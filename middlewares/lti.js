@@ -23,7 +23,22 @@ const renderUserResponses = (req, res) => {
   responsesRepository
     .getResponsesByEmail(email)
     .then(results =>
-      res.render(`${componentLocation}/index`, { email, results })
+      res.render(`${componentLocation}/form/index`, { email, results })
+    );
+};
+
+const renderUserResponse = (req, res, next) => {
+  const email = getEmail(req);
+  const name = req.params.name;
+
+  responsesRepository
+    .getResponseByEmail(name, email)
+    .then(response =>
+      res.render(`${componentLocation}/activity`, {
+        activity: response,
+        createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
+        getTitle
+      })
     );
 };
 
@@ -46,8 +61,7 @@ const renderUserDeliverable = (req, res) => {
 
   responsesRepository.getDeliverableByType(email, type).then(results => {
     const activitiesTotalCount = results.length;
-    const solvedActivitiesCount = results
-      .filter(result => !!result.data)
+    const solvedActivitiesCount = results.filter(result => !!result.data)
       .length;
 
     res.render(`${componentLocation}/deliverables/${type}`, {
@@ -158,6 +172,7 @@ function getEmail(req) {
 module.exports = {
   validateLtiRequest,
   renderUserResponses,
+  renderUserResponse,
   renderLtiDashboard,
   renderUserDeliverables,
   renderUserDeliverable,
