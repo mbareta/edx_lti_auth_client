@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
-const getTitle = require('../lib/titleProvider');
+const { getDeliverable, getSubDeliverable, getActivity, deliverableContentTree } = require('../lib/contentProvider');
 
 const componentLocation = 'lti';
 
@@ -37,7 +37,7 @@ const renderUserResponse = (req, res, next) => {
       res.render(`${componentLocation}/activity`, {
         activity: response,
         createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
-        getTitle
+        getActivity
       })
     );
 };
@@ -50,7 +50,7 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
 
   responsesRepository
     .getDeliverableTypesByEmail(email)
-    .then(results => res.render(view, { email, results, getTitle }));
+    .then(results => res.render(view, { email, results, getDeliverable }));
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
 const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
@@ -60,16 +60,20 @@ const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
 
   responsesRepository.getDeliverableByType(email, type).then(results => {
-    const activitiesTotalCount = results.length;
+    const activitiesTotalCount = deliverableContentTree[type].activitiesCount;
     const solvedActivitiesCount = results.filter(result => !!result.data)
       .length;
 
     res.render(`${componentLocation}/deliverables/${type}`, {
       email,
       results,
+      type,
       solvedActivitiesCount,
       activitiesTotalCount,
-      getTitle
+      getDeliverable,
+      getSubDeliverable,
+      getActivity,
+      deliverableContentTree
     });
   });
 };

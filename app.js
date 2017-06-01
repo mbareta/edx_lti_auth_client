@@ -1,3 +1,11 @@
+// polyfill
+if (!Object.prototype.values) {
+  global.Object = Object.assign(
+    Object,
+    { values: require('object.values') } // eslint-disable-line global-require
+  );
+}
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon'); // eslint-disable-line

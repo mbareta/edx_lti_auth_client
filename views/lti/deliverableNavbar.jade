@@ -4,33 +4,19 @@ div.deliverable-navbar
 
   div.deliverable-navbar-content
     ul.deliverable-content-list
-      - const isUnique = (value, index, self) => self.indexOf(value) === index
-      - const subTypes = results.map(result => result.subType).filter(isUnique)
-      - subTypes.forEach((subType, subTypeIndex) => {
-        - let navSubTypeClass
-        - let iconClass
-        - if (subTypeIndex === 0) {
-            - navSubTypeClass = 'opened'
-            - iconClass = 'fa fa-chevron-up'
-        - } else {
-            - navSubTypeClass = ''
-            - iconClass = 'fa fa-chevron-down'
-        - }
-            div(class=`navSubType ${navSubTypeClass}`)
-              div.navItemHeader
-                h5= getTitle(subType)
-                i(class=`navSubTypeIcon ${iconClass}`)
-              - const resultsBySubType = results.filter(result => result.subType === subType)
-              ul.activities
-                - results.forEach((result, resultIndex) => {
+      - var subDeliverables = deliverableContentTree[type].subDeliverables
+      - for (var subDeliverable in subDeliverables) {
+          div(class=`navSubType`)
+            div.navItemHeader
+              h5= subDeliverables[subDeliverable].title
+              i(class=`navSubTypeIcon fa fa-chevron-down`)
+            ul.activities
+              - var activities = subDeliverables[subDeliverable].activities
+              - for (var activity in activities) {
                   li
-                    - if (subTypeIndex === 0 && resultIndex === 0) {
-                        a.active(href=`#${result.name.toLowerCase()}`)= getTitle(result.name)
-                    - } else {
-                      a(href=`#${result.name.toLowerCase()}`)= getTitle(result.name)
-                    - }
-                - })
-      - })
+                    a(href=`#${activity.toLowerCase()}`)= activities[activity].title
+              - }
+      - }
 
 script
   :babel
@@ -39,6 +25,11 @@ script
       const navSubTypes = document.querySelectorAll('.deliverable-content-list .navSubType')
       navItems.forEach(initializeNavItemEvents)
       navSubTypes.forEach(initializeNavSubTypeEvents)
+
+      // initially open only first items
+      navItems[0].classList.add('active')
+      navSubTypes[0].querySelector('.navSubTypeIcon').classList.add('fa-chevron-down')
+      navSubTypes[0].classList.toggle('opened')
 
       function initializeNavItemEvents(navItem) {
         navItem.addEventListener('click', () => changeActiveNavItem(navItem))

@@ -3,7 +3,7 @@ block content
   div.activity-container
     - if(activity) {
         div.activity-container
-        h3.activity-title= getTitle(activity.name)
+        h3.activity-title= getActivity(activity.name).title
         p.activity-description Activity description placeholder
 
     - }

@@ -53,8 +53,9 @@
 }
 
 .deliverable-content-list .activities {
-  list-style: none;
+  max-width: 200px;
   margin-left: 14px;
+  list-style: none;
 }
 
 .deliverable-content-list .navSubType {
