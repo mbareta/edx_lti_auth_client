@@ -10,6 +10,7 @@
             "name": "nodemon",
             "runtimeExecutable": "nodemon",
             "runtimeArgs": [
+                "--config", "nodemon.json",
                 "--inspect=3000"
             ],
             "program": "${workspaceRoot}/bin/www",
