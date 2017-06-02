@@ -20,6 +20,12 @@
   text-transform: uppercase;
 }
 
+.deliverable-navbar-header {
+  display: flex;
+  height: 65px;
+  align-items: center;
+}
+
 .deliverable-navbar-header h4 {
   margin-left: 20px;
   color: white;
@@ -35,12 +41,6 @@
   list-style: none;
 }
 
-.deliverable-navbar-header {
-  display: flex;
-  height: 65px;
-  align-items: center;
-}
-
 .deliverable-content-list a {
   color: #b5b5b5;
 }
@@ -52,10 +52,15 @@
   color: #555;
 }
 
-.deliverable-content-list .activities {
-  max-width: 200px;
-  margin-left: 14px;
-  list-style: none;
+.deliverable-content-list .navItemHeader {
+  width: 260px;
+}
+
+.deliverable-content-list .navItemHeader h5 {
+  width: 86%;
+
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .deliverable-content-list .navSubType {
@@ -74,6 +79,16 @@
 
 .deliverable-content-list .navSubTypeIcon {
   float: right;
-  margin-top: 27px;
+  margin-top: 23px;
   margin-right: 17px;
+}
+
+.deliverable-content-list .activities {
+  max-width: 200px;
+  margin-left: 14px;
+  list-style: none;
+}
+
+.deliverable-content-list .activities li {
+  margin-bottom: 14px;
 }

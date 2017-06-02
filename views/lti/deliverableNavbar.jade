@@ -28,7 +28,8 @@ script
 
       // initially open only first items
       navItems[0].classList.add('active')
-      navSubTypes[0].querySelector('.navSubTypeIcon').classList.add('fa-chevron-down')
+      navSubTypes[0].querySelector('.navSubTypeIcon').classList.remove('fa-chevron-down')
+      navSubTypes[0].querySelector('.navSubTypeIcon').classList.add('fa-chevron-up')
       navSubTypes[0].classList.toggle('opened')
 
       function initializeNavItemEvents(navItem) {
