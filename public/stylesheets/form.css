@@ -28,6 +28,30 @@
   cursor: pointer;
 }
 
+.form-control-container .reset-button-wrapper {
+  position: relative;
+  float: right;
+  height: 26px;
+  width: 63px;
+  top: -3px;
+
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.form-control-container .reset-button {
+  position: relative;
+  top: 2px;
+  border: none;
+
+  color: #555;
+  text-transform: uppercase;
+  background-color: transparent;
+
+  cursor:pointer;
+}
+
 .form-control-container .view-in-course-link {
   display: inline-block;
   position: relative;
@@ -120,4 +144,3 @@
   color: white;
   cursor: pointer;
 }
-

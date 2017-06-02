@@ -20,7 +20,9 @@
         i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
-        input.save-button(type='button', value='yes')
+        input.save-button(type='button', value='Save')
+      div.reset-button-wrapper(data-editor-id=form.action, data-initial-data=form.data)
+        input.reset-button(type='button', value='Cancel')
 
   script
     :babel
@@ -30,11 +32,19 @@
         forms.forEach(form => {
           const modal = form.querySelector('.confirm-modal-wrapper')
           const saveButton = form.querySelector('.save-button-wrapper')
+          const resetButton = form.querySelector('.reset-button-wrapper')
           const confirmButton = form.querySelector('.confirm-button')
           const cancelButton = form.querySelector('.cancel-button')
 
           saveButton.addEventListener('click', () => {
             modal.classList.remove('hidden')
+          })
+
+          resetButton.addEventListener('click', (event) => {
+            const editor = resetButton.dataset.editorId
+            const initialData = resetButton.dataset.initialData
+
+            CKEDITOR.instances[editor].setData(initialData)
           })
 
           confirmButton.addEventListener('click', () => {
