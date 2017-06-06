@@ -1,6 +1,13 @@
 div.deliverable-navbar
   div.deliverable-navbar-header
-    h4 Outline
+    h4= getDeliverable(type).title
+      i.fa.fa-caret-down.deliverable-header-icon
+    - for (var option in deliverableContentTree) {
+        - if (option !== type) {
+          a.option.hidden(href=`/lti/deliverable/${option}`)
+            h4= getDeliverable(option).title
+        - }
+    - }
 
   div.deliverable-navbar-content
     ul.deliverable-content-list
@@ -25,6 +32,22 @@ script
       const navSubTypes = document.querySelectorAll('.deliverable-content-list .navSubType')
       navItems.forEach(initializeNavItemEvents)
       navSubTypes.forEach(initializeNavSubTypeEvents)
+
+      const deliverableDropdown = document.querySelector('.deliverable-navbar-header')
+      const dropdownOptions = document.querySelectorAll('.option')
+      const dropdownIcon = deliverableDropdown.querySelector('.deliverable-header-icon')
+
+      deliverableDropdown.addEventListener('click', () => {
+        if (dropdownIcon.classList.contains('fa-caret-up')) {
+          dropdownIcon.classList.remove('fa-caret-up')
+          dropdownIcon.classList.add('fa-caret-down')
+        } else {
+          dropdownIcon.classList.remove('fa-caret-down')
+          dropdownIcon.classList.add('fa-caret-up')
+        }
+
+        dropdownOptions.forEach(option => option.classList.toggle('hidden'))
+      })
 
       // initially open only first items
       navItems[0].classList.add('active')

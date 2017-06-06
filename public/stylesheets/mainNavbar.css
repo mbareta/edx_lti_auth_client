@@ -1,15 +1,17 @@
 .main-navbar {
-  height: 65px;
+  height: 72px;
   width: 100%;
 }
 
 .toggle-deliverable-navbar-btn {
   display: inline-flex;
-  height: 65px;
+  height: 100%;
   width: 52px;
 
   align-items: center;
   background: linear-gradient(to right bottom, #9F9A93 49%, transparent 50%);
+
+  cursor: pointer;
 }
 
 .toggle-deliverable-navbar-btn .main-navbar-text {

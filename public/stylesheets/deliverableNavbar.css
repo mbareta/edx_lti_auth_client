@@ -22,14 +22,38 @@
 
 .deliverable-navbar-header {
   display: flex;
-  height: 65px;
-  align-items: center;
+  height: 100%;
+
+  flex-direction: column;
+  align-items: flex-start;
+
+  cursor: pointer;
 }
 
-.deliverable-navbar-header h4 {
+.deliverable-navbar-header h4,
+.deliverable-navbar-header h5 {
   margin-left: 20px;
   color: white;
   }
+
+.deliverable-navbar-header .option {
+  display: block;
+  width: 100%;
+  margin-top: -8px;
+  padding-bottom: 6px;
+}
+
+.deliverable-navbar-header .option.hidden {
+  display: none;
+}
+
+.deliverable-navbar-header .deliverable-header-icon {
+  position: relative;
+  top: -3px;
+  right: -63px;
+  font-size: 17px;
+  color: white;
+}
 
 .deliverable-content-list {
   width: 100%;
