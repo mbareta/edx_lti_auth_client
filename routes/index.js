@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Portfolio' });
+  res.render('index', { title: 'Workspace' });
 });
 
 router.get('/blocks', (req, res) => {
