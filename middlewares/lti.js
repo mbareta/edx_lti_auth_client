@@ -47,10 +47,7 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
   res
 ) => {
   const email = getEmail(req);
-
-  responsesRepository
-    .getDeliverableTypesByEmail(email)
-    .then(results => res.render(view, { email, deliverableContentTree }));
+  res.render(view, { email, deliverableContentTree });
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
 
