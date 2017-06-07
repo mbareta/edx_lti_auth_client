@@ -1,6 +1,5 @@
 const express = require('express');
 const {
-  renderLtiDashboard,
   renderUserDeliverable,
   renderUserDeliverables,
   validateLtiRequest
@@ -8,10 +7,10 @@ const {
 
 const router = express.Router();
 
-router.get('/', renderLtiDashboard);
 router.get('/deliverables', renderUserDeliverables);
 
-router.get('/deliverable/:type', renderUserDeliverable);
-router.post('/deliverable/:type', validateLtiRequest, renderUserDeliverable);
+router.get('/deliverables/:type', renderUserDeliverable);
+
+router.post('/deliverables/:type', validateLtiRequest, renderUserDeliverable);
 
 module.exports = router;

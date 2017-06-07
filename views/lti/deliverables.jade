@@ -9,11 +9,5 @@ html
     script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
   body
     div.deliverables-container
-      each result in results
-        div.deliverable-wrapper
-          a(href=`/lti/deliverable/${result}`)
-            div.deliverable
-              h5.title= getDeliverable(result).title
-              p Placeholder text for this paragraph!
-          div.activities
-            p.title Activities
+      - for (key in deliverableContentTree)
+        include ../deliverableCard.jade

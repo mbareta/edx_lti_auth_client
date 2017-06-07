@@ -47,13 +47,9 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
   res
 ) => {
   const email = getEmail(req);
-
-  responsesRepository
-    .getDeliverableTypesByEmail(email)
-    .then(results => res.render(view, { email, results, getDeliverable }));
+  res.render(view, { email, deliverableContentTree });
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
-const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 
 const renderUserDeliverable = (req, res) => {
   const { type } = req.params;
@@ -177,7 +173,6 @@ module.exports = {
   validateLtiRequest,
   renderUserResponses,
   renderUserResponse,
-  renderLtiDashboard,
   renderUserDeliverables,
   renderUserDeliverable,
   updateResponse,

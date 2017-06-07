@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  div.home-page-content
-    a(href='/lti')
-      h2 Workspace Tools
+  div.lti-dashboard
+    h1 Deliverables
+    div.deliverables-container
+      - for (const key in deliverableContentTree)
+          include deliverableCard.jade
+
+
