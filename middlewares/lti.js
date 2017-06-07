@@ -53,7 +53,6 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
     .then(results => res.render(view, { email, results, getDeliverable }));
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
-const renderLtiDashboard = renderUserDeliverablesCurried('lti/index');
 
 const renderUserDeliverable = (req, res) => {
   const { type } = req.params;
@@ -177,7 +176,6 @@ module.exports = {
   validateLtiRequest,
   renderUserResponses,
   renderUserResponse,
-  renderLtiDashboard,
   renderUserDeliverables,
   renderUserDeliverable,
   updateResponse,

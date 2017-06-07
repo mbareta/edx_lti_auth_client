@@ -1,6 +1,15 @@
 extends layout
 
 block content
-  div.home-page-content
-    a(href='/lti')
-      h2 Workspace Tools
+  div.lti-dashboard
+    h1 Deliverables
+    div.deliverables-container
+        - for (const key in deliverableContentTree)
+          div.deliverable-wrapper
+            a(href=`/lti/deliverables/${key}`)
+              div.deliverable
+                h5.title= deliverableContentTree[key].title
+                p= deliverableContentTree[key].description
+            div.activities
+              p.title Activities
+
