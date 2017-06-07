@@ -1,6 +1,6 @@
 const express = require('express');
 const edxCourseApi = require('../lib/edxCourseApi');
-const deliverableContentTree = require('../lib/contentProvider');
+const { deliverableContentTree } = require('../lib/contentProvider');
 
 const router = express.Router();
 
