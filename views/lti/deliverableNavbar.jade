@@ -4,7 +4,7 @@ div.deliverable-navbar
       i.fa.fa-caret-down.deliverable-header-icon
     - for (var option in deliverableContentTree) {
         - if (option !== type) {
-          a.option.hidden(href=`/lti/deliverable/${option}`)
+          a.option.hidden(href=`/lti/deliverables/${option}`)
             h4= getDeliverable(option).title
         - }
     - }

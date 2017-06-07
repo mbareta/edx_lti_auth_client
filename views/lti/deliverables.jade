@@ -9,11 +9,11 @@ html
     script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
   body
     div.deliverables-container
-      each result in results
+      - for (key in deliverableContentTree)
         div.deliverable-wrapper
-          a(href=`/lti/deliverable/${result}`)
+          a(href=`/lti/deliverables/${key}`)
             div.deliverable
-              h5.title= getDeliverable(result).title
-              p Placeholder text for this paragraph!
+              h5.title= deliverableContentTree[key].title
+              p= deliverableContentTree[key].description
           div.activities
             p.title Activities
