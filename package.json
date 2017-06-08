@@ -29,7 +29,6 @@
     "nodemon": "^1.11.0",
     "object.values": "^1.0.4",
     "pug": "^2.0.0-beta11",
-    "react": "^15.4.2",
     "redis": "^2.6.5",
     "request": "^2.81.0",
     "sequelize": "^3.30.1",

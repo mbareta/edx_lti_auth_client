@@ -5,20 +5,23 @@ block content
         div.activity-container
         h3.activity-title= getActivity(activity.name).title
         p.activity-description Activity description placeholder
-
     - }
 
     - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
     include ./form/form.jade
+    include editorMethods
 
   script
     :babel
       document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('.activity-form')
+        const resetButton = form.querySelector('.reset-button-wrapper')
+        const saveButton = form.querySelector('.save-button-wrapper')
+
+        saveButton.addEventListener('click', () => {
+          form.querySelector('input[type="submit"]').click()
+        })
+        form.addEventListener('submit', onEditorSubmit)
+        resetButton.addEventListener('click', resetEditor)
         initializeCKEditor()
       })
-
-      function initializeCKEditor() {
-        const editors = document.querySelectorAll('.editor')
-
-        editors.forEach(editor => CKEDITOR.replace(editor.id))
-      }

@@ -1,0 +1,49 @@
+script
+  :babel
+    function initializeCKEditor() {
+        const editors = document.querySelectorAll('.editor')
+
+        editors.forEach(editor => CKEDITOR.replace(editor.id))
+      }
+
+      function onEditorSubmit(event) {
+        event.preventDefault()
+        const form = event.target
+        const modal = form.querySelector('.confirm-modal-wrapper')
+        const successModal = form.querySelector('.success-modal-wrapper')
+        const confirmButton = form.querySelector('.confirm-button')
+        const cancelButton = form.querySelector('.cancel-button')
+
+        confirmButton.addEventListener('click', () => {
+          const xhr = new XMLHttpRequest()
+
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              modal.classList.add('hidden')
+              successModal.classList.remove('hidden')
+              setTimeout(() => successModal.classList.add('hidden'), 3000)
+            }
+            else if (xhr.readyState === 4 && xhr.status !== 200) {
+              throw new Error('Something went wrong, your answer is not saved.')
+            }
+          }
+
+          xhr.open('POST', form.action, true)
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.send(JSON.stringify({ data: form.querySelector('textarea').value }))
+        })
+
+        cancelButton.addEventListener('click', () => {
+          modal.classList.add('hidden')
+        })
+
+        modal.classList.remove('hidden')
+      }
+
+      function resetEditor() {
+        const resetButton = this
+        const editor = resetButton.dataset.editorId
+        const initialData = resetButton.dataset.initialData
+
+        CKEDITOR.instances[editor].setData(initialData)
+      }

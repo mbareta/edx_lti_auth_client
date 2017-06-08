@@ -13,47 +13,21 @@
         div.confirm-button
           | Yes
 
+    div.success-modal-wrapper.hidden
+      div.success-modal
+        h4.modal-title
+          | Success!
+        p.modal-content
+          | Your changes are now saved across all your courses.
+
     textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
+    input.hidden(type='submit')
     div.form-control-container
       div.view-in-course-link
         | View in course
         i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
-        input.save-button(type='button', value='Save')
+        button.save-button Save
       div.reset-button-wrapper(data-editor-id=form.action, data-initial-data=form.data)
         input.reset-button(type='button', value='Cancel')
-
-  script
-    :babel
-      document.addEventListener('DOMContentLoaded', () => {
-        const forms = document.querySelectorAll('.activity-form')
-
-        forms.forEach(form => {
-          const modal = form.querySelector('.confirm-modal-wrapper')
-          const saveButton = form.querySelector('.save-button-wrapper')
-          const resetButton = form.querySelector('.reset-button-wrapper')
-          const confirmButton = form.querySelector('.confirm-button')
-          const cancelButton = form.querySelector('.cancel-button')
-
-          saveButton.addEventListener('click', () => {
-            modal.classList.remove('hidden')
-          })
-
-          resetButton.addEventListener('click', (event) => {
-            const editor = resetButton.dataset.editorId
-            const initialData = resetButton.dataset.initialData
-
-            CKEDITOR.instances[editor].setData(initialData)
-          })
-
-          confirmButton.addEventListener('click', () => {
-            form.submit()
-            modal.classList.add('hidden')
-          })
-
-          cancelButton.addEventListener('click', () => {
-            modal.classList.add('hidden')
-          })
-        })
-      })

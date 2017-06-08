@@ -6,6 +6,7 @@ block content
     div.deliverable-container
       include mainNavbar
       block deliverable
+      include editorMethods
 
   script
     :babel
@@ -32,10 +33,17 @@ block content
         })
 
         initializeCKEditor()
+
+        const forms = document.querySelectorAll('.activity-form')
+
+        forms.forEach(form => {
+          const resetButton = form.querySelector('.reset-button-wrapper')
+          const saveButton = form.querySelector('.save-button-wrapper')
+
+          saveButton.addEventListener('click', () => {
+            form.querySelector('input[type="submit"]').click()
+          })
+          form.addEventListener('submit', onEditorSubmit)
+          resetButton.addEventListener('click', resetEditor)
+        })
       })
-
-      function initializeCKEditor() {
-        const editors = document.querySelectorAll('.editor')
-
-        editors.forEach(editor => CKEDITOR.replace(editor.id))
-      }

@@ -93,7 +93,8 @@
   cursor:pointer;
 }
 
-.confirm-modal-wrapper {
+.confirm-modal-wrapper,
+.success-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -103,11 +104,12 @@
     background-color: whitesmoke;
 }
 
-.confirm-modal-wrapper.hidden {
+.confirm-modal-wrapper.hidden,
+.success-modal-wrapper.hidden {
   display: none;
 }
 
-.confirm-modal {
+.confirm-modal, .success-modal {
   height: 270px;
   width: 450px;
 
@@ -122,8 +124,14 @@
   white-space: pre;
 }
 
+.success-modal {
+  height: 123px;
+}
+
 .confirm-modal .modal-title,
-.confirm-modal .modal-content {
+.confirm-modal .modal-content,
+.success-modal .modal-title,
+.success-modal .modal-content {
   margin-left: 32px;
 }
 
@@ -143,4 +151,8 @@
   background-color: #F76B1C;
   color: white;
   cursor: pointer;
+}
+
+input.hidden {
+  display: none;
 }
