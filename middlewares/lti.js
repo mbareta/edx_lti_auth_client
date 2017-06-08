@@ -90,7 +90,7 @@ const addResponse = (req, res) => {
 
   responsesRepository
     .upsert(formResponse)
-    .then(() => res.redirect(`/${componentLocation}`));
+    .then(() => res.sendStatus(200));
 };
 
 const updateResponse = (req, res) => {
@@ -103,7 +103,7 @@ const updateResponse = (req, res) => {
 
       return responsesRepository.upsert(formResponse);
     })
-    .then(() => res.redirect(`/${componentLocation}`));
+    .then(() => res.sendStatus(200));
 };
 
 const gradeResponse = (req, res) => {
