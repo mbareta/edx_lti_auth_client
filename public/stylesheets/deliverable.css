@@ -39,6 +39,10 @@
   margin-left: 18px;
 }
 
+.deliverable-description {
+  white-space:pre-line;
+}
+
 .deliverable-icon {
   color: #f76b1c;
 }

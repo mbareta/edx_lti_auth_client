@@ -1,0 +1,50 @@
+- var addActionLink = '/lti/form/submit/pitchdeck/pitchdeckdefault'
+- var businessName = getActivity('businessname')
+h2.subdeliverable-title#businessname
+  span= businessName.title
+p.subdeliverable-description= businessName.description
+div.activity-container
+
+  - var businessNameValue = results.find(result => result.name === 'businessname')
+  - var form = businessNameValue ? {action: `/lti/form/update/${businessNameValue._id}`, data: businessNameValue.data } : {action: `${addActionLink}/businessname`, data: '' }
+  include ../form/form.jade
+
+- var businessStatement = getActivity('businessstatement')
+h2.subdeliverable-title#businessstatement
+  span= businessStatement.title
+p.subdeliverable-description= businessStatement.description
+div.activity-container
+
+  - var businessStatementValue = results.find(result => result.name === 'businessstatement')
+  - var form = businessStatementValue ? {action: `/lti/form/update/${businessStatementValue._id}`, data: businessStatementValue.data } : {action: `${addActionLink}/businessstatement`, data: '' }
+  include ../form/form.jade
+
+- var tweetableBusiness = getActivity('tweetablebusiness')
+h2.subdeliverable-title#tweetablebusiness
+  span= tweetableBusiness.title
+p.subdeliverable-description= tweetableBusiness.description
+div.activity-container
+
+  - var tweetableBusinessValue = results.find(result => result.name === 'tweetablebusiness')
+  - var form = tweetableBusinessValue ? {action: `/lti/form/update/${tweetableBusinessValue._id}`, data: tweetableBusinessValue.data } : {action: `${addActionLink}/tweetablebusiness`, data: '' }
+  include ../form/form.jade
+
+- var elevatorPitch = getActivity('elevatorpitch')
+h2.subdeliverable-title#elevatorpitch
+  span= elevatorPitch.title
+p.subdeliverable-description= elevatorPitch.description
+div.activity-container
+
+  - var elevatorPitchValue = results.find(result => result.name === 'elevatorpitch')
+  - var form = elevatorPitchValue ? {action: `/lti/form/update/${elevatorPitchValue._id}`, data: elevatorPitchValue.data } : {action: `${addActionLink}/elevatorpitch`, data: '' }
+  include ../form/form.jade
+
+- var myStory = getActivity('mystory')
+h2.subdeliverable-title#mystory
+  span= myStory.title
+p.subdeliverable-description= myStory.description
+div.activity-container
+
+  - var myStoryValue = results.find(result => result.name === 'mystory')
+  - var form = myStoryValue ? {action: `/lti/form/update/${myStoryValue._id}`, data: myStoryValue.data } : {action: `${addActionLink}/mystory`, data: '' }
+  include ../form/form.jade

@@ -3,9 +3,9 @@ extends ../deliverableContainer
 block deliverable
   div.deliverable-info
     i.fa.fa-pie-chart.deliverable-icon
-    h1.deliverable-title= getDeliverable('businessmodelcanvas').title
+    h1.deliverable-title= getDeliverable('pitchdeck').title
 
-    p.deliverable-description= getDeliverable('businessmodelcanvas').description
+    p= getDeliverable('pitchdeck').description
 
     div.activities-data
       h5.activities-data-title Activities:
@@ -14,4 +14,4 @@ block deliverable
         | /
         span.total-activity-count !{activitiesTotalCount}
 
-  include ../subDeliverables/businessmodelcanvasdefault.jade
+  include ../subDeliverables/pitchdeckdefault.jade
