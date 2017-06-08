@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
-const { getDeliverable, getSubDeliverable, getActivity, deliverableContentTree } = require('../lib/contentProvider');
+const { getDeliverable, getSubDeliverable, getActivity, getPathToActivity, deliverableContentTree } = require('../lib/contentProvider');
 
 const componentLocation = 'lti';
 
@@ -13,6 +13,8 @@ const validateLtiRequest = (req, res, next) => {
       // store user data in session
       req.session.lti = getUserDataFromLtiAndReq(ltiProvider, req);
       next();
+    } else {
+      throw new Error('Invalid LTI request.')
     }
   });
 };
@@ -90,7 +92,34 @@ const addResponse = (req, res) => {
 
   responsesRepository
     .upsert(formResponse)
-    .then(() => res.redirect(`/${componentLocation}`));
+    .then(() => res.sendStatus(200));
+};
+
+const saveResponseOnFirstVisit = (req, res, next) => {
+  const { name } = req.params;
+  const email = getEmail(req);
+
+  responsesRepository.getResponseByEmail(name)
+  .then(response => {
+    if (!response) {
+      const { deliverable, subDeliverable } = getPathToActivity(name);
+      const formResponse = {
+        name,
+        email,
+        type: deliverable,
+        subType: subDeliverable,
+        data: null,
+        metadata: null,
+        lti: req.session.lti || {}
+      };
+
+      responsesRepository
+        .upsert(formResponse)
+        .then(() => next());
+    } else {
+      next();
+    }
+  })
 };
 
 const updateResponse = (req, res) => {
@@ -103,7 +132,7 @@ const updateResponse = (req, res) => {
 
       return responsesRepository.upsert(formResponse);
     })
-    .then(() => res.redirect(`/${componentLocation}`));
+    .then(() => res.sendStatus(200));
 };
 
 const gradeResponse = (req, res) => {
@@ -138,7 +167,10 @@ function getUserDataFromLtiAndReq(ltiProvider, req) {
     username,
     outcome_service: { service_url, source_did }
   } = ltiProvider;
-  const { body: { context_id, lis_person_contact_email_primary } } = req;
+  const {
+    body: { context_id, lis_person_contact_email_primary },
+    params: { name }
+  } = req;
 
   if (userId === 'student') {
     return {
@@ -147,7 +179,7 @@ function getUserDataFromLtiAndReq(ltiProvider, req) {
       id: 'studioUserId',
       courseId: 'context_id',
       outcomeServiceUrl: 'service_url',
-      outcomeServiceSourcedId: 'source_did'
+      outcomeServiceSourcedId: name
     };
   }
   return {
@@ -177,5 +209,6 @@ module.exports = {
   renderUserDeliverable,
   updateResponse,
   addResponse,
-  gradeResponse
+  gradeResponse,
+  saveResponseOnFirstVisit
 };

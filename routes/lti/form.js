@@ -5,6 +5,7 @@ const {
   addResponse,
   updateResponse,
   gradeResponse,
+  saveResponseOnFirstVisit,
   validateLtiRequest
 } = require('../../middlewares/lti');
 
@@ -14,8 +15,7 @@ const router = express.Router();
 router.get('/', renderUserResponses);
 
 // view individual
-router.post('/:name', validateLtiRequest, renderUserResponse);
-router.get('/:name', renderUserResponse);
+router.post('/:name', validateLtiRequest, saveResponseOnFirstVisit, renderUserResponse);
 
 // LTI update
 router.post('/update/:id', updateResponse);
