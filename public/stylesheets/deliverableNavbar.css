@@ -30,11 +30,19 @@
   cursor: pointer;
 }
 
+.deliverable-navbar-header h4 {
+  display: inline-flex;
+  width: 280px;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+}
+
 .deliverable-navbar-header h4,
 .deliverable-navbar-header h5 {
   margin-left: 20px;
   color: white;
-  }
+}
 
 .deliverable-navbar-header .option {
   display: block;
@@ -48,9 +56,8 @@
 }
 
 .deliverable-navbar-header .deliverable-header-icon {
-  position: relative;
-  top: -3px;
-  right: -63px;
+  margin-right: 30px;
+  align-self: center;
   font-size: 17px;
   color: white;
 }
