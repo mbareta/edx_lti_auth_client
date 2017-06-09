@@ -7,8 +7,6 @@ block content
         p.activity-description Activity description placeholder
     - }
 
-    = activity.data
-
     - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
     include ./form/form.jade
     include editorMethods
