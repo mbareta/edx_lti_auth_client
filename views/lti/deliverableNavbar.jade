@@ -11,18 +11,34 @@ div.deliverable-navbar
 
   div.deliverable-navbar-content
     ul.deliverable-content-list
-      - var subDeliverables = deliverableContentTree[type].subDeliverables
-      - for (var subDeliverable in subDeliverables) {
-          div(class=`navSubType`)
-            div.navItemHeader
-              h5= subDeliverables[subDeliverable].title
-              i(class=`navSubTypeIcon fa fa-chevron-down`)
-            ul.activities
-              - var activities = subDeliverables[subDeliverable].activities
-              - for (var activity in activities) {
-                  li
-                    a(href=`#${activity.toLowerCase()}`)= activities[activity].title
-              - }
+      - if (type !== 'businessmodelcanvas' && type !== 'pitchdeck') {
+        - var subDeliverables = deliverableContentTree[type].subDeliverables
+        - for (var subDeliverable in subDeliverables) {
+            div.navSubType
+              div.navItemHeader
+                h5= subDeliverables[subDeliverable].title
+                i.navSubTypeIcon.fa.fa-chevron-down
+              ul.activities
+                - var activities = subDeliverables[subDeliverable].activities
+                - for (var activity in activities) {
+                    li
+                      a(href=`#${activity.toLowerCase()}`)= activities[activity].title
+                - }
+        - }
+      - } else {
+        - var subDeliverables = deliverableContentTree[type].subDeliverables
+        - for (var subDeliverable in subDeliverables) {
+            div.navSubType
+              div.navItemHeader.hidden
+                h5= subDeliverables[subDeliverable].title
+                i.navSubTypeIcon.fa.fa-chevron-down
+              ul.activities
+                - var activities = subDeliverables[subDeliverable].activities
+                - for (var activity in activities) {
+                    li
+                      a(href=`#${activity.toLowerCase()}`)= activities[activity].title
+                - }
+        - }
       - }
 
 script
