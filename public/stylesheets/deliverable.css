@@ -105,6 +105,11 @@
   margin-top: 2%;
 }
 
+.deliverable-container .activity-container {
+  width: 100%;
+  margin: 0 8%;
+}
+
 .activity-title {
   font-size: 22px;
   margin-bottom: 12px;

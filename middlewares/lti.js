@@ -99,7 +99,7 @@ const saveResponseOnFirstVisit = (req, res, next) => {
   const { name } = req.params;
   const email = getEmail(req);
 
-  responsesRepository.getResponseByEmail(name)
+  responsesRepository.getResponseByEmail(name, email)
   .then(response => {
     if (!response) {
       const { deliverable, subDeliverable } = getPathToActivity(name);
