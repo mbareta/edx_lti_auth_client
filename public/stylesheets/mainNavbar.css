@@ -48,10 +48,10 @@
   text-transform: uppercase;
 }
 
-.main-navbar-items .preview-mode-title {
+.main-navbar .preview-mode-title {
   margin-right: 8%;
-
   color: #b5b5b5;
+  cursor: pointer;
 }
 
 .main-navbar-items .preview-mode-icon {

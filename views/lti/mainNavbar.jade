@@ -4,5 +4,60 @@ div.main-navbar
     i.fa.fa-long-arrow-left.main-navbar-btn-icon
 
   div.main-navbar-items
-    a.preview-mode-title(href='') Preview Mode
-    i.fa.fa-eye.preview-mode-icon
+    span#preview-button.preview-mode-title(href='#')
+      i.fa.fa-eye.preview-mode-icon
+      = 'Preview Mode'
+
+  div.preview-banner
+    i.message You are currently in preview mode.
+    span.preview-mode-title
+      i.fa.fa-download
+      = 'Download'
+    span#edit-mode-button.preview-mode-title
+      i.fa.fa-edit
+      = 'Edit Mode'
+
+
+  script
+    :babel
+      const handlePreviewButtonClick = event => {
+        document.body.classList.add('preview');
+
+        for (let instanceKey in CKEDITOR.instances) {
+          CKEDITOR.instances[instanceKey].setReadOnly(true)
+        }
+
+        const navbar = document.querySelector('.deliverable-navbar');
+        const deliverableContainer = document.querySelector('.deliverable-container');
+        const isClosed = navbar.classList.contains('closed')
+
+        if(!isClosed) {
+          navbar.classList.add('closed');
+          deliverableContainer.classList.add('expanded')
+        }
+      }
+
+      const handleEditButtonClick = event => {
+        document.body.classList.remove('preview');
+
+        for (let instanceKey in CKEDITOR.instances) {
+          CKEDITOR.instances[instanceKey].setReadOnly(false);
+        }
+
+        const navbar = document.querySelector('.deliverable-navbar');
+        const deliverableContainer = document.querySelector('.deliverable-container');
+        const isClosed = navbar.classList.contains('closed')
+
+        if(isClosed) {
+          navbar.classList.remove('closed');
+          deliverableContainer.classList.remove('expanded')
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const previewButton = document.querySelector('#preview-button');
+        const editButton = document.querySelector('#edit-mode-button');
+
+        previewButton.addEventListener('click', handlePreviewButtonClick, true);
+        editButton.addEventListener('click', handleEditButtonClick, true);
+      })

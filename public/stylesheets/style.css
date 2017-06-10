@@ -72,3 +72,50 @@ header.workspace-navbar {
 .workspace-navbar .workspace-navbar-title {
   margin-left: 20px
 }
+
+
+/* DELIVERABLE PREVIEW MODE */
+body.preview #preview-button,
+body.preview .toggle-deliverable-navbar-btn,
+body.preview .subdeliverable-description,
+body.preview .activity-description,
+body.preview .form-control-container,
+body.preview .deliverable-description,
+body.preview .activities-data,
+body.preview .cke_top {
+  display: none;
+}
+
+.preview-banner {
+  display: none;
+}
+
+body.preview .preview-banner {
+  display: block;
+  background: #FF9B5C;
+  min-width: 100%;
+  padding: 1rem;
+  margin: -3rem -1rem 0;
+}
+
+body.preview .preview-banner .message {
+  color: white;
+  width: 65%;
+  display: inline-block;
+  text-align: left;
+  margin-left: 5.52%;
+  font-weight: bold;
+}
+
+body.preview .preview-banner span {
+  text-transform: uppercase;
+  color: white;
+  font-family: Roboto;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+body.preview .preview-banner span .fa {
+  margin-right: .6rem;
+  color: white;
+}
