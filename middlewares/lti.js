@@ -198,7 +198,7 @@ function getEmail(req) {
   if (email) {
     return email;
   }
-  // throw new Error('Not Authorized');
+  throw new Error('Not Authorized');
 }
 
 module.exports = {
