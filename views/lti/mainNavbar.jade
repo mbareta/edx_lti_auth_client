@@ -52,7 +52,13 @@ div.main-navbar
         document.body.classList.remove('preview');
 
         for (let instanceKey in CKEDITOR.instances) {
-          CKEDITOR.instances[instanceKey].setReadOnly(false);
+          const cke = CKEDITOR.instances[instanceKey];
+          cke.setReadOnly(false)
+          if(cke.document.getBody().getChild(0).getText().trim() === '') {
+            const containerId = cke.container.getParent().getParent().getParent().getId();
+            document.querySelector('#' + containerId + ' form p.empty-cke-warning').remove();
+            document.querySelector('#' + containerId + ' .cke').style.display = 'initial';
+          }
         }
 
         const navbar = document.querySelector('.deliverable-navbar');
