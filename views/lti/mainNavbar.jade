@@ -32,9 +32,22 @@ div.main-navbar
             msg.className = 'empty-cke-warning';
             msg.innerHTML = 'Enter edit mode to fill in this section...';
 
-            const containerId = cke.container.getParent().getParent().getParent().getId();
-            document.querySelector('#' + containerId + ' form').appendChild(msg);
-            document.querySelector('#' + containerId + ' .cke').style.display = 'none';
+            let container = cke.container.getParent().getParent().getParent();
+            if(window.location.href.indexOf('businessplan') === -1) {
+              // find second previous sibling which is subdeliverable title
+              if(!container.hasClass('canvas-cell')) {
+                container = container.getPrevious().getPrevious();
+                const containerId = container.getId();
+                const form = document.querySelector('#' + containerId).nextSibling.nextSibling.querySelector('form');
+                form.appendChild(msg);
+                form.querySelector('.cke').style.display = 'none';
+              }
+            }
+            else {
+              const containerId = container.getId();
+              document.querySelector('#' + containerId + ' form').appendChild(msg);
+              document.querySelector('#' + containerId + ' .cke').style.display = 'none';
+            }
           }
         }
 
@@ -55,9 +68,22 @@ div.main-navbar
           const cke = CKEDITOR.instances[instanceKey];
           cke.setReadOnly(false)
           if(cke.document.getBody().getChild(0).getText().trim() === '') {
-            const containerId = cke.container.getParent().getParent().getParent().getId();
-            document.querySelector('#' + containerId + ' form p.empty-cke-warning').remove();
-            document.querySelector('#' + containerId + ' .cke').style.display = 'initial';
+            let container = cke.container.getParent().getParent().getParent();
+            if(window.location.href.indexOf('businessplan') === -1) {
+              // find second previous sibling which is subdeliverable title
+              if(!container.hasClass('canvas-cell')) {
+                container = container.getPrevious().getPrevious();
+                const containerId = container.getId();
+                const form = document.querySelector('#' + containerId).nextSibling.nextSibling.querySelector('form');
+                form.querySelector('p.empty-cke-warning').remove();
+                form.querySelector('.cke').style.display = 'initial';
+              }
+            }
+            else {
+              const containerId = container.getId();
+              document.querySelector('#' + containerId + ' form p.empty-cke-warning').remove();
+              document.querySelector('#' + containerId + ' .cke').style.display = 'initial';
+            }
           }
         }
 
