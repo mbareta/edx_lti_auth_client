@@ -24,7 +24,18 @@ div.main-navbar
         document.body.classList.add('preview');
 
         for (let instanceKey in CKEDITOR.instances) {
-          CKEDITOR.instances[instanceKey].setReadOnly(true)
+          const cke = CKEDITOR.instances[instanceKey];
+          cke.setReadOnly(true)
+          if(cke.document.getBody().getChild(0).getText().trim() === '') {
+            // insert message
+            let msg = document.createElement('p');
+            msg.className = 'empty-cke-warning';
+            msg.innerHTML = 'Enter edit mode to fill in this section...';
+
+            const containerId = cke.container.getParent().getParent().getParent().getId();
+            document.querySelector('#' + containerId + ' form').appendChild(msg);
+            document.querySelector('#' + containerId + ' .cke').style.display = 'none';
+          }
         }
 
         const navbar = document.querySelector('.deliverable-navbar');
@@ -41,7 +52,13 @@ div.main-navbar
         document.body.classList.remove('preview');
 
         for (let instanceKey in CKEDITOR.instances) {
-          CKEDITOR.instances[instanceKey].setReadOnly(false);
+          const cke = CKEDITOR.instances[instanceKey];
+          cke.setReadOnly(false)
+          if(cke.document.getBody().getChild(0).getText().trim() === '') {
+            const containerId = cke.container.getParent().getParent().getParent().getId();
+            document.querySelector('#' + containerId + ' form p.empty-cke-warning').remove();
+            document.querySelector('#' + containerId + ' .cke').style.display = 'initial';
+          }
         }
 
         const navbar = document.querySelector('.deliverable-navbar');
