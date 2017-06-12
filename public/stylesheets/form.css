@@ -156,3 +156,7 @@
 input.hidden {
   display: none;
 }
+
+p.empty-cke-warning {
+  font-style: italic;
+}
