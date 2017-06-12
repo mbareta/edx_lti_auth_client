@@ -1,0 +1,12 @@
+.form
+  form(action=form.action, method='POST', id=`${form.action}-form` class='canvas-form')
+    textarea(type='editor', name='data', class='editor', id=`canvas-${form.action}`, rows='10', cols='80')= form.data
+    input.hidden(type='submit')
+    div.initial-editor-data.hidden(data-editor-id=`canvas-${form.action}`, data-initial-data=form.data)
+
+    div.success-modal-wrapper.hidden
+      div.success-modal
+        h4.modal-title
+          | Success!
+        p.modal-content
+          | Your changes are now saved across all your courses.

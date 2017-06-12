@@ -1,0 +1,143 @@
+.canvas-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-left: 6%;
+  margin-right: 8%;
+}
+
+.canvas-control-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  margin-top: 12px;
+}
+
+.canvas-control-container #ckeditor-toolbar {
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+.canvas-table {
+  display: flex;
+  flex-flow: column wrap;
+  height: 742px;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+}
+
+.canvas-table .canvas-cell {
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
+  border: 1px solid #e5e5e5;
+}
+
+.canvas-table .canvas-cell-header {
+  position: relative;
+  top: 8px;
+  left: 18px;
+}
+
+.canvas-table .fa {
+  position: relative;
+  top: 8px;
+  left: 10px;
+}
+
+.canvas-container .buttons {
+  display: flex;
+  align-self: center;
+}
+
+.canvas-container .save-button-wrapper {
+  display: inline-block;
+  height: 26px;
+  width: 63px;
+
+  transform: skew(-24deg);
+  background-color: #F76B1C;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.canvas-container .save-icon {
+  color: white;
+  transform: skew(24deg);
+  padding-right: 7px;
+  position: relative;
+  top: 2px;
+}
+
+.canvas-container .save-button {
+  position: relative;
+  top: 2px;
+  border: none;
+  transform: skew(24deg);
+
+  color: white;
+  text-transform: uppercase;
+  background-color: transparent;
+
+  cursor:pointer;
+}
+
+.canvas-container .reset-button-wrapper {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  width: 63px;
+  top: -3px;
+
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.canvas-container .reset-button {
+  position: relative;
+  top: 5px;
+  border: none;
+
+  color: #555;
+  text-transform: uppercase;
+  background-color: transparent;
+
+  cursor:pointer;
+}
+
+.canvas-table .row-7,
+.canvas-table .row-3,
+.canvas-table .row-5, {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.canvas-table .row-7 {
+  height: 70%;
+}
+
+.canvas-table .row-3 {
+  height: 30%;
+}
+
+.canvas-table .row-5 {
+  height: 50%;
+}
+
+.canvas-table .column-2,
+.canvas-table .column-5 {
+  display: inline-flex;
+  flex-flow: column wrap;
+}
+
+.canvas-table .column-2 {
+  height: 100%;
+  width: 20%;
+}
+
+.canvas-table .column-5 {
+  height: 100%;
+  width: 50%;
+}

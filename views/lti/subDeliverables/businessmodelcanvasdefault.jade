@@ -1,5 +1,147 @@
 - var addActionLink = '/lti/form/submit/businessmodelcanvas/businessmodelcanvasdefault'
+- var keyPartners = getActivity('keypartners')
+- var assets = getActivity('assets')
+- var differentiators = getActivity('differentiators')
+- var revenueStreams = getActivity('revenuestreams')
+- var distributionChannels = getActivity('distributionchannels')
+- var customerRelationships = getActivity('customerrelationships')
+- var customerSegments = getActivity('customersegments')
 - var valueProposition = getActivity('valueproposition')
+- var costStructure = getActivity('coststructure')
+div.canvas-container
+  div.canvas-control-container
+    div#ckeditor-toolbar
+    div.buttons
+      div.reset-button-wrapper
+          input.reset-button(type='button', value='Cancel')
+      div.save-button-wrapper
+        i.fa.fa-floppy-o.save-icon
+        button.save-button Save
+  div.canvas-table
+    div.row-7
+      div.column-2
+        div.canvas-cell.key-partners
+          i.fa.fa-user
+          span.canvas-cell-header= keyPartners.title
+          - var keyPartnersValue = results.find(result => result.name === 'keypartners')
+          - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/keypartners`, data: '' }
+          include ../form/canvas.jade
+
+      div.column-2
+        div.row-5
+          div.canvas-cell.differentiators
+            i.fa.fa-key
+            span.canvas-cell-header= differentiators.title
+            - var differentiatorsValue = results.find(result => result.name === 'differentiators')
+            - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/differentiators`, data: '' }
+            include ../form/canvas.jade
+
+        div.row-5
+          div.canvas-cell.assets
+            i.fa.fa-cubes
+            span.canvas-cell-header= assets.title
+            - var assetsValue = results.find(result => result.name === 'assets')
+            - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/assets`, data: '' }
+            include ../form/canvas.jade
+
+      div.column-2
+        div.canvas-cell.value-proposition
+          i.fa.fa-check-square-o
+          span.canvas-cell-header.canvas-cell-header= valueProposition.title
+          - var valuePropositionValue = results.find(result => result.name === 'valueproposition')
+          - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/valueproposition`, data: '' }
+          include ../form/canvas.jade
+
+      div.column-2
+        div.row-5
+          div.canvas-cell.customer-relationships
+            i.fa.fa-users
+            span.canvas-cell-header= customerRelationships.title
+            - var customerRelationshipsValue = results.find(result => result.name ===   'customerrelationships')
+            - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } :  {action: `${addActionLink}/customerrelationships`, data: '' }
+            include ../form/canvas.jade
+
+        div.row-5
+          div.canvas-cell.distribution-channels
+            i.fa.fa-truck
+            span.canvas-cell-header= distributionChannels.title
+            - var distributionChannelsValue = results.find(result => result.name ===  'distributionchannels')
+            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } :   {action: `${addActionLink}/distributionchannels`, data: '' }
+            include ../form/canvas.jade
+
+      div.column-2
+        div.canvas-cell.customer-segments
+          i.fa.fa-briefcase
+          span.canvas-cell-header= customerSegments.title
+          - var customerSegmentsValue = results.find(result => result.name === 'customersegments')
+          - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/customersegments`, data: '' }
+          include ../form/canvas.jade
+
+    div.row-3
+      div.column-5
+        div.canvas-cell.cost-
+          i.fa.fa-money
+          span.canvas-cell-header= costStructure.title
+          - var costStructureValue = results.find(result => result.name === 'coststructure')
+          - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/coststructure`, data: '' }
+          include ../form/canvas.jade
+
+      div.column-5
+        div.canvas-cell.revenue-streams
+          i.fa.fa-line-chart
+          span.canvas-cell-header= revenueStreams.title
+          - var revenueStreamsValue = results.find(result => result.name === 'revenuestreams')
+          - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/revenuestreams`, data: '' }
+          include ../form/canvas.jade
+
+  script
+    :babel
+      document.addEventListener('DOMContentLoaded', () => {
+        const forms = document.querySelectorAll('.canvas-container .canvas-form')
+        const saveButton = document.querySelector('.canvas-container .save-button-wrapper')
+        const resetButton = document.querySelector('.canvas-container .reset-button-wrapper')
+
+        saveButton.addEventListener('click', () => {
+          forms.forEach(form => {
+            form.addEventListener('submit', onCanvasSubmit)
+            form.querySelector('input[type="submit"]').click()
+          })
+        })
+
+        resetButton.addEventListener('click', () => {
+          forms.forEach(form => {
+            const initialDataHolder = form.querySelector('.initial-editor-data')
+            const editor = initialDataHolder.dataset.editorId
+            const initialData = initialDataHolder.dataset.initialData
+            const bindedEditorId = editor.replace('canvas-', '')
+
+            CKEDITOR.instances[bindedEditorId].setData(initialData)
+            CKEDITOR.instances[editor].setData(initialData)
+          })
+        })
+
+        function onCanvasSubmit(event) {
+          event.preventDefault()
+          const form = event.target
+          const xhr = new XMLHttpRequest()
+          const successModal = form.querySelector('.success-modal-wrapper')
+
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              successModal.classList.remove('hidden')
+              setTimeout(() => successModal.classList.add('hidden'), 3000)
+            }
+            else if (xhr.readyState === 4 && xhr.status !== 200) {
+              throw new Error('Something went wrong, your answer is not saved.')
+            }
+          }
+
+          xhr.open('POST', form.action, true)
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+          xhr.send(JSON.stringify({ data: form.querySelector('textarea').value }))
+        }
+      })
+
 h2.subdeliverable-title#valueproposition
   span= valueProposition.title
 p.subdeliverable-description= valueProposition.description
@@ -9,7 +151,6 @@ div.activity-container
   - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/valueproposition`, data: '' }
   include ../form/form.jade
 
-- var customerSegments = getActivity('customersegments')
 h2.subdeliverable-title#customersegments
   span= customerSegments.title
 p.subdeliverable-description= customerSegments.description
@@ -19,7 +160,6 @@ div.activity-container
   - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/customersegments`, data: '' }
   include ../form/form.jade
 
-- var customerRelationships = getActivity('customerrelationships')
 h2.subdeliverable-title#customerrelationships
   span= customerRelationships.title
 p.subdeliverable-description= customerRelationships.description
@@ -29,7 +169,6 @@ div.activity-container
   - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } : {action: `${addActionLink}/customerrelationships`, data: '' }
   include ../form/form.jade
 
-- var distributionChannels = getActivity('distributionchannels')
 h2.subdeliverable-title#distributionchannels
   span= distributionChannels.title
 p.subdeliverable-description= distributionChannels.description
@@ -39,7 +178,6 @@ div.activity-container
   - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } : {action: `${addActionLink}/distributionchannels`, data: '' }
   include ../form/form.jade
 
-- var revenueStreams = getActivity('revenuestreams')
 h2.subdeliverable-title#revenuestreams
   span= revenueStreams.title
 p.subdeliverable-description= revenueStreams.description
@@ -49,7 +187,6 @@ div.activity-container
   - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/revenuestreams`, data: '' }
   include ../form/form.jade
 
-- var differentiators = getActivity('differentiators')
 h2.subdeliverable-title#differentiators
   span= differentiators.title
 p.subdeliverable-description= differentiators.description
@@ -59,7 +196,6 @@ div.activity-container
   - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/differentiators`, data: '' }
   include ../form/form.jade
 
-- var assets = getActivity('assets')
 h2.subdeliverable-title#assets
   span= assets.title
 p.subdeliverable-description= assets.description
@@ -69,8 +205,7 @@ div.activity-container
   - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/assets`, data: '' }
   include ../form/form.jade
 
-- var keyPartners = getActivity('keypartners')
-h2.subdeliverable-title#assets
+h2.subdeliverable-title#keypartners
   span= keyPartners.title
 p.subdeliverable-description= keyPartners.description
 div.activity-container
@@ -79,8 +214,7 @@ div.activity-container
   - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/keypartners`, data: '' }
   include ../form/form.jade
 
-- var costStructure = getActivity('coststructure')
-h2.subdeliverable-title#assets
+h2.subdeliverable-title#coststructure
   span= costStructure.title
 p.subdeliverable-description= costStructure.description
 div.activity-container
