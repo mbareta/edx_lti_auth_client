@@ -26,15 +26,9 @@ div.main-navbar
         for (let instanceKey in CKEDITOR.instances) {
           const cke = CKEDITOR.instances[instanceKey];
           cke.setReadOnly(true)
-          if(cke.document.getBody().getChild(0).getText().trim() === '') {
-            // insert message
-            let msg = document.createElement('p');
-            msg.className = 'empty-cke-warning';
-            msg.innerHTML = 'Enter edit mode to fill in this section...';
 
-            const containerId = cke.container.getParent().getParent().getParent().getId();
-            document.querySelector('#' + containerId + ' form').appendChild(msg);
-            document.querySelector('#' + containerId + ' .cke').style.display = 'none';
+          if(cke.document.getBody().getChild(0).getText().trim() === '') {
+            cke.setData('<i>Enter edit mode to fill in this section...</i>');
           }
         }
 
@@ -54,10 +48,9 @@ div.main-navbar
         for (let instanceKey in CKEDITOR.instances) {
           const cke = CKEDITOR.instances[instanceKey];
           cke.setReadOnly(false)
-          if(cke.document.getBody().getChild(0).getText().trim() === '') {
-            const containerId = cke.container.getParent().getParent().getParent().getId();
-            document.querySelector('#' + containerId + ' form p.empty-cke-warning').remove();
-            document.querySelector('#' + containerId + ' .cke').style.display = 'initial';
+
+          if(cke.document.getBody().getChild(0).getText().trim() === 'Enter edit mode to fill in this section...') {
+            cke.setData('')
           }
         }
 
