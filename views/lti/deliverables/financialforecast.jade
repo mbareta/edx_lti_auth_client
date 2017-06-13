@@ -1,0 +1,11 @@
+extends ../deliverableContainer
+
+block deliverable
+  div.deliverable-info
+    i.fa.fa-pie-chart.deliverable-icon
+    h1.deliverable-title= getDeliverable('financialforecast').title
+
+    p.deliverable-description= getDeliverable('financialforecast').description
+
+
+  include ../subDeliverables/financialforecastdefault.jade
