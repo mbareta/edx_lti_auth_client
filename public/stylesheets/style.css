@@ -82,7 +82,10 @@ body.preview .activity-description,
 body.preview .form-control-container,
 body.preview .deliverable-description,
 body.preview .activities-data,
-body.preview .cke_top {
+body.preview .cke_top,
+body.preview .reset-button-wrapper,
+body.preview .save-button-wrapper,
+body.preview #ckeditor-toolbar {
   display: none;
 }
 

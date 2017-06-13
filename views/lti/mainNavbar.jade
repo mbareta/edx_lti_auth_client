@@ -24,7 +24,12 @@ div.main-navbar
         document.body.classList.add('preview');
 
         for (let instanceKey in CKEDITOR.instances) {
-          CKEDITOR.instances[instanceKey].setReadOnly(true)
+          const cke = CKEDITOR.instances[instanceKey];
+          cke.setReadOnly(true)
+
+          if(cke.document.getBody().getChild(0).getText().trim() === '') {
+            cke.setData('<i>Enter edit mode to fill in this section...</i>');
+          }
         }
 
         const navbar = document.querySelector('.deliverable-navbar');
@@ -41,7 +46,12 @@ div.main-navbar
         document.body.classList.remove('preview');
 
         for (let instanceKey in CKEDITOR.instances) {
-          CKEDITOR.instances[instanceKey].setReadOnly(false);
+          const cke = CKEDITOR.instances[instanceKey];
+          cke.setReadOnly(false)
+
+          if(cke.document.getBody().getChild(0).getText().trim() === 'Enter edit mode to fill in this section...') {
+            cke.setData('')
+          }
         }
 
         const navbar = document.querySelector('.deliverable-navbar');

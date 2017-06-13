@@ -3,7 +3,36 @@ script
     function initializeCKEditor() {
         const editors = document.querySelectorAll('.editor')
 
-        editors.forEach(editor => CKEDITOR.replace(editor.id))
+        editors.forEach(editor => {
+          if (editor.id.indexOf('canvas-') !== -1) {
+            CKEDITOR.replace(editor.id, {
+              extraPlugins: 'sharedspace',
+              removePlugins: 'resize',
+              sharedSpaces: { top: 'ckeditor-toolbar' },
+              on: {
+                key: () => {
+                  const bindedEditorId = editor.id.replace('canvas-', '')
+
+                  setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
+                    CKEDITOR.instances[editor.id].getData()
+                  ), 0)
+                }
+              }
+            })
+          } else {
+            CKEDITOR.replace(editor.id, {
+              on: {
+                key: () => {
+                  const bindedEditorId = `canvas-${editor.id}`
+
+                  setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
+                    CKEDITOR.instances[editor.id].getData()
+                  ), 0)
+                }
+              }
+            })
+          }
+        })
       }
 
       function onEditorSubmit(event) {
@@ -46,4 +75,9 @@ script
         const initialData = resetButton.dataset.initialData
 
         CKEDITOR.instances[editor].setData(initialData)
+
+        const bindedEditorId = `canvas-${editor}`
+        if (CKEDITOR.instances[bindedEditorId]) {
+          CKEDITOR.instances[bindedEditorId].setData(initialData)
+        }
       }
