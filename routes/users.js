@@ -1,6 +1,5 @@
 const express = require('express');
-const db = require('../models/index');
-const { getUserInfo } = require('../middlewares/auth');
+const { getUserInfo, cacheUserXBlocks } = require('../middlewares/auth');
 const config = require('../config/main');
 
 const router = express.Router();
@@ -17,14 +16,9 @@ const { authorize, storeAccessToken, logout } = require('edx-oauth-middleware').
   auth: config.auth
 });
 
-/* GET users listing. */
-router.get('/', (req, res) =>
-  db.User.findOne().then(user => res.send(user))
-);
-
 router.get('/auth', authorize);
 
-router.get('/login', storeAccessToken, getUserInfo);
+router.get('/login', storeAccessToken, cacheUserXBlocks, getUserInfo);
 
 router.get('/logout', logout);
 

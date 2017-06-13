@@ -24,9 +24,14 @@
     input.hidden(type='submit')
     div.form-control-container
       unless isLtiSession
+        - var activityId = form.action.split('/')
+        - activityId = activityId[activityId.length -1]
+        - var block = blocks.find(block => block.launch_url.indexOf(activityId) > 0)
+
         div.view-in-course-link
-          | View in course
-          i.fa.fa-arrow-circle-o-right
+          a(href=block && block.lms_web_url)
+            | View in course
+            i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
         button.save-button Save
