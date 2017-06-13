@@ -58,8 +58,6 @@ const renderUserDeliverable = (req, res) => {
   const email = getEmail(req);
   const { blocks } = req.session;
 
-  console.dir(blocks)
-
   responsesRepository.getDeliverableByType(email, type).then(results => {
     const activitiesTotalCount = deliverableContentTree[type].activitiesCount;
     const solvedActivitiesCount = results.filter(result => !!result.data)
