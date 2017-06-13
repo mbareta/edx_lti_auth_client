@@ -23,9 +23,10 @@
     textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
     input.hidden(type='submit')
     div.form-control-container
-      div.view-in-course-link
-        | View in course
-        i.fa.fa-arrow-circle-o-right
+      unless isLtiSession
+        div.view-in-course-link
+          | View in course
+          i.fa.fa-arrow-circle-o-right
       div.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
         button.save-button Save
