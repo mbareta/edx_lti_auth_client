@@ -56,6 +56,9 @@ const renderUserDeliverables = renderUserDeliverablesCurried();
 const renderUserDeliverable = (req, res) => {
   const { type } = req.params;
   const email = getEmail(req);
+  const { blocks } = req.session;
+
+  console.dir(blocks)
 
   responsesRepository.getDeliverableByType(email, type).then(results => {
     const activitiesTotalCount = deliverableContentTree[type].activitiesCount;
@@ -71,7 +74,8 @@ const renderUserDeliverable = (req, res) => {
       getDeliverable,
       getSubDeliverable,
       getActivity,
-      deliverableContentTree
+      deliverableContentTree,
+      blocks
     });
   });
 };
