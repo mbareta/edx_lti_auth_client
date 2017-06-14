@@ -114,3 +114,8 @@
   font-size: 22px;
   margin-bottom: 12px;
 }
+
+/* This applies to the activities rendered in the courseware */
+.activity-container .activity-description {
+  margin-bottom: 12px;
+}

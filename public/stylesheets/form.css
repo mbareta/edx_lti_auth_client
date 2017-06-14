@@ -110,12 +110,11 @@
 }
 
 .confirm-modal, .success-modal {
-  height: 270px;
   width: 450px;
 
   position: fixed;
-  left: 34%;
-  bottom: 40%;
+  left: 27%;
+  bottom: 35%;
   z-index: 5;
 
   background: white;
@@ -124,8 +123,33 @@
   white-space: pre;
 }
 
+.confirm-modal {
+  height: 215px;
+}
+
 .success-modal {
-  height: 123px;
+  height: 156px;
+}
+
+.confirm-modal h4,
+.success-modal h4 {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 24px 0 16px;
+}
+
+.deliverable-container .confirm-modal {
+  height: 281px;
+}
+
+.deliverable-container .activity-container .confirm-modal,
+.deliverable-container .activity-container .success-modal {
+  left: 34%;
+  bottom: 40%;
+}
+
+.activity-container .modal-title {
+  margin-top: 44px;
 }
 
 .confirm-modal .modal-title,
@@ -143,7 +167,7 @@
 
   float: right;
   margin-right: 20px;
-  margin-top: 58px;
+  margin-top: 34px;
 
   justify-content: center;
   align-items: center;
