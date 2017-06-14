@@ -26,17 +26,6 @@ const responsesRepository = () => {
         lti
       });
 
-  const getByLti = lti => {
-    const { outcomeServiceSourcedId } = lti;
-
-    if (!outcomeServiceSourcedId) {
-      return Promise.resolve(false);
-    }
-
-    return mongoConnectionPool.db.collection(mongoDbName)
-      .findOne({ 'lti.outcomeServiceSourcedId': outcomeServiceSourcedId });
-  };
-
   const getResponseById = (id) => mongoConnectionPool.db.collection(mongoDbName)
       .findOne({ _id: ObjectId(id) });
 
@@ -54,7 +43,7 @@ const responsesRepository = () => {
       .find({ $and: [{ email, type }] })
       .toArray();
 
-  const upsert = formResponse => getByLti(formResponse.lti)
+  const upsert = formResponse => getResponseByEmail(formResponse.name, formResponse.email)
     .then(existingResponse => {
       if (existingResponse) {
         formResponse._id = existingResponse._id;
@@ -66,7 +55,6 @@ const responsesRepository = () => {
   return {
     updateResponse,
     saveResponse,
-    getByLti,
     getResponseById,
     getResponsesByEmail,
     getResponseByEmail,
