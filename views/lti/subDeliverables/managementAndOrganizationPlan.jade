@@ -36,12 +36,12 @@ div.activity-container#recruitment
   - var form = recruitment ? {action: `/lti/form/update/${recruitment._id}`, data: recruitment.data} : {action: `${addActionLink}/recruitment`, data: '' }
   include ../form/form.jade
 
-div.activity-container#compensationandownership
-  h3.activity-title Compensation and Ownership
+div.activity-container#compensionandownership
+  h3.activity-title Compension and Ownership
   p.activity-description What is the compensation package for the entrepreneur and other key management team members? What are their salaries, benefits, and bonuses? What portion of the business is owned by the entrepreneur and management team?
 
-  - var compensationAndOwnership = results.find(result => result.name === 'compensationandownership')
-  - var form = compensationAndOwnership ? {action: `/lti/form/update/${compensationAndOwnership._id}`, data: compensationAndOwnership.data} : {action: `${addActionLink}/compensationandownership`, data: '' }
+  - var compensionAndOwnership = results.find(result => result.name === 'compensionandownership')
+  - var form = compensionAndOwnership ? {action: `/lti/form/update/${compensionAndOwnership._id}`, data: compensionAndOwnership.data} : {action: `${addActionLink}/compensionandownership`, data: '' }
   include ../form/form.jade
 
 div.activity-container#incentiveplan

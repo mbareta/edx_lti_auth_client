@@ -40,7 +40,7 @@ div.activity-container#intellectualproperty
   p.activity-description How will you protect intellectual property? What patents, trademarks, or copyrights have been obtained or which ones will be pursued? What license or royalty agreements are associated with the product/service, and what plans have been made for future agreements? What distribution rights have been obtained or given away?
 
   - var intellectualProperty = results.find(result => result.name === 'intellectualproperty')
-  - var form = intellectualProperty ? {action: `/lti/form/update/${intellectualProperty._id}`, data: compensationAndOwnership.data} : {action: `${addActionLink}/intellectualproperty`, data: '' }
+  - var form = intellectualProperty ? {action: `/lti/form/update/${intellectualProperty._id}`, data: intellectualProperty.data} : {action: `${addActionLink}/intellectualproperty`, data: '' }
   include ../form/form.jade
 
 div.activity-container#governmentapprovals
