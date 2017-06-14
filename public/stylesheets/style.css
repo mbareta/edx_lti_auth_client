@@ -54,9 +54,16 @@ header.workspace-navbar {
   text-transform: uppercase;
 }
 
-.workspace-navbar .workspace-navbar-title,
 .workspace-navbar .workspace-navbar-item {
   color: #b5b5b5;
+}
+
+.workspace-navbar .workspace-navbar-title {
+  margin-left: 11px
+}
+
+.workspace-navbar .workspace-navbar-title img {
+  max-height: 34px;
 }
 
 .workspace-navbar .workspace-navbar-item:hover {
@@ -68,11 +75,6 @@ header.workspace-navbar {
   width: 600px;
   justify-content: space-around;
 }
-
-.workspace-navbar .workspace-navbar-title {
-  margin-left: 20px
-}
-
 
 /* DELIVERABLE PREVIEW MODE */
 body.preview #preview-button,

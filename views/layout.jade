@@ -30,7 +30,8 @@ html
         })()
   body
       header.workspace-navbar
-        span.workspace-navbar-title Workspace
+        span.workspace-navbar-title
+          img(src='/assets/images/kauffman_fasttrac_logo.png')
 
         nav.workspace-navbar-items
           a.workspace-navbar-item(href='/courses', onclick=`javascript:event.target.port=${config.lmsPort}`) Explore

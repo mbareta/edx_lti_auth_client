@@ -30,4 +30,5 @@ benchmarks/graphs
 
 # Assets
 public/assets/*
+!public/assets/images
 !public/assets/ckeditor
