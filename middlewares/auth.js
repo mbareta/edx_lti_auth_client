@@ -1,8 +1,9 @@
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request').defaults({ jar: true }));
 const { baseUrl, lmsPort } = require('../config/main');
+const edxCourseApi = require('../lib/edxCourseApi');
 
-module.exports.getUserInfo = (req, res) => {
+const getUserInfo = (req, res) => {
   const accessToken = req.session.token.access_token;
   const options = {
     url: `${baseUrl}:${lmsPort}/oauth2/user_info`,
@@ -17,4 +18,16 @@ module.exports.getUserInfo = (req, res) => {
     res.redirect(req.session.redirectToUrl || '/');
   })
   .catch(error => res.send(`Access Token Error ${error.message}`));
+};
+
+const cacheUserXBlocks = (req, res, next) => {
+  // cache all user blocks in session
+  edxCourseApi.getAllUserBlocks(req.session)
+  .then(blocks => { req.session.blocks = blocks; })
+  .then(next);
+};
+
+module.exports = {
+  getUserInfo,
+  cacheUserXBlocks
 };

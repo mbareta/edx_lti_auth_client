@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/blocks', (req, res) => {
-  edxCourseApi.getDisabledBlocks(req.session.user, req.session.token.access_token)
+  edxCourseApi.getDisabledBlocks(req.session)
   .then(results => res.send(results));
 });
 
