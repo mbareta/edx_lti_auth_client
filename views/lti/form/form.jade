@@ -26,7 +26,7 @@
       unless isLtiSession
         - var activityId = form.action.split('/')
         - activityId = activityId[activityId.length -1]
-        - var block = blocks.find(block => block.launch_url.indexOf(activityId) > 0)
+        - var block = blocks && blocks.find(block => block.launch_url.indexOf(activityId) > 0)
 
         div.view-in-course-link
           a(href=block && block.lms_web_url)

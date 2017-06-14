@@ -122,3 +122,11 @@ body.preview .preview-banner span .fa {
   margin-right: .6rem;
   color: white;
 }
+
+body.preview .deliverable-container .activity-container {
+  margin-left: 6%;
+}
+
+body.preview .deliverable-container .activity-container .form {
+  margin-left: -0.8%;
+}
