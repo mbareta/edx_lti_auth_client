@@ -15,6 +15,19 @@ html
     script(src='/assets/ckeditor/ckeditor.js')
     link(rel='preload' href='/assets/ckeditor/contents.css?t=H0CG' as='style')
     link(rel='stylesheet', href='/stylesheets/form.css')
+
+    script
+      :babel
+        var bugmuncher_options = {
+          api_key: "cd9d0312a0c59b558394"
+        };
+        (function(){
+          var e = document.createElement("script");
+          e.setAttribute("type", "text/javascript");
+          var d = new Date(); var n = '?'+d.getFullYear()+(d.getMonth()+1)+d.getDate()+d.getHours();
+          e.setAttribute("src", "//cdn.bugmuncher.com/bugmuncher.js"+n);
+          document.getElementsByTagName("head")[0].appendChild(e);
+        })()
   body
       header.workspace-navbar
         span.workspace-navbar-title Workspace

@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "cp -R node_modules/font-awesome/fonts ./public/assets/font-awesome && cp -R node_modules/font-awesome/css ./public/assets/font-awesome",
     "check": "flow; test $? -eq 0 -o $? -eq 2",
-    "dev": "nodemon --debug ./bin/www localhost 3000",
+    "dev": "nodemon --inspect=5555 ./bin/www localhost 3000",
     "start": "npm run postinstall && nodemon ./bin/www localhost 3000"
   },
   "dependencies": {
