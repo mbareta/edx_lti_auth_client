@@ -34,9 +34,9 @@ html
           img(src='/assets/images/kauffman_fasttrac_logo.png')
 
         nav.workspace-navbar-items
-          a.workspace-navbar-item(href='/courses', onclick=`javascript:event.target.port=${config.lmsPort}`) Explore
-          a.workspace-navbar-item(href='/') FAQ
-          a.workspace-navbar-item(href='/dashboard', onclick=`javascript:event.target.port=${config.lmsPort}`) My Courses
+          a.workspace-navbar-item(href=`${config.lmsUrl}/courses`) Explore
+          a.workspace-navbar-item(href=`${config.lmsUrl}/faq`) FAQ
+          a.workspace-navbar-item(href=`${config.lmsUrl}/dashboard`) My Courses
           a.workspace-navbar-item(href='/') Workspace
           if email
             a.workspace-navbar-item(href='/users/logout')
