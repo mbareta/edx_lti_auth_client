@@ -1,12 +1,12 @@
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request').defaults({ jar: true }));
-const { baseUrl, lmsPort } = require('../config/main');
+const config = require('../config/main');
 const edxCourseApi = require('../lib/edxCourseApi');
 
 const getUserInfo = (req, res) => {
   const accessToken = req.session.token.access_token;
   const options = {
-    url: `${baseUrl}:${lmsPort}/oauth2/user_info`,
+    url: `${config.lmsUrl}/oauth2/user_info`,
     headers: {
       Authorization: `Bearer ${accessToken}`
     }

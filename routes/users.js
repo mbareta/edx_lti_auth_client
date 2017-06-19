@@ -3,10 +3,10 @@ const { getUserInfo, cacheUserXBlocks, setUserCookies } = require('../middleware
 const config = require('../config/main');
 
 const router = express.Router();
-const loginUrl = `${config.baseUrl}:${config.portfolioPort}/users/login`;
-const redirectOnLoginUrl = `${config.baseUrl}:${config.portfolioPort}`;
-const lmsUrl = `${config.baseUrl}:${config.lmsPort}`;
-const edxLogoutUrl = `${config.baseUrl}:${config.lmsPort}/logout`;
+const loginUrl = `${config.baseUrl}/users/login`;
+const redirectOnLoginUrl = `${config.baseUrl}`;
+const lmsUrl = `${config.lmsUrl}`;
+const edxLogoutUrl = `${config.lmsUrl}/logout`;
 const { authorize, storeAccessToken, logout } = require('edx-oauth-middleware').init({
   loginUrl,
   redirectOnLoginUrl,

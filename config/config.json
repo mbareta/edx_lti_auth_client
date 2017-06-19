@@ -5,10 +5,9 @@
     "database": "fullstack",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "baseUrl": "http://localhost",
-    "lmsPort": 8000,
-    "studioPort": 8001,
-    "portfolioPort": 3000,
+    "baseUrl": "http://localhost:3000",
+    "lmsUrl": "http://localhost:8000",
+    "studioUrl": "http://localhost:8001",
     "client": {
       "id": "id",
       "secret": "secret"
@@ -32,10 +31,9 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "baseUrl": "http://52.90.208.190",
-    "lmsPort": 80,
-    "studioPort": 18010,
-    "portfolioPort": 3000,
+    "baseUrl": "http://52.90.208.190:3000",
+    "lmsUrl": "http://52.90.208.190",
+    "studioUrl": "http://52.90.208.190:18010",
     "client": {
       "id": "id",
       "secret": "secret"
