@@ -8,6 +8,7 @@
     "baseUrl": "http://localhost:3000",
     "lmsUrl": "http://localhost:8000",
     "studioUrl": "http://localhost:8001",
+    "cookieDomain": "http://localhost/",
     "client": {
       "id": "id",
       "secret": "secret"
@@ -34,6 +35,7 @@
     "baseUrl": "http://52.90.208.190:3000",
     "lmsUrl": "http://52.90.208.190",
     "studioUrl": "http://52.90.208.190:18010",
+    "cookieDomain": "http://52.90.208.190/",
     "client": {
       "id": "id",
       "secret": "secret"
