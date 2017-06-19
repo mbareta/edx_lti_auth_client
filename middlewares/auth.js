@@ -30,8 +30,9 @@ const cacheUserXBlocks = (req, res, next) => {
 const setUserCookies = (req, res, next) => {
   const cookies = req.session.edxCookies;
   const encode = (cookie) => decodeURIComponent(cookie);
+  const domain = config.cookieDomain;
   cookies.forEach(cookie =>
-    res.cookie(cookie.split('=')[0], cookie.split('=')[1].split(';')[0], { encode, domain: config.cookieDomain })
+    res.cookie(cookie.split('=')[0], cookie.split('=')[1].split(';')[0], { encode, domain })
   );
   next();
 };
