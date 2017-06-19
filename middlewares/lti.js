@@ -39,7 +39,8 @@ const renderUserResponse = (req, res, next) => {
       res.render(`${componentLocation}/activity`, {
         activity: response,
         createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
-        getActivity
+        getActivity,
+        blocks: req.session.blocks
       })
     );
 };
