@@ -1,7 +1,6 @@
-div.deliverable-wrapper
-  a(href=`/lti/deliverables/${key}`, target='_blank')
-    div.deliverable
-      h5.title= deliverableContentTree[key].title
-      p= deliverableContentTree[key].description ? `${deliverableContentTree[key].description.slice(0, 60)}${deliverableContentTree[key].description.length > 60 ? '...' : '' }` : ''
+div.deliverable-wrapper(data-deliverable-link=`/lti/deliverables/${key}`)
+  div.deliverable
+    h5.title= deliverableContentTree[key].title
+    p= deliverableContentTree[key].description ? `${deliverableContentTree[key].description.slice(0, 60)}${deliverableContentTree[key].description.length > 60 ? '...' : '' }` : ''
   div.activities
     p.title Activities
