@@ -50,7 +50,7 @@ script
             if (xhr.readyState === 4 && xhr.status === 200) {
               modal.classList.add('hidden')
               successModal.classList.remove('hidden')
-              setTimeout(() => successModal.classList.add('hidden'), 23000)
+              setTimeout(() => successModal.classList.add('hidden'), 3000)
             }
             else if (xhr.readyState === 4 && xhr.status !== 200) {
               throw new Error('Something went wrong, your answer is not saved.')
