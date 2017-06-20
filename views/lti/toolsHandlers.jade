@@ -1,0 +1,15 @@
+script
+    :babel
+      function handleToolClick(link) {
+        if(window.self !== window.top) {
+          window.parent.location.href = link.dataset.deliverableLink
+        } else {
+          window.location.href = link.dataset.deliverableLink
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.deliverable-wrapper').forEach(link => {
+          link.addEventListener('click', () => handleToolClick(link))
+        })
+      })
