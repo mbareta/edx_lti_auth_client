@@ -23,8 +23,9 @@ div.canvas-container
         div.canvas-cell.key-partners
           i.fa.fa-user
           span.canvas-cell-header= keyPartners.title
-          - var keyPartnersValue = results.find(result => result.name === 'keypartners')
-          - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/keypartners`, data: '' }
+          - var activityId = 'keypartners'
+          - var keyPartnersValue = results.find(result => result.name === activityId)
+          - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
           include ../form/canvas.jade
 
       div.column-2
@@ -32,24 +33,27 @@ div.canvas-container
           div.canvas-cell.differentiators
             i.fa.fa-key
             span.canvas-cell-header= differentiators.title
-            - var differentiatorsValue = results.find(result => result.name === 'differentiators')
-            - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/differentiators`, data: '' }
+            - var activityId = 'differentiators'
+            - var differentiatorsValue = results.find(result => result.name === activityId)
+            - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
             include ../form/canvas.jade
 
         div.row-5
           div.canvas-cell.assets
             i.fa.fa-cubes
             span.canvas-cell-header= assets.title
-            - var assetsValue = results.find(result => result.name === 'assets')
-            - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/assets`, data: '' }
+            - var activityId = 'assets'
+            - var assetsValue = results.find(result => result.name === activityId)
+            - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
             include ../form/canvas.jade
 
       div.column-2
         div.canvas-cell.value-proposition
           i.fa.fa-check-square-o
           span.canvas-cell-header.canvas-cell-header= valueProposition.title
-          - var valuePropositionValue = results.find(result => result.name === 'valueproposition')
-          - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/valueproposition`, data: '' }
+          - var activityId = 'valueproposition'
+          - var valuePropositionValue = results.find(result => result.name === activityId)
+          - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
           include ../form/canvas.jade
 
       div.column-2
@@ -57,24 +61,27 @@ div.canvas-container
           div.canvas-cell.customer-relationships
             i.fa.fa-users
             span.canvas-cell-header= customerRelationships.title
-            - var customerRelationshipsValue = results.find(result => result.name ===   'customerrelationships')
-            - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } :  {action: `${addActionLink}/customerrelationships`, data: '' }
+            - var activityId = 'customerrelationships'
+            - var customerRelationshipsValue = results.find(result => result.name === activityId)
+            - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } :  {action: `${addActionLink}/${activityId}`, data: '' }
             include ../form/canvas.jade
 
         div.row-5
           div.canvas-cell.distribution-channels
             i.fa.fa-truck
             span.canvas-cell-header= distributionChannels.title
-            - var distributionChannelsValue = results.find(result => result.name ===  'distributionchannels')
-            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } :   {action: `${addActionLink}/distributionchannels`, data: '' }
+            - var activityId = 'distributionchannels'
+            - var distributionChannelsValue = results.find(result => result.name === activityId)
+            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } :   {action: `${addActionLink}/${activityId}`, data: '' }
             include ../form/canvas.jade
 
       div.column-2
         div.canvas-cell.customer-segments
           i.fa.fa-briefcase
           span.canvas-cell-header= customerSegments.title
-          - var customerSegmentsValue = results.find(result => result.name === 'customersegments')
-          - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/customersegments`, data: '' }
+          - var activityId = 'customersegments'
+          - var customerSegmentsValue = results.find(result => result.name === activityId)
+          - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
           include ../form/canvas.jade
 
     div.row-3
@@ -82,16 +89,18 @@ div.canvas-container
         div.canvas-cell.cost-
           i.fa.fa-money
           span.canvas-cell-header= costStructure.title
-          - var costStructureValue = results.find(result => result.name === 'coststructure')
-          - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/coststructure`, data: '' }
+          - var activityId = 'coststructure'
+          - var costStructureValue = results.find(result => result.name === activityId)
+          - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
           include ../form/canvas.jade
 
       div.column-5
         div.canvas-cell.revenue-streams
           i.fa.fa-line-chart
           span.canvas-cell-header= revenueStreams.title
-          - var revenueStreamsValue = results.find(result => result.name === 'revenuestreams')
-          - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/revenuestreams`, data: '' }
+          - var activityId = 'revenuestreams'
+          - var revenueStreamsValue = results.find(result => result.name === activityId)
+          - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
           include ../form/canvas.jade
 
   script
@@ -153,8 +162,9 @@ h2.subdeliverable-title#valueproposition
 p.subdeliverable-description= valueProposition.description
 div.activity-container
 
-  - var valuePropositionValue = results.find(result => result.name === 'valueproposition')
-  - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/valueproposition`, data: '' }
+  - var activityId = 'valueproposition'
+  - var valuePropositionValue = results.find(result => result.name === activityId)
+  - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#customersegments
@@ -162,8 +172,9 @@ h2.subdeliverable-title#customersegments
 p.subdeliverable-description= customerSegments.description
 div.activity-container
 
-  - var customerSegmentsValue = results.find(result => result.name === 'customersegments')
-  - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/customersegments`, data: '' }
+  - var activityId = 'customersegments'
+  - var customerSegmentsValue = results.find(result => result.name === activityId)
+  - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#customerrelationships
@@ -171,8 +182,9 @@ h2.subdeliverable-title#customerrelationships
 p.subdeliverable-description= customerRelationships.description
 div.activity-container
 
-  - var customerRelationshipsValue = results.find(result => result.name === 'customerrelationships')
-  - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } : {action: `${addActionLink}/customerrelationships`, data: '' }
+  - var activityId = 'customerrelationships'
+  - var customerRelationshipsValue = results.find(result => result.name === activityId)
+  - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#distributionchannels
@@ -180,8 +192,9 @@ h2.subdeliverable-title#distributionchannels
 p.subdeliverable-description= distributionChannels.description
 div.activity-container
 
-  - var distributionChannelsValue = results.find(result => result.name === 'distributionchannels')
-  - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } : {action: `${addActionLink}/distributionchannels`, data: '' }
+  - var activityId = 'distributionchannels'
+  - var distributionChannelsValue = results.find(result => result.name === activityId)
+  - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#revenuestreams
@@ -189,8 +202,9 @@ h2.subdeliverable-title#revenuestreams
 p.subdeliverable-description= revenueStreams.description
 div.activity-container
 
-  - var revenueStreamsValue = results.find(result => result.name === 'revenuestreams')
-  - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/revenuestreams`, data: '' }
+  - var activityId = 'revenuestreams'
+  - var revenueStreamsValue = results.find(result => result.name === activityId)
+  - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#differentiators
@@ -198,8 +212,9 @@ h2.subdeliverable-title#differentiators
 p.subdeliverable-description= differentiators.description
 div.activity-container
 
-  - var differentiatorsValue = results.find(result => result.name === 'differentiators')
-  - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/differentiators`, data: '' }
+  - var activityId = 'differentiators'
+  - var differentiatorsValue = results.find(result => result.name === activityId)
+  - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#assets
@@ -207,8 +222,9 @@ h2.subdeliverable-title#assets
 p.subdeliverable-description= assets.description
 div.activity-container
 
-  - var assetsValue = results.find(result => result.name === 'assets')
-  - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/assets`, data: '' }
+  - var activityId = 'assets'
+  - var assetsValue = results.find(result => result.name === activityId)
+  - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#keypartners
@@ -216,8 +232,9 @@ h2.subdeliverable-title#keypartners
 p.subdeliverable-description= keyPartners.description
 div.activity-container
 
-  - var keyPartnersValue = results.find(result => result.name === 'keypartners')
-  - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/keypartners`, data: '' }
+  - var activityId = 'keypartners'
+  - var keyPartnersValue = results.find(result => result.name === activityId)
+  - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 h2.subdeliverable-title#coststructure
@@ -225,6 +242,7 @@ h2.subdeliverable-title#coststructure
 p.subdeliverable-description= costStructure.description
 div.activity-container
 
-  - var costStructureValue = results.find(result => result.name === 'coststructure')
-  - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/coststructure`, data: '' }
+  - var activityId = 'coststructure'
+  - var costStructureValue = results.find(result => result.name === activityId)
+  - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade

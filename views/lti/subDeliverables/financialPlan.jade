@@ -7,46 +7,52 @@ div.activity-container#startupcosts
   h3.activity-title Startup Costs
   p.activity-description What are your estimated costs to start this business? Are these one-time costs (expenditures) or ongoing costs (expenses)?
 
-  - var startupCosts = results.find(result => result.name === 'startupcosts')
-  - var form = startupCosts ? {action: `/lti/form/update/${startupCosts._id}`, data: startupCosts.data } : {action: `${addActionLink}/startupcosts`, data: '' }
+  - var activityId = 'startupcosts'
+  - var startupCosts = results.find(result => result.name === activityId)
+  - var form = startupCosts ? {action: `/lti/form/update/${startupCosts._id}`, data: startupCosts.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#salesprojections
   h3.activity-title Sales Projections
   p.activity-description What are your sales projections for the next three years? Where did you get the information to project financials? Are the projections reasonable?
 
-  - var salesProjections = results.find(result => result.name === 'salesprojections')
-  - var form = salesProjections ? {action: `/lti/form/update/${salesProjections._id}`, data: v.data} : {action: `${addActionLink}/salesprojections`, data: '' }
+  - var activityId = 'salesprojections'
+  - var salesProjections = results.find(result => result.name === activityId)
+  - var form = salesProjections ? {action: `/lti/form/update/${salesProjections._id}`, data: v.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#incomeprojections
   h3.activity-title Income Projections
   p.activity-description What are your net income projections for the next three years? When will your company be profitable?
 
-  - var incomeProjections = results.find(result => result.name === 'incomeprojections')
-  - var form = incomeProjections ? {action: `/lti/form/update/${incomeProjections._id}`, data: incomeProjections.data} : {action: `${addActionLink}/incomeprojections`, data: '' }
+  - var activityId = 'incomeprojections'
+  - var incomeProjections = results.find(result => result.name === activityId)
+  - var form = incomeProjections ? {action: `/lti/form/update/${incomeProjections._id}`, data: incomeProjections.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#cashrequirements
   h3.activity-title Cash Requirements
   p.activity-description How much cash will be required to cover startup costs, operations, and/or growth?
 
-  - var cashRequirements = results.find(result => result.name === 'cashrequirements')
-  - var form = cashRequirements ? {action: `/lti/form/update/${cashRequirements._id}`, data: cashRequirements.data} : {action: `${addActionLink}/cashrequirements`, data: '' }
+  - var activityId = 'cashrequirements'
+  - var cashRequirements = results.find(result => result.name === activityId)
+  - var form = cashRequirements ? {action: `/lti/form/update/${cashRequirements._id}`, data: cashRequirements.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#sourcesoffinancing
   h3.activity-title Sources of Financing
   p.activity-description Based on cash requirements to start, maintain operations, and grow, will you seek debt or equity financing? How much is the cost of obtaining these funds?
 
-  - var sourcesOfFinancing = results.find(result => result.name === 'sourcesoffinancing')
-  - var form = sourcesOfFinancing ? {action: `/lti/form/update/${sourcesOfFinancing._id}`, data: sourcesOfFinancing.data} : {action: `${addActionLink}/sourcesoffinancing`, data: '' }
+  - var activityId = 'sourcesoffinancing'
+  - var sourcesOfFinancing = results.find(result => result.name === activityId)
+  - var form = sourcesOfFinancing ? {action: `/lti/form/update/${sourcesOfFinancing._id}`, data: sourcesOfFinancing.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#exitstrategy
   h3.activity-title Exit Strategy
   p.activity-description What is your overall plan for growth? How will this plan enable you to obtain a wealthy harvest upon exit? What are your specific plans for going public, selling the business, merging the business, or other?
 
-  - var exitStrategy = results.find(result => result.name === 'exitstrategy')
-  - var form = exitStrategy ? {action: `/lti/form/update/${exitStrategy._id}`, data: exitStrategy.data} : {action: `${addActionLink}/exitstrategy`, data: '' }
+  - var activityId = 'exitstrategy'
+  - var exitStrategy = results.find(result => result.name === activityId)
+  - var form = exitStrategy ? {action: `/lti/form/update/${exitStrategy._id}`, data: exitStrategy.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
