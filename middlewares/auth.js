@@ -22,7 +22,7 @@ const getUserInfo = (req, res) => {
 
 const cacheUserXBlocks = (req, res, next) => {
   // cache all user blocks in session
-  edxCourseApi.getAllUserBlocks(req.session)
+  edxCourseApi.getAllUserBlocks(req)
   .then(blocks => { req.session.blocks = blocks; })
   .then(next);
 };

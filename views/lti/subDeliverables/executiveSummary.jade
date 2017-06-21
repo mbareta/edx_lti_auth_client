@@ -7,8 +7,9 @@ div.activity-container#venturedescription
   h3.activity-title Venture Description
   p.activity-description What business is your venture in, and what is the current stage of development? Current stage of development may be start-up, initial operations, expansion, rapid growth, or stable operations. Briefly describe your business model. What is unique about the product/service, and what proprietary rights does the business have?
 
-  - var ventureDescription = results.find(result => result.name === 'venturedescription')
-  - var form = ventureDescription ? {action: `/lti/form/update/${ventureDescription._id}`, data: ventureDescription.data } : {action: `${addActionLink}/venturedescription`, data: '' }
+  - var activityId = 'venturedescription';
+  - var ventureDescription = results.find(result => result.name === activityId)
+  - var form = ventureDescription ? {action: `/lti/form/update/${ventureDescription._id}`, data: ventureDescription.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#managementandorganizationplan

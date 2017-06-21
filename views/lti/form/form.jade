@@ -24,8 +24,6 @@
     input.hidden(type='submit')
     div.form-control-container
       unless isLtiSession
-        - var activityId = form.action.split('/')
-        - activityId = activityId[activityId.length -1]
         - var block = blocks && blocks.find(block => block.launch_url.indexOf(activityId) > 0)
 
         div.view-in-course-link
