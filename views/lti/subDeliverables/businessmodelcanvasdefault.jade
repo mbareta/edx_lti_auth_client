@@ -127,13 +127,19 @@ div.canvas-container
           const successModal = form.querySelector('.success-modal-wrapper')
 
           xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              successModal.classList.remove('hidden')
-              setTimeout(() => successModal.classList.add('hidden'), 3000)
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                successModal.classList.remove('hidden')
+                setTimeout(() => successModal.classList.add('hidden'), 3000)
+              }
+              else {
+                throw new Error(xhr, xhr.status)
+              }
             }
-            else if (xhr.readyState === 4 && xhr.status !== 200) {
-              throw new Error('Something went wrong, your answer is not saved.')
-            }
+          }
+
+          xhr.onerror = () => {
+            throw new Error(xhr, xhr.status)
           }
 
           xhr.open('POST', form.action, true)
