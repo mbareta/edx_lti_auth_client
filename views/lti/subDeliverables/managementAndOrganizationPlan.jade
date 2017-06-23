@@ -55,7 +55,7 @@ div.activity-container#incentiveplan
 
   - var activityId = 'incentiveplan'
   - var incentivePlan = results.find(result => result.name === 'activityId')
-  - var form = recruitment ? {action: `/lti/form/update/${incentivePlan._id}`, data: incentivePlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var form = incentivePlan ? {action: `/lti/form/update/${incentivePlan._id}`, data: incentivePlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#communication
