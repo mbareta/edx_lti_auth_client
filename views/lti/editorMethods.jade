@@ -10,32 +10,48 @@ script
               removePlugins: 'resize',
               sharedSpaces: { top: 'ckeditor-toolbar' },
               on: {
-                key: () => {
-                  const bindedEditorId = editor.id.replace('canvas-', '')
-
-                  setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
-                    CKEDITOR.instances[editor.id].getData()
-                  ), 0)
-                }
+                key: canvasEditorOnKeyHandler
               }
             })
           } else {
             CKEDITOR.replace(editor.id, {
               on: {
-                key: () => {
-                  const bindedEditorId = `canvas-${editor.id}`
-
-                  // if the deliverable has no canvas there'll be no binded editors
-                  if (CKEDITOR.instances[bindedEditorId]) {
-                    setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
-                      CKEDITOR.instances[editor.id].getData()
-                    ), 0)
-                  }
-                }
+                key: editorOnKeyHandler
               }
             })
           }
         })
+      }
+
+      function editorOnKeyHandler() {
+        const editorId = this.name
+        const bindedEditorId = `canvas-${this.name}`
+
+        // if the deliverable has no canvas there'll be no binded editors
+        if (CKEDITOR.instances[bindedEditorId]) {
+          if (this.timeoutId) {
+            clearTimeout(this.timeoutId)
+          }
+
+          this.timeoutId = setTimeout(() =>
+            CKEDITOR.instances[bindedEditorId].setData(
+              CKEDITOR.instances[editorId].getData()
+            ), 1000)
+        }
+      }
+
+      function canvasEditorOnKeyHandler() {
+        const editorId = this.name
+        const bindedEditorId = editorId.replace('canvas-', '')
+
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId)
+        }
+
+        this.timeoutId = setTimeout(() =>
+          CKEDITOR.instances[bindedEditorId].setData(
+            CKEDITOR.instances[editorId].getData()
+          ), 1000)
       }
 
       function onEditorSubmit(event) {
