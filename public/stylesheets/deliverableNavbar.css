@@ -13,6 +13,10 @@
   transform: translateX(-100%);
 }
 
+.deliverable-navbar.closed .deliverable-content-list {
+  margin-left: 0;
+}
+
 .deliverable-navbar-header {
   width: 100%;
   background: #50473D;
