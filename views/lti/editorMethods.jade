@@ -25,9 +25,12 @@ script
                 key: () => {
                   const bindedEditorId = `canvas-${editor.id}`
 
-                  setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
-                    CKEDITOR.instances[editor.id].getData()
-                  ), 0)
+                  // if the deliverable has no canvas there'll be no binded editors
+                  if (CKEDITOR.instances[bindedEditorId]) {
+                    setTimeout(() => CKEDITOR.instances[bindedEditorId].setData(
+                      CKEDITOR.instances[editor.id].getData()
+                    ), 0)
+                  }
                 }
               }
             })
