@@ -1,15 +1,17 @@
+- var executiveSummary = getSubDeliverable('executivesummary')
 h2.subdeliverable-title
-  span= getSubDeliverable('executivesummary').title
-p.subdeliverable-description An executive summary is often considered the most important part of a business plan. This is a summary of the key points you want your audience to tune into. You’ll want to fill this out last after you’ve had a chance to go through each section. Depending on which audience you are presenting your plan to, you’ll want to tailor this section to be most relevant to them . . .
+  span= executiveSummary.title
+p.subdeliverable-description!= executiveSummary.description
 
 - var addActionLink = '/lti/form/submit/businessplan/executivesummary'
+- var ventureDescription = getActivity('venturedescription')
 div.activity-container#venturedescription
-  h3.activity-title Venture Description
-  p.activity-description What business is your venture in, and what is the current stage of development? Current stage of development may be start-up, initial operations, expansion, rapid growth, or stable operations. Briefly describe your business model. What is unique about the product/service, and what proprietary rights does the business have?
+  h3.activity-title= ventureDescription.title
+  p.activity-description!= ventureDescription.description
 
   - var activityId = 'venturedescription'
-  - var ventureDescription = results.find(result => result.name === activityId)
-  - var form = ventureDescription ? {action: `/lti/form/update/${ventureDescription._id}`, data: ventureDescription.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var ventureDescriptionValue = results.find(result => result.name === activityId)
+  - var form = ventureDescriptionValue ? {action: `/lti/form/update/${ventureDescriptionValue._id}`, data: ventureDescriptionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
 div.activity-container#managementandorganizationplan

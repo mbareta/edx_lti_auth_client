@@ -119,3 +119,9 @@
 .activity-container .activity-description {
   margin-bottom: 12px;
 }
+
+.subdeliverable.tip,
+.activity-container .tip {
+  margin-left: 6%;
+  margin-right: 8%;
+}
