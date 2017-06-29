@@ -1,58 +1,66 @@
+- var financialPlan = getSubDeliverable('financialplan')
 h2.subdeliverable-title
-  span Financial Plan
-p.subdeliverable-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur ultricies nisi in semper. Nam sollicitudin facilisis augue et semper. Phasellus congue sem odio, varius ultrices nisl fermentum vel. Integer porttitor, tortor at aliquet efficitur, nisl tellus blandit nunc, quis malesuada leo metus in ex.
+  span= financialPlan.title
+p.subdeliverable-description!= financialPlan.description
 
 - var addActionLink = '/lti/form/submit/businessplan/financialplan'
+
+- var activityId = 'startupcosts'
+- var startupCosts = getActivity(activityId)
 div.activity-container#startupcosts
-  h3.activity-title Startup Costs
-  p.activity-description What are your estimated costs to start this business? Are these one-time costs (expenditures) or ongoing costs (expenses)?
+  h3.activity-title= startupCosts.title
+  p.activity-description!= startupCosts.description
 
-  - var activityId = 'startupcosts'
-  - var startupCosts = results.find(result => result.name === activityId)
-  - var form = startupCosts ? {action: `/lti/form/update/${startupCosts._id}`, data: startupCosts.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var startupCostsValue = results.find(result => result.name === activityId)
+  - var form = startupCostsValue ? {action: `/lti/form/update/${startupCostsValue._id}`, data: startupCostsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'salesprojections'
+- var salesProjections = getActivity(activityId)
 div.activity-container#salesprojections
-  h3.activity-title Sales Projections
-  p.activity-description What are your sales projections for the next three years? Where did you get the information to project financials? Are the projections reasonable?
+  h3.activity-title= salesProjections.title
+  p.activity-description!= salesProjections.description
 
-  - var activityId = 'salesprojections'
-  - var salesProjections = results.find(result => result.name === activityId)
-  - var form = salesProjections ? {action: `/lti/form/update/${salesProjections._id}`, data: v.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var salesProjectionsValue = results.find(result => result.name === activityId)
+  - var form = salesProjectionsValue ? {action: `/lti/form/update/${salesProjectionsValue._id}`, data: salesProjectionsValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'incomeprojections'
+- var incomeProjections = getActivity(activityId)
 div.activity-container#incomeprojections
-  h3.activity-title Income Projections
-  p.activity-description What are your net income projections for the next three years? When will your company be profitable?
+  h3.activity-title= incomeProjections.title
+  p.activity-description!= incomeProjections.description
 
-  - var activityId = 'incomeprojections'
-  - var incomeProjections = results.find(result => result.name === activityId)
-  - var form = incomeProjections ? {action: `/lti/form/update/${incomeProjections._id}`, data: incomeProjections.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var incomeProjectionsValue = results.find(result => result.name === activityId)
+  - var form = incomeProjectionsValue ? {action: `/lti/form/update/${incomeProjectionsValue._id}`, data: incomeProjectionsValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'cashrequirements'
+- var cashRequirements = getActivity(activityId)
 div.activity-container#cashrequirements
-  h3.activity-title Cash Requirements
-  p.activity-description How much cash will be required to cover startup costs, operations, and/or growth?
+  h3.activity-title= cashRequirements.title
+  p.activity-description!= cashRequirements.description
 
-  - var activityId = 'cashrequirements'
-  - var cashRequirements = results.find(result => result.name === activityId)
-  - var form = cashRequirements ? {action: `/lti/form/update/${cashRequirements._id}`, data: cashRequirements.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var cashRequirementsValue = results.find(result => result.name === activityId)
+  - var form = cashRequirementsValue ? {action: `/lti/form/update/${cashRequirementsValue._id}`, data: cashRequirementsValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'sourcesoffinancing'
+- var sourcesOfFinancing = getActivity(activityId)
 div.activity-container#sourcesoffinancing
-  h3.activity-title Sources of Financing
-  p.activity-description Based on cash requirements to start, maintain operations, and grow, will you seek debt or equity financing? How much is the cost of obtaining these funds?
+  h3.activity-title= sourcesOfFinancing.title
+  p.activity-description!= sourcesOfFinancing.description
 
-  - var activityId = 'sourcesoffinancing'
-  - var sourcesOfFinancing = results.find(result => result.name === activityId)
-  - var form = sourcesOfFinancing ? {action: `/lti/form/update/${sourcesOfFinancing._id}`, data: sourcesOfFinancing.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var sourcesOfFinancingValue = results.find(result => result.name === activityId)
+  - var form = sourcesOfFinancingValue ? {action: `/lti/form/update/${sourcesOfFinancingValue._id}`, data: sourcesOfFinancingValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'exitstrategy'
+- var exitStrategy = getActivity(activityId)
 div.activity-container#exitstrategy
-  h3.activity-title Exit Strategy
-  p.activity-description What is your overall plan for growth? How will this plan enable you to obtain a wealthy harvest upon exit? What are your specific plans for going public, selling the business, merging the business, or other?
+  h3.activity-title= exitStrategy.title
+  p.activity-description!= exitStrategy.description
 
-  - var activityId = 'exitstrategy'
-  - var exitStrategy = results.find(result => result.name === activityId)
-  - var form = exitStrategy ? {action: `/lti/form/update/${exitStrategy._id}`, data: exitStrategy.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var exitStrategyValue = results.find(result => result.name === activityId)
+  - var form = exitStrategyValue ? {action: `/lti/form/update/${exitStrategyValue._id}`, data: exitStrategyValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade

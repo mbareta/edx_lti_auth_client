@@ -1,86 +1,96 @@
+- var managementAndOrganizationPlan = getSubDeliverable('managementandorganizationplan')
 span#managementandorganizationplan
 h2.subdeliverable-title
-  span Management and Organization Plan
-p.subdeliverable-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur ultricies nisi in semper. Nam sollicitudin facilisis augue et semper. Phasellus congue sem odio, varius ultrices nisl fermentum vel. Integer porttitor, tortor at aliquet efficitur, nisl tellus blandit nunc, quis malesuada leo metus in ex. Sed lobortis auctor libero sed gravida. Pellentesque iaculis nisi orci, eu volutpat purus vulputate in. Morbi suscipit magna at velit blandit ultrices. Aenean viverra lectus eget aliquam euismod. Nullam vel pharetra libero, quis condimentum dolor. In egestas magna sed magna tempor, quis rutrum tellus ornare.
+  span= managementAndOrganizationPlan.title
+p.subdeliverable-description!= managementAndOrganizationPlan.description
 
+- var activityId = 'legalformofbusiness'
+- var legalFormOfBusiness = getActivity(activityId)
 - var addActionLink = '/lti/form/submit/businessplan/managementandorganizationplan'
 div.activity-container#legalformofbusiness
-  h3.activity-title Legal Form of Business
-  p.activity-description What legal form has been selected? What are the major reasons for this selection? What is the state of incorporation (corporations) or organization (LLCs)? In which states will it be necessary to be authorized to do business? Some legal forms allow for special elections for tax purposes. What, if any, tax treatment elections will you request?
+  h3.activity-title= legalFormOfBusiness.title
+  p.activity-description!= legalFormOfBusiness.description
 
-  - var activityId = 'legalformofbusiness'
-  - var legalFormOfBusiness = results.find(result => result.name === activityId)
-  - var form = legalFormOfBusiness ? {action: `/lti/form/update/${legalFormOfBusiness._id}`, data: legalFormOfBusiness.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var legalFormOfBusinessValue = results.find(result => result.name === activityId)
+  - var form = legalFormOfBusinessValue ? {action: `/lti/form/update/${legalFormOfBusinessValue._id}`, data: legalFormOfBusinessValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'managementteam'
+- var managementTeam = getActivity(activityId)
 div.activity-container#managementteam
-  h3.activity-title Management Team
-  p.activity-description What is the contribution of the entrepreneur? Who are the key management team members, and what are their job descriptions and prior experiences? What offices or titles, such as president or chief financial officer, will each hold? What experience and qualifications are desired for future management positions? When and how will these be filled?
+  h3.activity-title= managementTeam.title
+  p.activity-description!= managementTeam.description
 
-  - var activityId = 'managementteam'
-  - var managementTeam = results.find(result => result.name === activityId)
-  - var form = managementTeam ? {action: `/lti/form/update/${managementTeam._id}`, data: managementTeam.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var managementTeamValue = results.find(result => result.name === activityId)
+  - var form = managementTeamValue ? {action: `/lti/form/update/${managementTeamValue._id}`, data: managementTeamValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'advisoryboard'
+- var advisoryBoard = getActivity(activityId)
 div.activity-container#advisoryboard
-  h3.activity-title Board of Directors/Advisory Board
-  p.activity-description Who are the board of directors or advisory board members? Include names, compensation, and any ownership in the company. What are their qualifications related to the business?
+  h3.activity-title= advisoryBoard.title
+  p.activity-description!= advisoryBoard.description
 
-  - var activityId = 'advisoryboard'
-  - var advisoryBoard = results.find(result => result.name === activityId)
-  - var form = advisoryBoard ? {action: `/lti/form/update/${advisoryBoard._id}`, data: advisoryBoard.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var advisoryBoardValue = results.find(result => result.name === activityId)
+  - var form = advisoryBoardValue ? {action: `/lti/form/update/${advisoryBoardValue._id}`, data: advisoryBoardValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'recruitment'
+- var recruitment = getActivity(activityId)
 div.activity-container#recruitment
-  h3.activity-title Recruitment and Selection of Employees
-  p.activity-description What is your plan to find and hire self-motivated people for your business? What are the required qualifications, the duties to be performed, and the interview and hiring guidelines to be followed?
+  h3.activity-title= recruitment.title
+  p.activity-description!= recruitment.description
 
-  - var activityId = 'recruitment'
   - var recruitment = results.find(result => result.name === activityId)
-  - var form = recruitment ? {action: `/lti/form/update/${recruitment._id}`, data: recruitment.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var form = recruitmentValue ? {action: `/lti/form/update/${recruitmentValue._id}`, data: recruitmentValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'compensionandownership'
+- var compensionAndOwnership = getActivity(activityId)
 div.activity-container#compensionandownership
-  h3.activity-title Compension and Ownership
-  p.activity-description What is the compensation package for the entrepreneur and other key management team members? What are their salaries, benefits, and bonuses? What portion of the business is owned by the entrepreneur and management team?
+  h3.activity-title= compensionAndOwnership.title
+  p.activity-description!= compensionAndOwnership.description
 
-  - var activityId = 'compensionandownership'
-  - var compensionAndOwnership = results.find(result => result.name === activityId)
-  - var form = compensionAndOwnership ? {action: `/lti/form/update/${compensionAndOwnership._id}`, data: compensionAndOwnership.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var compensionAndOwnershipValue = results.find(result => result.name === activityId)
+  - var form = compensionAndOwnershipValue ? {action: `/lti/form/update/${compensionAndOwnershipValue._id}`, data: compensionAndOwnershipValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'incentiveplan'
+- var incentivePlan = getActivity(activityId)
 div.activity-container#incentiveplan
-  h3.activity-title Employee Reward and Incentive Plan
-  p.activity-description What system for employee rewards and incentives will be in effect? What is the incentive plan? Include special recognition awards, lump sum awards, bonuses, stock options, profit sharing, deferred compensation, commissions, teamwork, and flexible hours.
+  h3.activity-title= incentivePlan.title
+  p.activity-description!= incentivePlan.description
 
-  - var activityId = 'incentiveplan'
-  - var incentivePlan = results.find(result => result.name === 'activityId')
-  - var form = incentivePlan ? {action: `/lti/form/update/${incentivePlan._id}`, data: incentivePlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var incentivePlanValue = results.find(result => result.name === 'activityId')
+  - var form = incentivePlanValue ? {action: `/lti/form/update/${incentivePlanValue._id}`, data: incentivePlanValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'communication'
+- var communication = getActivity(activityId)
 div.activity-container#communication
-  h3.activity-title Communication
-  p.activity-description How will you communicate your business values and expectations? What system will you use to assure clarity of communication throughout your business?
+  h3.activity-title= communication.title
+  p.activity-description!= communication.description
 
-  - var activityId = 'communication'
-  - var communication = results.find(result => result.name === activityId)
-  - var form = communication ? {action: `/lti/form/update/${communication._id}`, data: communication.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var communicationValue = results.find(result => result.name === activityId)
+  - var form = communicationValue ? {action: `/lti/form/update/${communicationValue._id}`, data: communicationValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'infrastructure'
+- var infrastructure = getActivity(activityId)
 div.activity-container#infrastructure
-  h3.activity-title Infrastructure
-  p.activity-description Who are the key advisers? Include names and compensation of accountants, lawyers, bankers, and consultants. What expertise will they provide? Include strategic alliances, computer technology, management, marketing, and specialists in product or service issues.
+  h3.activity-title= infrastructure.title
+  p.activity-description!= infrastructure.description
 
-  - var activityId = 'infrastructure'
-  - var infrastructure = results.find(result => result.name === activityId)
-  - var form = infrastructure ? {action: `/lti/form/update/${infrastructure._id}`, data: infrastructure.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var infrastructureValue = results.find(result => result.name === activityId)
+  - var form = infrastructureValue ? {action: `/lti/form/update/${infrastructureValue._id}`, data: infrastructureValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'operationsplan'
+- var operationsPlan = getActivity(activityId)
 div.activity-container#operationsplan
-  h3.activity-title Operations Plan
-  p.activity-description What are the operational systems that are needed for your business to function smoothly?
+  h3.activity-title= operationsPlan.title
+  p.activity-description!= operationsPlan.description
 
-  - var activityId = 'operationsplan'
-  - var operationsPlan = results.find(result => result.name === activityId)
-  - var form = operationsPlan ? {action: `/lti/form/update/${operationsPlan._id}`, data: operationsPlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var operationsPlanValue = results.find(result => result.name === activityId)
+  - var form = operationsPlanValue ? {action: `/lti/form/update/${operationsPlanValue._id}`, data: operationsPlanValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
