@@ -5,7 +5,7 @@ block deliverable
     i.fa.fa-pie-chart.deliverable-icon
     h1.deliverable-title= getDeliverable('pitchdeck').title
 
-    p.deliverable-description= getDeliverable('pitchdeck').description
+    p.deliverable-description!= getDeliverable('pitchdeck').description
 
     div.activities-data
       h5.activities-data-title Activities:

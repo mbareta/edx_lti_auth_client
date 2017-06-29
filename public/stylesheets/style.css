@@ -165,3 +165,16 @@ body.preview .deliverable-container .activity-container .form {
   font-style: normal;
   font-weight: bold;
 }
+
+.tip.activity {
+  width: 86%;
+  margin-left: 6%;
+  margin-right: 8%;
+}
+
+.after-tip-content {
+  width: 100%;
+  margin-left: 6%;
+  margin-top: 11px;
+  margin-bottom: 11px;
+}

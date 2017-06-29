@@ -4,39 +4,42 @@ h2.subdeliverable-title
 p.subdeliverable-description!= executiveSummary.description
 
 - var addActionLink = '/lti/form/submit/businessplan/executivesummary'
-- var ventureDescription = getActivity('venturedescription')
+- var activityId = 'venturedescription'
+- var ventureDescription = getActivity(activityId)
 div.activity-container#venturedescription
   h3.activity-title= ventureDescription.title
   p.activity-description!= ventureDescription.description
 
-  - var activityId = 'venturedescription'
   - var ventureDescriptionValue = results.find(result => result.name === activityId)
   - var form = ventureDescriptionValue ? {action: `/lti/form/update/${ventureDescriptionValue._id}`, data: ventureDescriptionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'managementandorganizationplan'
+- var managementAndOrganizationPlan = getActivity(activityId)
 div.activity-container#managementandorganizationplan
-  h3.activity-title Management and Organization Plan
-  p.activity-description What form of organization does the business operate under, and why? Who are the key management team members and what skills do they have to help the business? Who are the key support groups for your management team, including accountants, attorneys, consultants, board of directors, and advisory board members?
+  h3.activity-title= managementAndOrganizationPlan.title
+  p.activity-description!= managementAndOrganizationPlan.description
 
-  - var activityId = 'managementandorganizationplan'
-  - var managementAndOrganizationPlan = results.find(result => result.name === activityId)
-  - var form = managementAndOrganizationPlan ? {action: `/lti/form/update/${managementAndOrganizationPlan._id}`, data: managementAndOrganizationPlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var managementAndOrganizationPlanValue = results.find(result => result.name === activityId)
+  - var form = managementAndOrganizationPlanValue ? {action: `/lti/form/update/${managementAndOrganizationPlanValue._id}`, data: managementAndOrganizationPlanValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'marketingplan'
+- var marketingPlan = getActivity(activityId)
 div.activity-container#marketingplan
-  h3.activity-title Marketing Plan
-  p.activity-description What is the market like in terms of the industry, the customer, customer needs, product benefits, the venture’s target markets, and the market penetration plan? Who are the major competitors, and what are their strengths and weaknesses? What are your market penetration plans? Include specific facts and figures from your market research.
+  h3.activity-title= marketingPlan.title
+  p.activity-description!= marketingPlan.description
 
-  - var activityId = 'marketingplan'
-  - var marketingPlan = results.find(result => result.name === activityId)
-  - var form = marketingPlan ? {action: `/lti/form/update/${marketingPlan._id}`, data: marketingPlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var marketingPlanValue = results.find(result => result.name === activityId)
+  - var form = marketingPlanValue ? {action: `/lti/form/update/${marketingPlanValue._id}`, data: marketingPlanValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
 
+- var activityId = 'financialplan'
+- var financialPlan = getActivity(activityId)
 div.activity-container#financialplan
-  h3.activity-title Financial Plan
-  p.activity-description What will it cost to start this business? What are the projections for sales and net profit? How much cash will be needed to start and operate this business? What sources of financing have been, and will be, sought? How much money has been contributed by the entrepreneur? What is your exit strategy?
+  h3.activity-title= financialPlan.title
+  p.activity-description!= financialPlan.description
 
-  - var activityId = 'financialplan'
-  - var financialPlan = results.find(result => result.name === activityId)
-  - var form = financialPlan ? {action: `/lti/form/update/${financialPlan._id}`, data: financialPlan.data} : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var financialPlanValue = results.find(result => result.name === activityId)
+  - var form = financialPlanValue ? {action: `/lti/form/update/${financialPlanValue._id}`, data: financialPlanValue.data} : {action: `${addActionLink}/${activityId}`, data: '' }
   include ../form/form.jade
