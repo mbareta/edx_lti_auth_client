@@ -4,7 +4,7 @@ block content
     - if(activity) {
         div.activity-container
         h3.activity-title= getActivity(activity.name).title
-        p.activity-description= getActivity(activity.name).description
+        p.activity-description!= getActivity(activity.name).description
     - }
 
     - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
