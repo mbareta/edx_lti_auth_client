@@ -36,9 +36,10 @@
 .deliverable {
   height: 55%;
   margin-left: 12px;
+  margin-right: 12px;
 }
 
-.deliverable p {
+.deliverable .short-description {
   color: #757575;
 }
 
