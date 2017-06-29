@@ -56,13 +56,26 @@ script
 
       function onEditorSubmit(event) {
         event.preventDefault()
+
         const form = event.target
         const modal = form.querySelector('.confirm-modal-wrapper')
         const successModal = form.querySelector('.success-modal-wrapper')
         const confirmButton = form.querySelector('.confirm-button')
         const cancelButton = form.querySelector('.cancel-button')
 
-        confirmButton.addEventListener('click', () => {
+        confirmButton.addEventListener('click', saveResponse)
+
+        cancelButton.addEventListener('click', cancelHandler)
+
+        modal.classList.remove('hidden')
+
+        function cancelHandler() {
+          modal.classList.add('hidden')
+          confirmButton.removeEventListener('click', saveResponse)
+          cancelButton.removeEventListener('click', cancelHandler)
+        }
+
+        function saveResponse() {
           const xhr = new XMLHttpRequest()
 
           xhr.onreadystatechange = () => {
@@ -71,6 +84,8 @@ script
                 modal.classList.add('hidden')
                 successModal.classList.remove('hidden')
                 setTimeout(() => successModal.classList.add('hidden'), 3000)
+                confirmButton.removeEventListener('click', saveResponse)
+                cancelButton.removeEventListener('click', cancelHandler)
               } else {
                 throw new Error(xhr, xhr.status)
               }
@@ -84,13 +99,7 @@ script
           xhr.open('POST', form.action, true)
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify({ data: form.querySelector('textarea').value }))
-        })
-
-        cancelButton.addEventListener('click', () => {
-          modal.classList.add('hidden')
-        })
-
-        modal.classList.remove('hidden')
+        }
       }
 
       function resetEditor() {

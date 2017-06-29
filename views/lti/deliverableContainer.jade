@@ -38,11 +38,7 @@ block content
 
         forms.forEach(form => {
           const resetButton = form.querySelector('.reset-button-wrapper')
-          const saveButton = form.querySelector('.save-button-wrapper')
 
-          saveButton.addEventListener('click', () => {
-            form.querySelector('input[type="submit"]').click()
-          })
           form.addEventListener('submit', onEditorSubmit)
           resetButton.addEventListener('click', resetEditor)
         })

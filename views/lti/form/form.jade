@@ -21,7 +21,6 @@
           | Your changes are now saved across all your courses.
 
     textarea(type='editor', name='data', class='editor', id=form.action, rows='10', cols='80')= form.data
-    input.hidden(type='submit')
     div.form-control-container
       unless isLtiSession
         - var block = blocks && blocks.find(block => block.launch_url.indexOf(activityId) > 0)
