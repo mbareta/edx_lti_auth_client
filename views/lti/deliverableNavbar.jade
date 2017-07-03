@@ -11,7 +11,7 @@ div.deliverable-navbar
 
   div.deliverable-navbar-content
     ul.deliverable-content-list
-      - if (type !== 'businessmodelcanvas' && type !== 'pitchdeck') {
+      - if (type !== 'businessmodelcanvas' && type !== 'pitchdeck' && type!== 'financialforecast') {
         - var subDeliverables = deliverableContentTree[type].subDeliverables
         - for (var subDeliverable in subDeliverables) {
             div.navSubType

@@ -1,3 +1,4 @@
+- var financialForecastDefault = getSubDeliverable('financialforecastdefault')
 h2.subdeliverable-title
-  span Financial Forecast Download
-p.subdeliverable-description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur ultricies nisi in semper. Nam sollicitudin facilisis augue et semper. Phasellus congue sem odio, varius ultrices nisl fermentum vel. Integer porttitor, tortor at aliquet efficitur, nisl tellus blandit nunc, quis malesuada leo metus in ex.
+  span= financialForecastDefault.title
+p.subdeliverable-description!= financialForecastDefault.description
