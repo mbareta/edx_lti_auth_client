@@ -112,6 +112,10 @@ body.preview .preview-banner .message {
   font-weight: bold;
 }
 
+body.preview .preview-mode-title a {
+  color: white;
+}
+
 body.preview .preview-banner span {
   text-transform: uppercase;
   color: white;

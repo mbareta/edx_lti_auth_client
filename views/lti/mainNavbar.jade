@@ -11,8 +11,9 @@ div.main-navbar
   div.preview-banner
     i.message You are currently in preview mode.
     span.preview-mode-title
-      i.fa.fa-download
-      = 'Download'
+      a(href='/lti/deliverables/#{deliverable}/download')
+        i.fa.fa-download
+        = 'Download'
     span#edit-mode-button.preview-mode-title
       i.fa.fa-edit
       = 'Edit Mode'

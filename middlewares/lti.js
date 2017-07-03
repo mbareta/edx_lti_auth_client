@@ -3,7 +3,15 @@ const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
-const { getDeliverable, getSubDeliverable, getActivity, getPathToActivity, deliverableContentTree } = require('../lib/contentProvider');
+const htmlToRtf = require('../lib/exportContent');
+const {
+  getDeliverable,
+  getSubDeliverable,
+  getActivity,
+  getPathToActivity,
+  deliverableContentTree,
+  getDeliverableContent
+} = require('../lib/contentProvider');
 
 const componentLocation = 'lti';
 
@@ -14,7 +22,7 @@ const validateLtiRequest = (req, res, next) => {
       req.session.lti = getUserDataFromLtiAndReq(ltiProvider, req);
       next();
     } else {
-      throw new Error('Invalid LTI request.')
+      throw new Error('Invalid LTI request.');
     }
   });
 };
@@ -34,16 +42,14 @@ const renderUserResponse = (req, res, next) => {
   const name = req.params.name;
   const { blocks } = req.session;
 
-  responsesRepository
-    .getResponseByEmail(name, email)
-    .then(response =>
-      res.render(`${componentLocation}/activity`, {
-        activity: response,
-        createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
-        getActivity,
-        blocks
-      })
-    );
+  responsesRepository.getResponseByEmail(name, email).then(response =>
+    res.render(`${componentLocation}/activity`, {
+      activity: response,
+      createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
+      getActivity,
+      blocks
+    })
+  );
 };
 
 const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
@@ -94,17 +100,14 @@ const addResponse = (req, res) => {
     lti: req.session.lti || {}
   };
 
-  responsesRepository
-    .upsert(formResponse)
-    .then(() => res.sendStatus(200));
+  responsesRepository.upsert(formResponse).then(() => res.sendStatus(200));
 };
 
 const saveResponseOnFirstVisit = (req, res, next) => {
   const { name } = req.params;
   const email = getEmail(req);
 
-  responsesRepository.getResponseByEmail(name, email)
-  .then(response => {
+  responsesRepository.getResponseByEmail(name, email).then(response => {
     if (!response) {
       const { deliverable, subDeliverable } = getPathToActivity(name);
       const formResponse = {
@@ -117,13 +120,11 @@ const saveResponseOnFirstVisit = (req, res, next) => {
         lti: req.session.lti || {}
       };
 
-      responsesRepository
-        .upsert(formResponse)
-        .then(() => next());
+      responsesRepository.upsert(formResponse).then(() => next());
     } else {
       next();
     }
-  })
+  });
 };
 
 const updateResponse = (req, res) => {
@@ -163,6 +164,20 @@ const gradeResponse = (req, res) => {
     })
     .then(formResponse => responsesRepository.updateResponse(formResponse))
     .then(() => res.redirect(`/${componentLocation}`));
+};
+
+const serveDeliverableAsRtf = (req, res) => {
+  const { type } = req.params;
+  const email = getEmail(req);
+
+  responsesRepository
+    .getDeliverableByType(email, type)
+    .then(deliverableData => getDeliverableContent(type, deliverableData))
+    .then(content => {
+      res.setHeader('Content-Type', 'application/rtf');
+      res.setHeader('Content-Disposition', `attachment; filename=${type}.rtf`);
+      res.send(htmlToRtf(content));
+    });
 };
 
 function getUserDataFromLtiAndReq(ltiProvider, req) {
@@ -214,5 +229,6 @@ module.exports = {
   updateResponse,
   addResponse,
   gradeResponse,
-  saveResponseOnFirstVisit
+  saveResponseOnFirstVisit,
+  serveDeliverableAsRtf
 };

@@ -5,6 +5,7 @@ if (!Object.prototype.values) {
     { values: require('object.values') } // eslint-disable-line global-require
   );
 }
+global.Promise = require('bluebird');
 
 const express = require('express');
 const path = require('path');
