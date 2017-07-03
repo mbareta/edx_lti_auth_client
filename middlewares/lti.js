@@ -32,6 +32,7 @@ const renderUserResponses = (req, res) => {
 const renderUserResponse = (req, res, next) => {
   const email = getEmail(req);
   const name = req.params.name;
+  const { blocks } = req.session;
 
   responsesRepository
     .getResponseByEmail(name, email)
@@ -40,7 +41,7 @@ const renderUserResponse = (req, res, next) => {
         activity: response,
         createLink: `/lti/form/submit/${response.type}/${response.subType}/${response.name}`,
         getActivity,
-        blocks: req.session.blocks
+        blocks
       })
     );
 };
