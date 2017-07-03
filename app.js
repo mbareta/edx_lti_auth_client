@@ -26,8 +26,7 @@ const {
   excludesRequestRoute,
   skipWhitelistedRoutes,
   intercept,
-  getEmailFromSession,
-  isLtiSession
+  getEmailFromSession
 } = require('./lib/helpers');
 
 
@@ -61,7 +60,6 @@ app.use(skipWhitelistedRoutes(redirectAnonymous));
 
 app.use((req, _, next) => {
   app.locals.email = req.email = getEmailFromSession(req);
-  app.locals.isLtiSession = !!isLtiSession(req);
   next();
 });
 

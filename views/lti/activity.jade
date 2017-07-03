@@ -8,6 +8,7 @@ block content
     - }
 
     - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
+    - var hideViewInCourse = true;
     include ./form/form.jade
     include editorMethods
 
