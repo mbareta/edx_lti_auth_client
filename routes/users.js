@@ -15,7 +15,7 @@ const { authorize, storeAccessToken, logout } = require('edx-oauth-middleware').
 
 router.get('/auth', authorize);
 
-router.get('/login', storeAccessToken, cacheUserXBlocks, getUserInfo);
+router.get('/login', storeAccessToken, getUserInfo, cacheUserXBlocks);
 
 router.get('/logout', logout);
 
