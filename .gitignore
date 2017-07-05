@@ -30,5 +30,6 @@ benchmarks/graphs
 
 # Assets
 public/assets/*
+!public/assets/spreadsheets
 !public/assets/images
 !public/assets/ckeditor
