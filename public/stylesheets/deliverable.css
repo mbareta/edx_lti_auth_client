@@ -105,9 +105,13 @@
   margin-top: 2%;
 }
 
+.activity-container:last-of-type {
+  margin-bottom: 60px;
+}
+
 .deliverable-container .activity-container {
   width: 100%;
-  margin: 0 8%;
+  margin-left: 8%;
 }
 
 .activity-title {

@@ -7,6 +7,7 @@ html
     script(defer=true, src='https://code.getmdl.io/1.3.0/material.min.js')
     link(rel='stylesheet', href='/assets/font-awesome/css/font-awesome.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/footer.css')
     link(rel='stylesheet', href='/stylesheets/lti.css')
     link(rel='stylesheet', href='/stylesheets/deliverable.css')
     link(rel='stylesheet', href='/stylesheets/deliverableNavbar.css')
@@ -48,3 +49,15 @@ html
       main.workspace-content
         #content.page-content
           block content
+
+      div.wrapper.wrapper-footer
+        footer#footer-openedx.grid-container
+          div.colophon
+            p.copyright @ 2017 Ewing Marion Kauffman Foundation All Rights Reserved
+            div.footer-link
+              a(href=`${config.lmsUrl}\/terms`) Privacy policy/terms of use
+            div.footer-link
+              a(href='http://www.kauffman.org') Kauffman foundation
+            div.footer-link
+              a(href='mailto:info@fasttrac.org') Contact us
+          div.background-pattern

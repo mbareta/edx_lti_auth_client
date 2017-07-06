@@ -182,3 +182,7 @@ body.preview .deliverable-container .activity-container .form {
   margin-top: 11px;
   margin-bottom: 11px;
 }
+
+.activity-image {
+  width: 100%;
+}
