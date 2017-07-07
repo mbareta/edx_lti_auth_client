@@ -18,6 +18,14 @@
   transition: all 0.1s;
 }
 
+.deliverable-container .tool-features {
+  border: 1px solid #e3e3e3
+}
+
+.deliverable-container .tool-features p {
+  margin: 11px;
+}
+
 .deliverable-title,
 .activities-data-title,
 .solved-activity-count,
@@ -112,11 +120,17 @@
 .deliverable-container .activity-container {
   width: 100%;
   margin-left: 8%;
+  margin-right: 8%;
 }
 
 .activity-title {
   font-size: 22px;
   margin-bottom: 12px;
+}
+
+.activity-container ul {
+  margin-left: 2%;
+  margin-bottom: 16px;
 }
 
 /* This applies to the activities rendered in the courseware */

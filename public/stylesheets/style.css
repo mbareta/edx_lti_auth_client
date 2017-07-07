@@ -137,6 +137,14 @@ body.preview .deliverable-container .activity-container .form {
   margin-left: -0.8%;
 }
 
+body.preview .deliverable-container .tip,
+body.preview .deliverable-container .tool-features,
+body.preview .deliverable-container .activity-description-list,
+body.preview .deliverable-container .after-tip-content,
+body.preview .deliverable-container .activity-description {
+  display: none;
+}
+
 .tip {
   display: table;
   position: relative;
