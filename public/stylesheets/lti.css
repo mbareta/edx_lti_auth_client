@@ -77,7 +77,30 @@
 .deliverables-container .activities p {
   position: relative;
   top: 5px;
-  margin-left: 12px;
+  margin-left: 22px;
+  margin-bottom: 0;
+}
+
+.deliverables-container .activities .results-container {
+  position: relative;
+  top: 11px;
+  margin-left: 22px;
+  margin-bottom: 0;
+}
+
+.deliverables-container .activities .results {
+  padding-left: 6px;
+}
+
+.deliverables-container .activities .fa {
+  position: relative;
+  top: 6px;
+
+  font-size: 20px;
+}
+
+.deliverables-container .activities .deliverable-name {
+  padding-left: 27px;
 }
 
 /* Media queries */

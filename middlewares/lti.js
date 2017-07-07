@@ -4,6 +4,7 @@ const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
 const htmlToRtf = require('../lib/exportContent');
+const { getEmailFromRequest } = require('../lib/helpers');
 const {
   getDeliverable,
   getSubDeliverable,
@@ -28,7 +29,7 @@ const validateLtiRequest = (req, res, next) => {
 };
 
 const renderUserResponses = (req, res) => {
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
 
   responsesRepository
     .getResponsesByEmail(email)
@@ -38,7 +39,7 @@ const renderUserResponses = (req, res) => {
 };
 
 const renderUserResponse = (req, res, next) => {
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
   const name = req.params.name;
   const { blocks } = req.session;
 
@@ -56,18 +57,29 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
   req,
   res
 ) => {
-  const email = getEmail(req);
-  res.render(view, { email, deliverableContentTree });
+  const email = getEmailFromRequest(req);
+
+  responsesRepository.getResponsesByEmail(email)
+    .then(responses => {
+      const activitiesResults = Object.keys(deliverableContentTree)
+        .map(deliverable => ({
+          deliverable,
+          solvedActivities: responses.filter(response => response.type === deliverable).length,
+          totalActivities: getDeliverable(deliverable).activitiesCount
+        }));
+
+      res.render(view, { email, deliverableContentTree, activitiesResults });
+    });
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
 
 const renderUserDeliverable = (req, res) => {
   const { type } = req.params;
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
   const { blocks } = req.session;
 
   responsesRepository.getDeliverableByType(email, type).then(results => {
-    const activitiesTotalCount = deliverableContentTree[type].activitiesCount;
+    const activitiesTotalCount = getDeliverable(type).activitiesCount;
     const solvedActivitiesCount = results.filter(result => !!result.data)
       .length;
 
@@ -88,7 +100,7 @@ const renderUserDeliverable = (req, res) => {
 
 const addResponse = (req, res) => {
   const { name, type, subType } = req.params;
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
 
   const formResponse = {
     name,
@@ -105,7 +117,7 @@ const addResponse = (req, res) => {
 
 const saveResponseOnFirstVisit = (req, res, next) => {
   const { name } = req.params;
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
 
   responsesRepository.getResponseByEmail(name, email).then(response => {
     if (!response) {
@@ -168,7 +180,7 @@ const gradeResponse = (req, res) => {
 
 const serveDeliverableAsRtf = (req, res) => {
   const { type } = req.params;
-  const email = getEmail(req);
+  const email = getEmailFromRequest(req);
 
   responsesRepository
     .getDeliverableByType(email, type)
@@ -209,15 +221,6 @@ function getUserDataFromLtiAndReq(ltiProvider, req) {
     outcomeServiceUrl: service_url,
     outcomeServiceSourcedId: source_did
   };
-}
-
-// get email or throw error
-function getEmail(req) {
-  const email = req.email;
-  if (email) {
-    return email;
-  }
-  throw new Error('Not Authorized');
 }
 
 module.exports = {
