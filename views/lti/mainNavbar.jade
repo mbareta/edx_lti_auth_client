@@ -4,9 +4,11 @@ div.main-navbar
     i.fa.fa-long-arrow-left.main-navbar-btn-icon
 
   div.main-navbar-items
-    span#preview-button.preview-mode-title(href='#')
-      i.fa.fa-eye.preview-mode-icon
-      = 'Preview Mode'
+    - if (deliverable !== 'financialforecast') {
+      span#preview-button.preview-mode-title(href='#')
+        i.fa.fa-eye.preview-mode-icon
+        = 'Preview Mode'
+    - }
 
   div.preview-banner
     i.message You are currently in preview mode.
