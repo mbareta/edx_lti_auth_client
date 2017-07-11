@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUserInfo, cacheUserXBlocks, setUserCookies } = require('../middlewares/auth');
+const { getUserInfo, getUserProfile, cacheUserXBlocks } = require('../middlewares/auth');
 const config = require('../config/main');
 
 const router = express.Router();
@@ -15,7 +15,7 @@ const { authorize, storeAccessToken, logout } = require('edx-oauth-middleware').
 
 router.get('/auth', authorize);
 
-router.get('/login', storeAccessToken, getUserInfo, cacheUserXBlocks);
+router.get('/login', storeAccessToken, getUserInfo, getUserProfile, cacheUserXBlocks);
 
 router.get('/logout', logout);
 

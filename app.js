@@ -64,6 +64,7 @@ app.use(skipWhitelistedRoutes(redirectAnonymous));
 
 app.use((req, _, next) => {
   app.locals.email = req.email = getEmailFromSession(req);
+  app.locals.profile = req.session.profile;
   next();
 });
 

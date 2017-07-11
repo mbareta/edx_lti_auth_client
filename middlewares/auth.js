@@ -15,12 +15,28 @@ const getUserInfo = (req, res, next) => {
   request.getAsync(options)
   .then(response => {
     req.session.user = JSON.parse(response.body);
-    next();
   })
+  .then(next)
   .catch(error => res.send(`Access Token Error ${error.message}`));
 };
 
-const cacheUserXBlocks = (req, res, next) => {
+const getUserProfile = (req, res, next) => {
+  const accessToken = req.session.token.access_token;
+  const options = {
+    url: `${config.lmsUrl}/api/user/v1/accounts/${req.session.user.preferred_username}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  return request.getAsync(options)
+  .then(response => {
+    req.session.profile = JSON.parse(response.body);
+  })
+  .then(next);
+};
+
+const cacheUserXBlocks = (req, res) => {
   // cache all user blocks in session
   edxCourseApi.getAllUserBlocks(req)
   .then(blocks => { req.session.blocks = blocks; })
@@ -29,5 +45,6 @@ const cacheUserXBlocks = (req, res, next) => {
 
 module.exports = {
   getUserInfo,
+  getUserProfile,
   cacheUserXBlocks
 };

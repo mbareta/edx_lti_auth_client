@@ -50,8 +50,79 @@ header.workspace-navbar {
   background-color: white;
   border-bottom: 1px solid #ddd;
 
+  font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
+}
+
+.workspace-navbar .profile-menu {
+  max-width: 40px;
+  max-height: 47px;
+  border-radius: 10%;
+}
+
+.workspace-navbar .profile-menu .image-wrapper {
+  height: 89px;
+}
+
+.workspace-navbar .profile-menu .user-image-frame {
+  max-width: 40px;
+  border-radius: 10%;
+}
+
+.workspace-navbar .dropdown-menu {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  width: 160px;
+  height: 103px;
+
+  position: relative;
+  left: -102px;
+  top: -42px;
+
+  border: 1px solid rgb(200, 200, 200);
+  background: white;
+  z-index: 3;
+}
+
+.workspace-navbar .dropdown-menu.expanded {
+  display: flex;
+}
+
+ .workspace-navbar .orange-border {
+  display: block;
+  position: relative;
+  background: #f76b1c;
+  z-index: 5;
+  top: -7px;
+  height: 5px;
+  width: 40px;
+  right: -120px;
+}
+
+.workspace-navbar .dropdown-items {
+  display: flex;
+  flex: 0.9 0 1px;
+
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-content: space-around;
+
+  margin-left: 26px;
+  margin-top: -4px;
+}
+
+.workspace-navbar .dropdown-items a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #b5b5b5;
+  text-transform: capitalize;
+}
+
+.workspace-navbar .dropdown-items a:hover {
+  color: #3c3c3c;
 }
 
 .workspace-navbar .workspace-navbar-item {
@@ -72,8 +143,11 @@ header.workspace-navbar {
 
 .workspace-navbar .workspace-navbar-items {
   display: flex;
+  flex: 0.41 0 1px;
+  margin-right: 20px;
   width: 600px;
   justify-content: space-around;
+  align-items: center;
 }
 
 /* DELIVERABLE PREVIEW MODE */

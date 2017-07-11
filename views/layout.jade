@@ -41,8 +41,14 @@ html
           a.workspace-navbar-item(href=`${config.lmsUrl}\/dashboard`) My Courses
           a.workspace-navbar-item(href='/') Workspace
           if email
-            a.workspace-navbar-item(href='/users/logout')
-              = email
+            div.profile-menu
+              div.image-wrapper
+                img.user-image-frame(src=`${profile.profile_image.image_url_small}` alt='Profile image')
+              div.dropdown-menu
+                div.orange-border
+                div.dropdown-items
+                  a(href=`${config.lmsUrl}\/u\/${profile.username}`) Profile
+                  a(href=`/users/logout`) Sign Out
           else
             a.workspace-navbar-item(href='/users/auth') Log in
 
@@ -61,3 +67,15 @@ html
             div.footer-link
               a(href='mailto:info@fasttrac.org') Contact us
           div.background-pattern
+
+script
+  :babel
+    document.addEventListener('DOMContentLoaded', () => {
+      const profileMenuImage = document.querySelector('.image-wrapper')
+
+      profileMenuImage.addEventListener('click', () => {
+        const dropdown = document.querySelector('.profile-menu .dropdown-menu')
+
+        dropdown.classList.toggle('expanded')
+      })
+    })
