@@ -268,3 +268,10 @@ body.preview .deliverable-container .activity-description {
 .activity-image {
   width: 100%;
 }
+
+form div.cke_chrome {
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
