@@ -62,12 +62,12 @@ header.workspace-navbar {
 }
 
 .workspace-navbar .profile-menu .image-wrapper {
-  height: 89px;
+  position: relative;
 }
 
 .workspace-navbar .profile-menu .user-image-frame {
-  max-width: 40px;
-  border-radius: 10%;
+  width: 40px;
+  border-radius: 50%;
 }
 
 .workspace-navbar .dropdown-menu {
@@ -80,7 +80,7 @@ header.workspace-navbar {
 
   position: relative;
   left: -102px;
-  top: -42px;
+  top: 7px;
 
   border: 1px solid rgb(200, 200, 200);
   background: white;
