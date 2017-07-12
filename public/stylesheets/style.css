@@ -163,7 +163,8 @@ body.preview .activities-data,
 body.preview .cke_top,
 body.preview .reset-button-wrapper,
 body.preview .save-button-wrapper,
-body.preview #ckeditor-toolbar {
+body.preview #ckeditor-toolbar,
+body.preview .hide-in-preview {
   display: none;
 }
 
