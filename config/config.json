@@ -24,7 +24,9 @@
     },
     "cookieSecret": "fasttrac",
     "cookieMaxAge": 60000,
-    "whitelistRoutes": ["/users/auth", "/users/login"]
+    "whitelistRoutes": ["/users/auth", "/users/login"],
+    "googleAnalyticsAccount": "UA-97125166-1",
+    "bugmuncherApiKey": "cd9d0312a0c59b558394"
   },
   "production": {
     "username": "root",
@@ -51,6 +53,8 @@
     },
     "cookieSecret": "fasttrac",
     "cookieMaxAge": 60000,
-    "whitelistRoutes": ["/users/auth", "/users/login"]
+    "whitelistRoutes": ["/users/auth", "/users/login"],
+    "googleAnalyticsAccount": "UA-2096912-36",
+    "bugmuncherApiKey": "cd9d0312a0c59b558394"
   }
 }
