@@ -74,33 +74,35 @@
 }
 
 .deliverables-container .activities {
-  display: block;
+  display: flex;
   position: absolute;
   bottom: 0;
 
   width: 100%;
   height: 35%;
 
+  flex-flow: column nowrap;
+
   background-color: #FBFBFB;
   border-top: 1px solid #ebebeb;
 }
 
-.deliverables-container .activities p {
-  position: relative;
-  top: 5px;
+.deliverables-container .activities div {
+  padding-bottom: 6px;
+}
+
+.deliverables-container .activities p,
+.deliverables-container .activities .results-container {
   margin-left: 22px;
-  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.deliverables-container .activities p {
+  padding-top: 6px;
 }
 
 .deliverables-container .activities .results-container {
-  position: relative;
-  top: 11px;
-  margin-left: 22px;
   margin-bottom: 0;
-}
-
-.deliverables-container .activities .results {
-  padding-left: 6px;
 }
 
 .deliverables-container .activities .fa {
@@ -108,10 +110,6 @@
   top: 6px;
 
   font-size: 20px;
-}
-
-.deliverables-container .activities .deliverable-name {
-  padding-left: 27px;
 }
 
 /* Media queries */

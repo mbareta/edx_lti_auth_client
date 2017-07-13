@@ -7,6 +7,4 @@ div.deliverable-wrapper(data-deliverable-link=`/lti/deliverables/${key}`)
     p.title Activities
     - var deliverableResults = activitiesResults.find(result => result.deliverable === key)
     div.results-container
-      i.fa.fa-picture-o
       span.results= `${deliverableResults.solvedActivities} / ${deliverableResults.totalActivities}`
-      div.deliverable-name= deliverableContentTree[key].title
