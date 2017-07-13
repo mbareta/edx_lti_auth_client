@@ -35,9 +35,14 @@
 }
 
 .canvas-table .canvas-cell-header {
+  display: inline-flex;
   position: relative;
   top: 8px;
   left: 18px;
+
+  width: 70%;
+
+  flex-flow: row wrap;
 }
 
 .canvas-table .fa {
