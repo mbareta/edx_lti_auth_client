@@ -35,9 +35,28 @@
 }
 
 .canvas-table .canvas-cell-header {
+  display: inline-flex;
+  width: 77%;
+
   position: relative;
   top: 8px;
   left: 18px;
+}
+
+@media only screen
+  and (max-width: 1024px) {
+  .canvas-table .canvas-cell-header{
+    display: flex;
+    left: 6px;
+    font-size: 12px;
+  }
+}
+
+@media only screen
+  and (max-width: 768px) {
+  .canvas-table .canvas-cell-header{
+    font-size: 9px;
+  }
 }
 
 .canvas-table .fa {
