@@ -1,10 +1,17 @@
 div.deliverable-wrapper(data-deliverable-link=`/lti/deliverables/${key}`)
+  - var deliverable = getDeliverable(key)
   div.deliverable.deliverable-card
-    i.deliverable-icon(class=`${deliverableContentTree[key].icon}`)
-    h5.title= deliverableContentTree[key].title
-    p.short-description= deliverableContentTree[key].shortDescription ? `${deliverableContentTree[key].shortDescription.slice(0, 142)}${deliverableContentTree[key].shortDescription.length > 142 ? '...' : '' }` : ''
+    i.deliverable-icon(class=`${deliverable.icon}`)
+    h5.title= deliverable.title
+    - var shortDescriptionIsTooLong = deliverable.shortDescription && deliverable.shortDescription.length > 142;
+    - var shortDescription = shortDescriptionIsTooLong ? `${deliverable.shortDescription.slice(0, 142)}...` : deliverable.shortDescription
+    p.short-description= shortDescription
   div.activities
     p.title Activities
     - var deliverableResults = activitiesResults.find(result => result.deliverable === key)
     div.results-container
-      span.results= `${deliverableResults.solvedActivities} / ${deliverableResults.totalActivities}`
+      - if (key !== 'financialforecast') {
+        span.results= `${deliverableResults.solvedActivities} / ${deliverableResults.totalActivities}`
+      - } else {
+        span.results= deliverable.activityCounterReplacementText
+      - }

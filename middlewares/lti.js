@@ -68,7 +68,7 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
           totalActivities: getDeliverable(deliverable).activitiesCount
         }));
 
-      res.render(view, { email, deliverableContentTree, activitiesResults });
+      res.render(view, { email, getDeliverable, deliverableContentTree, activitiesResults });
     });
 };
 const renderUserDeliverables = renderUserDeliverablesCurried();
@@ -224,6 +224,7 @@ function getUserDataFromLtiAndReq(ltiProvider, req) {
 }
 
 module.exports = {
+  renderUserDeliverablesCurried,
   validateLtiRequest,
   renderUserResponses,
   renderUserResponse,
