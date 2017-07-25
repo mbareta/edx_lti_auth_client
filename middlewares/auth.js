@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request').defaults({ jar: true }));
 const config = require('../config/main');
 const edxCourseApi = require('../lib/edxCourseApi');

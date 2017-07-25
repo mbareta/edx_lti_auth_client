@@ -1,6 +1,3 @@
-'use strict';
-
-const Promise = require('bluebird');
 const mongoConnectionPool = require('../../lib/mongoConnectionPool');
 const ObjectId = require('mongodb').ObjectID;
 

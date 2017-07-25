@@ -10,9 +10,9 @@ const router = express.Router();
 
 router.get('/deliverables', renderUserDeliverables);
 
-router.get('/deliverables/:type', renderUserDeliverable);
-
-router.post('/deliverables/:type', validateLtiRequest, renderUserDeliverable);
+router.route('/deliverables/:type')
+  .get(renderUserDeliverable)
+  .post(validateLtiRequest, renderUserDeliverable);
 
 router.get('/deliverables/:type/download', serveDeliverableAsRtf);
 

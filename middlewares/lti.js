@@ -1,10 +1,8 @@
-/* eslint-disable */
-const Promise = require('bluebird');
 const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
 const htmlToRtf = require('../lib/exportContent');
-const { getEmailFromRequest } = require('../lib/helpers');
+const { getEmailFromRequest, getUserDataFromLtiAndReq } = require('../lib/helpers');
 const {
   getDeliverable,
   getSubDeliverable,
@@ -38,7 +36,7 @@ const renderUserResponses = (req, res) => {
     );
 };
 
-const renderUserResponse = (req, res, next) => {
+const renderUserResponse = (req, res) => {
   const email = getEmailFromRequest(req);
   const name = req.params.name;
   const { blocks } = req.session;
@@ -132,7 +130,7 @@ const saveResponseOnFirstVisit = (req, res, next) => {
         lti: req.session.lti || {}
       };
 
-      responsesRepository.upsert(formResponse).then(() => next());
+      responsesRepository.upsert(formResponse).then(next);
     } else {
       next();
     }
@@ -191,37 +189,6 @@ const serveDeliverableAsRtf = (req, res) => {
       res.send(htmlToRtf(content));
     });
 };
-
-function getUserDataFromLtiAndReq(ltiProvider, req) {
-  const {
-    userId,
-    username,
-    outcome_service: { service_url, source_did }
-  } = ltiProvider;
-  const {
-    body: { context_id, lis_person_contact_email_primary },
-    params: { name }
-  } = req;
-
-  if (userId === 'student') {
-    return {
-      email: 'studio@user',
-      username: 'studioUser',
-      id: 'studioUserId',
-      courseId: 'context_id',
-      outcomeServiceUrl: 'service_url',
-      outcomeServiceSourcedId: name
-    };
-  }
-  return {
-    email: lis_person_contact_email_primary,
-    username,
-    id: userId,
-    courseId: context_id,
-    outcomeServiceUrl: service_url,
-    outcomeServiceSourcedId: source_did
-  };
-}
 
 module.exports = {
   renderUserDeliverablesCurried,
