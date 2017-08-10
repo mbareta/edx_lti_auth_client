@@ -54,6 +54,10 @@
   cursor: pointer;
 }
 
+.main-navbar .preview-mode-title a {
+  margin-left: 1rem;
+}
+
 .main-navbar-items .preview-mode-icon {
   margin-right: 6px;
   align-self: center;

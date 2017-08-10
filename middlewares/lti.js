@@ -2,6 +2,7 @@ const ltiProvider = require('../lib/ltiProvider');
 const responsesRepository = require('../models/lti/responsesRepository');
 const outcomeServiceFactory = require('../lib/outcomeService');
 const htmlToRtf = require('../lib/exportContent');
+const wordExport = require('../lib/wordExport');
 const { getEmailFromRequest, getUserDataFromLtiAndReq } = require('../lib/helpers');
 const {
   getDeliverable,
@@ -9,7 +10,8 @@ const {
   getActivity,
   getPathToActivity,
   deliverableContentTree,
-  getDeliverableContent
+  getDeliverableContent,
+  getDeliverableContentTreeWithData
 } = require('../lib/contentProvider');
 
 const componentLocation = 'lti';
@@ -190,6 +192,38 @@ const serveDeliverableAsRtf = (req, res) => {
     });
 };
 
+const serveDeliverableAsWord = (req, res) => {
+  const { type } = req.params;
+  const email = getEmailFromRequest(req);
+
+  getDeliverableContentTreeWithData(email, type)
+  .then(deliverable => {
+    // prep the deliverable object
+    // convert object to array - we don't need the keys anyway
+    deliverable.subDeliverablesArray = Object.values(deliverable.subDeliverables);
+
+    deliverable.subDeliverablesArray.forEach(subDeliverable => {
+      // same as above, convert all activities to array
+      subDeliverable.activitiesArray = Object.values(subDeliverable.activities);
+
+      // remove HTML tags from user responses
+      subDeliverable.activitiesArray.forEach(activity => {
+        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '')
+      })
+    })
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename=${type}-${email}.docx`);
+    res.send(wordExport.render(deliverable));
+  })
+  .catch(err => {
+    res.send(err);
+  })
+
+
+
+}
+
 module.exports = {
   renderUserDeliverablesCurried,
   validateLtiRequest,
@@ -201,5 +235,6 @@ module.exports = {
   addResponse,
   gradeResponse,
   saveResponseOnFirstVisit,
-  serveDeliverableAsRtf
+  serveDeliverableAsRtf,
+  serveDeliverableAsWord
 };
