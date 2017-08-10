@@ -15,7 +15,10 @@ div.main-navbar
     span.preview-mode-title
       a(href='/lti/deliverables/#{deliverable}/download')
         i.fa.fa-download
-        = 'Download'
+        = 'Download RTF'
+      a(href='/lti/deliverables/#{deliverable}/downloadWord')
+        i.fa.fa-file-word-o
+        = 'Download DOCX'
     span#edit-mode-button.preview-mode-title
       i.fa.fa-edit
       = 'Edit Mode'

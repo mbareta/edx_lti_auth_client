@@ -36,6 +36,7 @@ const getUserProfile = (req, res, next) => {
 };
 
 const cacheUserXBlocks = (req, res) => {
+  return res.redirect('/');
   // cache all user blocks in session
   edxCourseApi.getAllUserBlocks(req)
   .then(blocks => { req.session.blocks = blocks; })
