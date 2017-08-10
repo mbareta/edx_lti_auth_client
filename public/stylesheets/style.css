@@ -78,7 +78,7 @@ header.workspace-navbar {
   justify-content: center;
 
   width: 160px;
-  height: 103px;
+  height: 142px;
 
   position: absolute;
   right: 17px;
@@ -106,11 +106,10 @@ header.workspace-navbar {
 
 .workspace-navbar .dropdown-items {
   display: flex;
-  flex: 0.9 0 1px;
+  flex: 0.9 0 54px;
 
   flex-flow: column nowrap;
   justify-content: space-around;
-  align-content: space-around;
 
   margin-left: 26px;
   margin-top: -4px;

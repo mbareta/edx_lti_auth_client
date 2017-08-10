@@ -63,6 +63,9 @@ html
                 div.orange-border
                 div.dropdown-items
                   a(href=`${config.lmsUrl}\/u\/${profile.username}`) Profile
+                  a(href=`${config.lmsUrl}\/affiliates\/new`) Add New Affiliate
+                  if profile.affiliate_slug
+                    a(href=`${config.lmsUrl}\/affiliates\/edit\/${profile.affiliate_slug}`) Edit Affiliate
                   a(href=`/users/logout`) Sign Out
           else
             a.workspace-navbar-item(href='/users/auth') Log in
