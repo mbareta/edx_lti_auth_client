@@ -9,7 +9,6 @@
     "start": "npm run postinstall && nodemon ./bin/www localhost 3000"
   },
   "dependencies": {
-    "angular-expressions": "^0.3.0",
     "babel-preset-env": "^1.4.0",
     "bluebird": "^3.5.0",
     "body-parser": "~1.16.0",
