@@ -63,8 +63,9 @@ html
                 div.orange-border
                 div.dropdown-items
                   a(href=`${config.lmsUrl}\/u\/${profile.username}`) Profile
-                  a(href=`${config.lmsUrl}\/affiliates\/new`) Add New Affiliate
-                  if profile.affiliate_slug
+                  if profile.is_staff
+                    a(href=`${config.lmsUrl}\/affiliates\/new`) Add New Affiliate
+                  if profile.affiliate_slug && profile.is_program_director_or_course_manager
                     a(href=`${config.lmsUrl}\/affiliates\/edit\/${profile.affiliate_slug}`) Edit Affiliate
                   a(href=`/users/logout`) Sign Out
           else
