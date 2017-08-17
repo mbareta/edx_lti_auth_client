@@ -78,7 +78,6 @@ header.workspace-navbar {
   justify-content: center;
 
   width: 160px;
-  height: 103px;
 
   position: absolute;
   right: 17px;
@@ -95,28 +94,31 @@ header.workspace-navbar {
 
  .workspace-navbar .orange-border {
   display: block;
-  position: relative;
-  background: #f76b1c;
-  z-index: 5;
-  top: -7px;
   height: 5px;
   width: 40px;
-  right: -120px;
+
+  position: absolute;
+  top: -3px;
+  right: 0;
+  z-index: 5;
+
+  background: #f76b1c;
 }
 
 .workspace-navbar .dropdown-items {
   display: flex;
-  flex: 0.9 0 1px;
 
   flex-flow: column nowrap;
-  justify-content: space-around;
-  align-content: space-around;
+  justify-content: space-evenly;
 
   margin-left: 26px;
-  margin-top: -4px;
 }
 
 .workspace-navbar .dropdown-items a {
+  display: flex;
+  align-items: center;
+  flex-basis: 38px;
+
   font-size: 16px;
   font-weight: 400;
   color: #b5b5b5;
