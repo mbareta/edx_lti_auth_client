@@ -208,21 +208,23 @@ const serveDeliverableAsWord = (req, res) => {
 
       // remove HTML tags from user responses
       subDeliverable.activitiesArray.forEach(activity => {
-        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '')
-      })
-    })
+        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '');
+      });
+    });
 
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', `attachment; filename=${type}-${email}.docx`);
-    res.send(wordExport.render(deliverable));
+
+    if (type === 'businessmodelcanvas') {
+      res.send(wordExport.render(deliverable, 'bmc.docx'));
+    } else {
+      res.send(wordExport.render(deliverable));
+    }
   })
   .catch(err => {
     res.send(err);
-  })
-
-
-
-}
+  });
+};
 
 module.exports = {
   renderUserDeliverablesCurried,

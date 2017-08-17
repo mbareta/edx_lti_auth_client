@@ -175,16 +175,16 @@ body.preview .hide-in-preview {
 }
 
 body.preview .preview-banner {
-  display: block;
+  display: flex;
   background: #FF9B5C;
   min-width: 100%;
   padding: 1rem;
-  margin: -3rem -1rem 0;
+  margin: -2rem -1rem 0;
 }
 
 body.preview .preview-banner .message {
   color: white;
-  width: 65%;
+  width: 60%;
   display: inline-block;
   text-align: left;
   margin-left: 5.52%;
