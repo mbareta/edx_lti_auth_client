@@ -208,7 +208,7 @@ const serveDeliverableAsWord = (req, res) => {
 
       // remove HTML tags from user responses
       subDeliverable.activitiesArray.forEach(activity => {
-        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '')
+        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '');
       });
     });
 
