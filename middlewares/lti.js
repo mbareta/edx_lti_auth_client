@@ -209,8 +209,8 @@ const serveDeliverableAsWord = (req, res) => {
       // remove HTML tags from user responses
       subDeliverable.activitiesArray.forEach(activity => {
         activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '')
-      })
-    })
+      });
+    });
 
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', `attachment; filename=${type}-${email}.docx`);
@@ -218,11 +218,8 @@ const serveDeliverableAsWord = (req, res) => {
   })
   .catch(err => {
     res.send(err);
-  })
-
-
-
-}
+  });
+};
 
 module.exports = {
   renderUserDeliverablesCurried,
