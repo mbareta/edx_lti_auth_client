@@ -13,6 +13,7 @@ const {
   getDeliverableContent,
   getDeliverableContentTreeWithData
 } = require('../lib/contentProvider');
+const { DELIVERABLES } = require('../lib/contentProvider/constants');
 
 const componentLocation = 'lti';
 
@@ -215,7 +216,7 @@ const serveDeliverableAsWord = (req, res) => {
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', `attachment; filename=${type}-${email}.docx`);
 
-    if (type === 'businessmodelcanvas') {
+    if (type === DELIVERABLES.BUSINESS_MODEL_CANVAS) {
       res.send(wordExport.render(deliverable, 'bmc.docx'));
     } else {
       res.send(wordExport.render(deliverable));
