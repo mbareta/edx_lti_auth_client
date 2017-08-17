@@ -214,6 +214,7 @@ const serveDeliverableAsWord = (req, res) => {
 
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     res.setHeader('Content-Disposition', `attachment; filename=${type}-${email}.docx`);
+
     res.send(wordExport.render(deliverable, 'bmc.docx'));
   })
   .catch(err => {
