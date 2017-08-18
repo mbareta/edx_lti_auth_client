@@ -17,6 +17,8 @@ html
     link(rel='preload' href='/assets/ckeditor/contents.css?t=H0CG' as='style')
     link(rel='stylesheet', href='/stylesheets/form.css')
 
+    include polyfills/forEach
+
     if config.bugmuncherApiKey
       script
         :babel
