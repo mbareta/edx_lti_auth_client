@@ -5,9 +5,16 @@
 .deliverables-container {
   width: 100%;
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .lti-dashboard .deliverable-wrapper {
@@ -23,13 +30,16 @@
     border: 1px solid #ddd;
 
     background-color: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.03);
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,0.03);
+            box-shadow: 0 0 15px rgba(0,0,0,0.03);
+    -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+    transition: -webkit-box-shadow 0.1s ease-in-out;
     transition: box-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
 }
 
 .deliverable-wrapper:hover {
     -webkit-box-shadow: 4px 4px 30px 5px rgba(0,0,0,0.06);
-    -moz-box-shadow: 4px 4px 30px 5px rgba(0,0,0,0.06);
     box-shadow: 4px 4px 30px 5px rgba(0,0,0,0.06);
 }
 
@@ -74,6 +84,8 @@
 }
 
 .deliverables-container .activities {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   position: absolute;
   bottom: 0;
@@ -81,7 +93,13 @@
   width: 100%;
   height: 35%;
 
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+
+  -webkit-box-direction: normal;
+
+      -ms-flex-flow: column nowrap;
+
+          flex-flow: column nowrap;
 
   background-color: #FBFBFB;
   border-top: 1px solid #ebebeb;

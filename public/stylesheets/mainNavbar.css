@@ -1,17 +1,30 @@
 .main-navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 72px;
   width: 100%;
 
-  align-items: center;
+  -webkit-box-align: center;
+
+      -ms-flex-align: center;
+
+          align-items: center;
 }
 
 .toggle-deliverable-navbar-btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   height: 100%;
   width: 52px;
 
-  align-items: center;
+  -webkit-box-align: center;
+
+      -ms-flex-align: center;
+
+          align-items: center;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(49%, #9F9A93), color-stop(50%, transparent));
   background: linear-gradient(to right bottom, #9F9A93 49%, transparent 50%);
 
   cursor: pointer;
@@ -38,10 +51,18 @@
 }
 
 .main-navbar-items {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   width: calc(100% - 52px - 8px);
 
-  flex-direction: row-reverse;
+  -webkit-box-orient: horizontal;
+
+  -webkit-box-direction: reverse;
+
+      -ms-flex-direction: row-reverse;
+
+          flex-direction: row-reverse;
   margin-left: 8px;
 
   font-size: 14px;
@@ -60,6 +81,7 @@
 
 .main-navbar-items .preview-mode-icon {
   margin-right: 6px;
-  align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
   color: #b5b5b5;
 }

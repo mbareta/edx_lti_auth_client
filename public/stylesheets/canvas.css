@@ -1,15 +1,27 @@
 .canvas-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-left: 6%;
   margin-right: 8%;
 }
 
 .canvas-control-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-bottom: 26px;
   margin-top: 12px;
 }
@@ -20,8 +32,13 @@
 }
 
 .canvas-table {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
   height: 742px;
   width: 100%;
   border: 1px solid #e5e5e5;
@@ -30,11 +47,14 @@
 .canvas-table .canvas-cell {
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: 1px solid #e5e5e5;
 }
 
 .canvas-table .canvas-cell-header {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   width: 77%;
 
@@ -46,6 +66,8 @@
 @media only screen
   and (max-width: 1024px) {
   .canvas-table .canvas-cell-header{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     left: 6px;
     font-size: 12px;
@@ -66,8 +88,11 @@
 }
 
 .canvas-container .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 
 .canvas-container .save-button-wrapper {
@@ -75,7 +100,9 @@
   height: 26px;
   width: 63px;
 
-  transform: skew(-24deg);
+  -webkit-transform: skew(-24deg);
+
+          transform: skew(-24deg);
   background-color: #F76B1C;
   text-align: center;
 
@@ -84,7 +111,8 @@
 
 .canvas-container .save-icon {
   color: white;
-  transform: skew(24deg);
+  -webkit-transform: skew(24deg);
+          transform: skew(24deg);
   padding-right: 7px;
   position: relative;
   top: 2px;
@@ -94,7 +122,8 @@
   position: relative;
   top: 2px;
   border: none;
-  transform: skew(24deg);
+  -webkit-transform: skew(24deg);
+          transform: skew(24deg);
 
   color: white;
   text-transform: uppercase;
@@ -130,8 +159,13 @@
 .canvas-table .row-7,
 .canvas-table .row-3,
 .canvas-table .row-5, {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
 }
 
 .canvas-table .row-7 {
@@ -148,8 +182,13 @@
 
 .canvas-table .column-2,
 .canvas-table .column-5 {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
-  flex-flow: column wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
 }
 
 .canvas-table .column-2 {

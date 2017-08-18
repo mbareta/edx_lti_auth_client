@@ -1,16 +1,22 @@
 .deliverable-navbar {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   width: 300px;
 
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+
+      flex-wrap: wrap;
   vertical-align: top;
+  -webkit-transition: all .1s;
   transition: all .1s;
 }
 
 .deliverable-navbar.closed,
 .deliverable-navbar.closed .deliverable-navbar-content {
   position: absolute;
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 .deliverable-navbar.closed .deliverable-content-list {
@@ -18,12 +24,22 @@
 }
 
 .deliverable-navbar-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 100%;
   width: 100%;
 
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+
+  -webkit-box-direction: normal;
+
+      -ms-flex-direction: column;
+
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 
   background: #50473D;
   text-transform: uppercase;
@@ -32,11 +48,19 @@
 }
 
 .deliverable-navbar-header h4 {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   width: 280px;
-  flex-direction: row;
-  align-self: center;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .deliverable-navbar-header h4,
@@ -58,7 +82,8 @@
 
 .deliverable-navbar-header .deliverable-header-icon {
   margin-right: 30px;
-  align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
   font-size: 17px;
   color: white;
 }
