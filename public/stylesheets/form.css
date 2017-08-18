@@ -27,7 +27,12 @@
   background-color: #F76B1C;
   text-align: center;
 
+  border: none;
   cursor: pointer;
+}
+
+.form-control-container .save-button-wrapper:focus {
+  outline: none;
 }
 
 .form-control-container .reset-button-wrapper {
@@ -84,6 +89,8 @@
 }
 
 .form-control-container .save-button {
+  display: inline-block;
+
   position: relative;
   top: 2px;
   border: none;
