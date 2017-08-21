@@ -132,7 +132,8 @@ const saveResponseOnFirstVisit = (req, res, next) => {
         lti: req.session.lti || {}
       };
 
-      responsesRepository.upsert(formResponse).then(next);
+      responsesRepository.upsert(formResponse)
+        .then(() => next());
     } else {
       next();
     }
