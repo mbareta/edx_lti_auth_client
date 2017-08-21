@@ -7,7 +7,7 @@ script
           if (editor.id.indexOf('canvas-') !== -1) {
             CKEDITOR.replace(editor.id, {
               extraPlugins: 'sharedspace',
-              removePlugins: 'resize',
+              removePlugins: 'resize, save',
               sharedSpaces: { top: 'ckeditor-toolbar' },
               on: {
                 key: canvasEditorOnKeyHandler
