@@ -186,7 +186,7 @@ header.workspace-navbar {
   display: flex;
 
   margin-right: 20px;
-  width: 600px;
+  width: 485px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;
