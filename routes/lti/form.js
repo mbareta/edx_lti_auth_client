@@ -6,6 +6,7 @@ const {
   updateResponse,
   gradeResponse,
   saveResponseOnFirstVisit,
+  updateResponsesEmail,
   validateLtiRequest
 } = require('../../middlewares/lti');
 

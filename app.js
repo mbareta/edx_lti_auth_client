@@ -22,6 +22,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const lti = require('./routes/lti/index');
 const ltiForm = require('./routes/lti/form');
+const apiResponses = require('./routes/api/responses');
 const { storeRequestOriginUrl, redirectAnonymous } = require('./middlewares/general');
 const {
   excludesRequestRoute,
@@ -72,6 +73,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/lti', lti);
 app.use('/lti/form', ltiForm);
+app.use('/api/responses', apiResponses);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
