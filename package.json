@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "cp -R node_modules/font-awesome/fonts ./public/assets/font-awesome && cp -R node_modules/font-awesome/css ./public/assets/font-awesome",
+    "fa-install": "cp -R node_modules/font-awesome/fonts ./public/assets/font-awesome && cp -R node_modules/font-awesome/css ./public/assets/font-awesome",
+    "postinstall": "npm run fa-install",
     "check": "flow; test $? -eq 0 -o $? -eq 2",
     "dev": "nodemon --inspect=5555 ./bin/www localhost 3000",
-    "start": "npm run postinstall && nodemon ./bin/www localhost 3000"
+    "start": "nodemon ./bin/www localhost 3000"
   },
   "dependencies": {
     "angular-expressions": "^0.3.0",
@@ -48,6 +49,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.41.0",
+    "husky": "^0.14.3",
     "locus": "^2.0.1"
   }
 }
