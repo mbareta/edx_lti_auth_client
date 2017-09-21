@@ -3,7 +3,6 @@
     "mongoUrl": "mongodb://localhost:27017/",
     "baseUrl": "http://localhost:3000",
     "lmsUrl": "http://localhost:8000",
-    "studioUrl": "http://localhost:8001",
     "cookieDomain": "http://localhost/",
     "client": {
       "id": "id",
@@ -22,20 +21,20 @@
     "cookieMaxAge": 60000,
     "whitelistRoutes": ["/users/auth", "/users/login"],
     "googleAnalyticsAccount": "UA-97125166-1",
-    "bugmuncherApiKey": "cd9d0312a0c59b558394"
+    "bugmuncherApiKey": "cd9d0312a0c59b558394",
+    "redisUrl": "//localhost:6379"
   },
   "production": {
-    "mongoUrl": "mongodb://localhost:27017/",
-    "baseUrl": "http://52.90.208.190:3000",
-    "lmsUrl": "http://52.90.208.190",
-    "studioUrl": "http://52.90.208.190:18010",
-    "cookieDomain": "http://52.90.208.190/",
+    "mongoUrl": "mongodb://production-mongo:27017/",
+    "baseUrl": "http://fasttrac-production-elb-work-1897064952.us-west-2.elb.amazonaws.com",
+    "lmsUrl": "http://fasttrac-production-elb-edx-738763844.us-west-2.elb.amazonaws.com",
+    "cookieDomain": "http://fasttrac-production-elb-edx-738763844.us-west-2.elb.amazonaws.com",
     "client": {
       "id": "id",
       "secret": "secret"
     },
     "auth": {
-      "tokenHost": "http://52.90.208.190",
+      "tokenHost": "http://fasttrac-production-elb-edx-738763844.us-west-2.elb.amazonaws.com",
       "authorizePath": "/oauth2/authorize",
       "tokenPath": "/oauth2/access_token/"
     },
@@ -47,6 +46,7 @@
     "cookieMaxAge": 60000,
     "whitelistRoutes": ["/users/auth", "/users/login"],
     "googleAnalyticsAccount": "UA-2096912-36",
-    "bugmuncherApiKey": "cd9d0312a0c59b558394"
+    "bugmuncherApiKey": "cd9d0312a0c59b558394",
+    "redisUrl": "//production-redis:6379"
   }
 }

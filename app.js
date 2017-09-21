@@ -54,7 +54,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: config.cookieSecret,
   cookie: { maxAge: config.cookieMaxAge },
-  store: new RedisStore()
+  store: new RedisStore({
+    url: config.redisUrl
+  })
 }));
 
 const ignoreOnRedirectRoutes = (['/users/auth', '/users/login', '/users/excludesRequestRoutelogout', '/favicon.ico']);
