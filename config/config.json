@@ -1,10 +1,6 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "fullstack",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "mongoUrl": "mongodb://localhost:27017/",
     "baseUrl": "http://localhost:3000",
     "lmsUrl": "http://localhost:8000",
     "studioUrl": "http://localhost:8001",
@@ -29,11 +25,7 @@
     "bugmuncherApiKey": "cd9d0312a0c59b558394"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "mongoUrl": "mongodb://localhost:27017/",
     "baseUrl": "http://52.90.208.190:3000",
     "lmsUrl": "http://52.90.208.190",
     "studioUrl": "http://52.90.208.190:18010",
