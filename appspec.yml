@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /opt/fast-deploy/apps/surveygizmo-dashboard/
+    destination: /opt/fast-deploy/apps/workspace/
     owner: fast-deploy
 permissions:
   - object: /opt/fast-deploy
