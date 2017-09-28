@@ -26,13 +26,13 @@
   "production": {
     "mongoUrl": "mongodb://production-mongo:27017/",
     "baseUrl": "https://workspace.fasttrac.org",
-    "lmsUrl": "https://courses.fasttrac.org",
+    "lmsUrl": "https://learn.fasttrac.org",
     "client": {
       "id": "id",
       "secret": "secret"
     },
     "auth": {
-      "tokenHost": "https://courses.fasttrac.org",
+      "tokenHost": "https://learn.fasttrac.org",
       "authorizePath": "/oauth2/authorize",
       "tokenPath": "/oauth2/access_token/"
     },
