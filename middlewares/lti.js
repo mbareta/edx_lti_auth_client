@@ -64,7 +64,9 @@ const renderUserDeliverablesCurried = (view = 'lti/deliverables') => (
       const activitiesResults = Object.keys(deliverableContentTree)
         .map(deliverable => ({
           deliverable,
-          solvedActivities: responses.filter(response => response.type === deliverable).length,
+          solvedActivities: responses.filter(
+            ({ type, data }) => type === deliverable && data
+          ).length,
           totalActivities: getDeliverable(deliverable).activitiesCount
         }));
 
