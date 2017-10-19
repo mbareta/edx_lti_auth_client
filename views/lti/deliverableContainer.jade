@@ -33,7 +33,8 @@ block content
           }
         })
 
-        initializeCKEditor()
+        const isBmc = `#{deliverable}` === 'businessmodelcanvas'
+        initializeCKEditor(isBmc)
 
         const forms = document.querySelectorAll('.activity-form')
 

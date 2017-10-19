@@ -199,3 +199,30 @@
 input.hidden {
   display: none;
 }
+
+.cke_notification.cke_notification_warning {
+  position: fixed;
+  width: 600px;
+  height: 40px;
+  background: red;
+  top: 6px;
+  left: 0;
+  right: 0;
+  transform: translate(75%, 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 3px;
+}
+
+.cke_notification_message {
+  margin: 0;
+  color: white;
+}
+
+.cke_notification_close {
+  position: absolute;
+  right: 20px;
+  color: white;
+}

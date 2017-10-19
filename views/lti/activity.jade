@@ -24,5 +24,7 @@ block content
         })
         form.addEventListener('submit', onEditorSubmit)
         resetButton.addEventListener('click', resetEditor)
-        initializeCKEditor()
+
+        const isBmc = #{activity.type} === 'businessmodelcanvas'
+        initializeCKEditor(isBmc)
       })

@@ -72,7 +72,7 @@ div.canvas-container
             span.canvas-cell-header= distributionChannels.title
             - var activityId = 'distributionchannels'
             - var distributionChannelsValue = results.find(result => result.name === activityId)
-            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } :   {action: `${addActionLink}/${activityId}`, data: '' }
+            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
             include ../form/canvas.jade
 
       div.column-2
