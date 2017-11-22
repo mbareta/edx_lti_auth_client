@@ -82,17 +82,59 @@ html
         #content.page-content
           block content
 
-      div.wrapper.wrapper-footer
+      .wrapper.wrapper-footer
         footer#footer-openedx.grid-container
-          div.colophon
-            p.copyright @ 2017 Ewing Marion Kauffman Foundation All Rights Reserved
-            div.footer-link
-              a(href=`${config.lmsUrl}\/terms`) Privacy policy/terms of use
-            div.footer-link
-              a(href='http://www.kauffman.org') Kauffman foundation
-            div.footer-link
-              a(href='mailto:info@fasttrac.org') Contact us
-          div.background-pattern
+          section#mk-footer(role='contentinfo', itemscope='itemscope', itemtype='https://schema.org/WPFooter')
+            .footer-wrapper.mk-grid
+              .mk-padding-wrapper
+                .mk-col-1-4
+                  section#custom_html-2.widget_text.widget.widget_custom_html.mk-in-viewport
+                    .widgettitle Explore FastTrac
+                    .textwidget.custom-html-widget
+                      ul
+                        li
+                          a(href='http://fasttrac.org/must-reads/') Must Reads
+                        li
+                          a(href='http://fasttrac.org/success-stories/') Success Stories
+                        li
+                          a(href='http://fasttrac.org/why-fasttrac/') Why FastTrac?
+                .mk-col-1-4
+                  section#custom_html-3.widget_text.widget.widget_custom_html.mk-in-viewport
+                    .widgettitle Start FastTrac
+                    .textwidget.custom-html-widget
+                      ul
+                        li
+                          a(href=`${config.lmsUrl}\/register`) Register
+                        li
+                          a(href=`${config.lmsUrl}\/courses`) Find a Course
+                        li
+                          a(href=`${config.lmsUrl}\/affiliates`) Find an Affiliate
+                .mk-col-1-4
+                  section#custom_html-4.widget_text.widget.widget_custom_html.mk-in-viewport
+                    .widgettitle Offer FastTrac
+                    .textwidget.custom-html-widget
+                      ul
+                        li
+                          a(href='http://fasttrac.org/why-offer-fasttrac/') Why Become an Affiliate?
+                        li
+                          a(href='http://www.surveygizmo.com/s3/3392617/Affiliate-Registration') Apply to be an Affiliate
+                .mk-col-1-4
+                  section#custom_html-5.widget_text.widget.widget_custom_html.mk-in-viewport
+                    .widgettitle About FastTrac
+                    .textwidget.custom-html-widget
+                      ul
+                        li
+                          a(href='http://fasttrac.org/about-us/') About Us
+                        li
+                          a(href='http://fasttrac.org/contact-us/') Contact Us
+                        li
+                          a(href='http://fasttrac.org/green/') Find Classic FastTrac
+            #sub-footer.background-pattern
+              .mk-grid
+                span.mk-footer-copyright
+                  | © 2017 Ewing Marion Kauffman Foundation
+                  br
+                  |  All Rights Reserved
 
 script
   :babel
