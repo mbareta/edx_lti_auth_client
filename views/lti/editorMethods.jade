@@ -6,36 +6,18 @@ script
         editors.forEach(editor => {
           if (editor.id.indexOf('canvas-') !== -1) {
             CKEDITOR.replace(editor.id, {
-              extraPlugins: 'sharedspace,htmlwriter,wordcount,notification',
+              extraPlugins: 'sharedspace,htmlwriter,notification',
               removePlugins: 'resize, save',
               sharedSpaces: { top: 'ckeditor-toolbar' },
               on: {
                 key: canvasEditorOnKeyHandler
-              },
-              wordcount: {
-                showParagraphs: false,
-                showWordCount: false,
-                showCharCount: true,
-                countSpacesAsChars: true,
-                countHTML: false,
-                maxWordCount: -1,
-                maxCharCount: isBmc ? 60 : -1
               }
             })
           } else {
             CKEDITOR.replace(editor.id, {
-              extraPlugins: 'htmlwriter,wordcount,notification',
+              extraPlugins: 'htmlwriter,notification',
               on: {
                 key: editorOnKeyHandler
-              },
-              wordcount: {
-                showParagraphs: false,
-                showWordCount: false,
-                showCharCount: true,
-                countSpacesAsChars: true,
-                countHTML: false,
-                maxWordCount: -1,
-                maxCharCount: isBmc ? 60 : -1
               }
             })
           }
