@@ -1,6 +1,10 @@
 script
   :babel
     function initializeCKEditor(isBmc = false) {
+        CKEDITOR.on('instanceCreated', function (e) {
+          e.editor.on('change', autosave);
+        });
+
         const editors = document.querySelectorAll('.editor')
 
         editors.forEach(editor => {
@@ -42,6 +46,51 @@ script
         })
       }
 
+      function autosave(event) {
+        if (this.autosaveTimeoutId) {
+          clearTimeout(this.autosaveTimeoutId)
+        }
+
+        this.autosaveTimeoutId = setTimeout(() => {
+          const form = document.querySelector(`.cke.${event.editor.id}`).parentNode;
+          saveData(form)
+        }, 5000)
+      }
+
+      function saveData(form) {
+        const modal = form.querySelector('.confirm-modal-wrapper')
+        const successModal = form.querySelector('.success-modal-wrapper')
+        const confirmButton = form.querySelector('.confirm-button')
+        const cancelButton = form.querySelector('.cancel-button')
+
+        const xhr = new XMLHttpRequest()
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              modal.classList.add('hidden')
+              successModal.classList.remove('hidden')
+              setTimeout(() => successModal.classList.add('hidden'), 3000)
+
+              // remove event listeners by cloning DOM nodes
+              confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
+              cancelButton.parentNode.replaceChild(cancelButton.cloneNode(true), cancelButton);
+
+            } else {
+              throw new Error(xhr, xhr.status)
+            }
+          }
+        }
+
+        xhr.onerror = () => {
+          throw new Error(xhr, xhr.status)
+        }
+
+        xhr.open('POST', form.action, true)
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({ data: form.querySelector('textarea').value }))
+      }
+
       function editorOnKeyHandler() {
         const editorId = this.name
         const bindedEditorId = `canvas-${this.name}`
@@ -78,46 +127,20 @@ script
 
         const form = event.target
         const modal = form.querySelector('.confirm-modal-wrapper')
-        const successModal = form.querySelector('.success-modal-wrapper')
         const confirmButton = form.querySelector('.confirm-button')
         const cancelButton = form.querySelector('.cancel-button')
 
-        confirmButton.addEventListener('click', saveResponse)
-
+        confirmButton.addEventListener('click', () => saveData(form))
         cancelButton.addEventListener('click', cancelHandler)
 
         modal.classList.remove('hidden')
 
         function cancelHandler() {
           modal.classList.add('hidden')
-          confirmButton.removeEventListener('click', saveResponse)
-          cancelButton.removeEventListener('click', cancelHandler)
-        }
 
-        function saveResponse() {
-          const xhr = new XMLHttpRequest()
-
-          xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                modal.classList.add('hidden')
-                successModal.classList.remove('hidden')
-                setTimeout(() => successModal.classList.add('hidden'), 3000)
-                confirmButton.removeEventListener('click', saveResponse)
-                cancelButton.removeEventListener('click', cancelHandler)
-              } else {
-                throw new Error(xhr, xhr.status)
-              }
-            }
-          }
-
-          xhr.onerror = () => {
-            throw new Error(xhr, xhr.status)
-          }
-
-          xhr.open('POST', form.action, true)
-          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          xhr.send(JSON.stringify({ data: form.querySelector('textarea').value }))
+          // remove event listeners by cloning DOM nodes
+          confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
+          cancelButton.parentNode.replaceChild(cancelButton.cloneNode(true), cancelButton);
         }
       }
 
