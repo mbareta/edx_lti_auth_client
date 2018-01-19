@@ -18,6 +18,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "docxtemplater": "^3.1.5",
+    "docxtemplater-html-module": "https://modules.docxtemplater.com/packages/v2/alex_extensionengine/22df5c5b-02b0-4e91-693d-5888cefb17b8/html-module-3.5.9.tar.gz",
     "edx-oauth-middleware": "0.0.5",
     "express": "~4.14.1",
     "express-session": "^1.15.0",

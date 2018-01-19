@@ -210,9 +210,9 @@ const serveDeliverableAsWord = (req, res) => {
       subDeliverable.activitiesArray = Object.values(subDeliverable.activities);
 
       // remove HTML tags from user responses
-      subDeliverable.activitiesArray.forEach(activity => {
-        activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '');
-      });
+      // subDeliverable.activitiesArray.forEach(activity => {
+      //   activity.data = activity.data && activity.data.replace(/(<([^>]+)>)/ig, '');
+      // });
     });
 
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
