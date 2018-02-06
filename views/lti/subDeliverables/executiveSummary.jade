@@ -6,12 +6,13 @@ p.subdeliverable-description!= executiveSummary.description
 - var addActionLink = '/lti/form/submit/businessplan/executivesummary'
 - var activityId = 'venturedescription'
 - var ventureDescription = getActivity(activityId)
+- var charLimit = ventureDescription.charLimit
 div.activity-container#venturedescription
   h3.activity-title= ventureDescription.title
   p.activity-description!= ventureDescription.description
 
   - var ventureDescriptionValue = results.find(result => result.name === activityId)
-  - var form = ventureDescriptionValue ? {action: `/lti/form/update/${ventureDescriptionValue._id}`, data: ventureDescriptionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+  - var form = ventureDescriptionValue ? {action: `/lti/form/update/${ventureDescriptionValue._id}`, data: ventureDescriptionValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
   include ../form/form.jade
 
 - var activityId = 'managementandorganizationplan'

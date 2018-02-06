@@ -7,7 +7,7 @@ block content
         p.activity-description!= getActivity(activity.name).description
     - }
 
-    - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data } : {action: `${createLink}`, data: '' }
+    - var form = activity ? {action: `/lti/form/update/${activity._id}`, data: activity.data, charLimit: getActivity(activity.name).charLimit} : {action: `${createLink}`, data: '', charLimit: getActivity(activity.name).charLimit}
     - var hideViewInCourse = true;
     include ./form/form.jade
     include editorMethods

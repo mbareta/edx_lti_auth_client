@@ -25,7 +25,8 @@ div.canvas-container
           span.canvas-cell-header= keyPartners.title
           - var activityId = 'keypartners'
           - var keyPartnersValue = results.find(result => result.name === activityId)
-          - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+          - var charLimit = getActivity(activityId).charLimit
+          - var form = keyPartnersValue ? {action: `/lti/form/update/${keyPartnersValue._id}`, data: keyPartnersValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
           include ../form/canvas.jade
 
       div.column-2
@@ -35,7 +36,8 @@ div.canvas-container
             span.canvas-cell-header= differentiators.title
             - var activityId = 'differentiators'
             - var differentiatorsValue = results.find(result => result.name === activityId)
-            - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+            - var charLimit = getActivity(activityId).charLimit
+            - var form = differentiatorsValue ? {action: `/lti/form/update/${differentiatorsValue._id}`, data: differentiatorsValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
             include ../form/canvas.jade
 
         div.row-5
@@ -44,7 +46,8 @@ div.canvas-container
             span.canvas-cell-header= assets.title
             - var activityId = 'assets'
             - var assetsValue = results.find(result => result.name === activityId)
-            - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+            - var charLimit = getActivity(activityId).charLimit
+            - var form = assetsValue ? {action: `/lti/form/update/${assetsValue._id}`, data: assetsValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
             include ../form/canvas.jade
 
       div.column-2
@@ -53,7 +56,8 @@ div.canvas-container
           span.canvas-cell-header.canvas-cell-header= valueProposition.title
           - var activityId = 'valueproposition'
           - var valuePropositionValue = results.find(result => result.name === activityId)
-          - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+          - var charLimit = getActivity(activityId).charLimit
+          - var form = valuePropositionValue ? {action: `/lti/form/update/${valuePropositionValue._id}`, data: valuePropositionValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
           include ../form/canvas.jade
 
       div.column-2
@@ -63,7 +67,8 @@ div.canvas-container
             span.canvas-cell-header= customerRelationships.title
             - var activityId = 'customerrelationships'
             - var customerRelationshipsValue = results.find(result => result.name === activityId)
-            - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data } :  {action: `${addActionLink}/${activityId}`, data: '' }
+            - var charLimit = getActivity(activityId).charLimit
+            - var form = customerRelationshipsValue ? {action: `/lti/form/update/${customerRelationshipsValue._id}`, data: customerRelationshipsValue.data, charLimit: charLimit } :  {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
             include ../form/canvas.jade
 
         div.row-5
@@ -72,7 +77,8 @@ div.canvas-container
             span.canvas-cell-header= distributionChannels.title
             - var activityId = 'distributionchannels'
             - var distributionChannelsValue = results.find(result => result.name === activityId)
-            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+            - var charLimit = getActivity(activityId).charLimit
+            - var form = distributionChannelsValue ? {action: `/lti/form/update/${distributionChannelsValue._id}`, data: distributionChannelsValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
             include ../form/canvas.jade
 
       div.column-2
@@ -81,7 +87,8 @@ div.canvas-container
           span.canvas-cell-header= customerSegments.title
           - var activityId = 'customersegments'
           - var customerSegmentsValue = results.find(result => result.name === activityId)
-          - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+          - var charLimit = getActivity(activityId).charLimit
+          - var form = customerSegmentsValue ? {action: `/lti/form/update/${customerSegmentsValue._id}`, data: customerSegmentsValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
           include ../form/canvas.jade
 
     div.row-3
@@ -91,7 +98,8 @@ div.canvas-container
           span.canvas-cell-header= costStructure.title
           - var activityId = 'coststructure'
           - var costStructureValue = results.find(result => result.name === activityId)
-          - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+          - var charLimit = getActivity(activityId).charLimit
+          - var form = costStructureValue ? {action: `/lti/form/update/${costStructureValue._id}`, data: costStructureValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
           include ../form/canvas.jade
 
       div.column-5
@@ -100,7 +108,8 @@ div.canvas-container
           span.canvas-cell-header= revenueStreams.title
           - var activityId = 'revenuestreams'
           - var revenueStreamsValue = results.find(result => result.name === activityId)
-          - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data } : {action: `${addActionLink}/${activityId}`, data: '' }
+          - var charLimit = getActivity(activityId).charLimit
+          - var form = revenueStreamsValue ? {action: `/lti/form/update/${revenueStreamsValue._id}`, data: revenueStreamsValue.data, charLimit: charLimit } : {action: `${addActionLink}/${activityId}`, data: '', charLimit: charLimit }
           include ../form/canvas.jade
 
   script
