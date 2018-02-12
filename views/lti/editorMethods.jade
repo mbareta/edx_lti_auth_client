@@ -70,7 +70,10 @@ script
 
       function saveData(form, data=undefined) {
         const modal = form.querySelector('.confirm-modal-wrapper')
-        const successModal = form.querySelector('.success-modal-wrapper')
+        if (modal === null) return;
+
+        const successMessage = form.querySelector('.success-message')
+        const globalSuccessMessage = document.querySelector('.canvas-control-container .success-message')
         const confirmButton = form.querySelector('.confirm-button')
         const cancelButton = form.querySelector('.cancel-button')
 
@@ -84,8 +87,17 @@ script
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
               modal.classList.add('hidden')
-              successModal.classList.remove('hidden')
-              setTimeout(() => successModal.classList.add('hidden'), 3000)
+              successMessage.classList.remove('hidden')
+              if (globalSuccessMessage) {
+                globalSuccessMessage.classList.remove('hidden')
+              }
+
+              setTimeout(() => {
+                successMessage.classList.add('hidden')
+                if (globalSuccessMessage) {
+                  globalSuccessMessage.classList.add('hidden')
+                }
+              }, 5000)
 
               // remove event listeners by cloning DOM nodes
               confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
