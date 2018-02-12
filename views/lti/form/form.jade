@@ -13,13 +13,6 @@
         div.confirm-button
           | Yes
 
-    div.success-modal-wrapper.hidden
-      div.success-modal
-        h4.modal-title
-          | Success!
-        p.modal-content
-          | Your changes are now saved across all your courses.
-
     textarea(type='editor', name='data', class='editor', id=form.action, autocomplete="off", data-limit=form.charLimit)= form.data
 
     div.form-control-container
@@ -30,6 +23,9 @@
           a(href=block && block.lms_web_url)
             | View in course
             i.fa.fa-arrow-circle-o-right
+          span.success-message.hidden
+            | Success! Your changes are now saved across all your courses.
+
       button.save-button-wrapper
         i.fa.fa-floppy-o.save-icon
         span.save-button Save
