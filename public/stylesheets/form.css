@@ -225,3 +225,14 @@ input.hidden {
 #overflowModal .confirm-modal {
   white-space: normal;
 }
+
+#overflowModal p.dismiss-message {
+  float: left;
+  margin-top: 2.5rem;
+  margin-left: 1.5rem;
+}
+
+#overflowModal input[type=checkbox] {
+  vertical-align: middle;
+  margin-right: .5rem;
+}
