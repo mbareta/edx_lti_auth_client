@@ -4,8 +4,18 @@ div#overflowModal.confirm-modal-wrapper.hidden
       | You have exceeded the character count on this display
     p.modal-content
       | You can continue adding data in the box below. Click OK to proceed.
+    p.dismiss-message
+      input#dismissCheckbox(type="checkbox")
+      label Got it! Don't show me this message again
     div.confirm-button
       | OK
+
+  script
+    :babel
+      const checkbox = document.querySelector('#dismissCheckbox');
+      checkbox.addEventListener('change', function() {
+        localStorage.setItem('dismiss', checkbox.checked);
+      })
 
 script
   :babel
@@ -165,7 +175,8 @@ script
             const maxDataLength = editor.element.$.dataset.limit;
             const bindedEditor = CKEDITOR.instances[bindedEditorId];
 
-            if (false && dataLength > maxDataLength) {
+            const dismissed = localStorage.getItem('dismiss') === 'true';
+            if (!dismissed && dataLength > maxDataLength) {
               showOverflowModal(bindedEditor);
             }
 
