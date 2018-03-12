@@ -236,3 +236,13 @@
   vertical-align: middle;
   margin-right: .5rem;
 }
+
+.cke_editable_inline {
+  padding: 1rem;
+  word-break: break-all;
+}
+
+.cke_editable_inline * {
+  font-size: 15px;
+  font-family: serif;
+}
