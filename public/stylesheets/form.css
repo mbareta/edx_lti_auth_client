@@ -246,3 +246,8 @@
   font-size: 15px;
   font-family: serif;
 }
+
+.cke_editable_inline ul,
+.cke_editable_inline ol {
+  margin-left: 1rem;
+}
