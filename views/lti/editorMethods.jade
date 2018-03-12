@@ -30,7 +30,7 @@ script
           // const charLimit = editor.element.$.dataset.limit;
 
           if (editor.id.indexOf('canvas-') !== -1) {
-            CKEDITOR.replace(editor.id, {
+            CKEDITOR.inline(editor.id, {
               extraPlugins: 'sharedspace,htmlwriter,wordcount,notification',
               removePlugins: 'resize, save',
               sharedSpaces: { top: 'ckeditor-toolbar' },
@@ -175,8 +175,15 @@ script
             const maxDataLength = editor.element.$.dataset.limit;
             const bindedEditor = CKEDITOR.instances[bindedEditorId];
 
+            // calculate overflow
+            const editorDiv = editor.element.$.nextElementSibling;
+            const editorForm = editorDiv.parentNode.parentNode.parentNode;
+            const isOverflowed = editorDiv.offsetHeight > editorForm.offsetHeight;
+
+            // user can dismiss overflow message permanently
             const dismissed = localStorage.getItem('dismiss') === 'true';
-            if (!dismissed && dataLength > maxDataLength) {
+
+            if (!dismissed && isOverflowed) {
               showOverflowModal(bindedEditor);
             }
 
