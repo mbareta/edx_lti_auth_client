@@ -27,7 +27,9 @@ html
       script
         :babel
           var bugmuncher_options = {
-            api_key: '!{config.bugmuncherApiKey}'
+            api_key: '!{config.bugmuncherApiKey}',
+            require_email: true,
+            prefill_email: '!{profile.email}'
           };
           (function(){
             var e = document.createElement("script");
