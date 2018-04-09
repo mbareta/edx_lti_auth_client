@@ -226,9 +226,18 @@
   white-space: normal;
 }
 
+#overflowModal ol {
+  margin: 1rem;
+}
+
+#overflowModal a {
+  color: #F76B1C;
+  margin-left: .2rem;
+  cursor: pointer;
+}
+
 #overflowModal p.dismiss-message {
   float: left;
-  margin-top: 2.5rem;
   margin-left: 1.5rem;
 }
 

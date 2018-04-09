@@ -1,21 +1,28 @@
 div#overflowModal.confirm-modal-wrapper.hidden
   div.confirm-modal
     h4.modal-title
-      | You have exceeded the character count on this display
-    p.modal-content
-      | You can continue adding data in the box below. Click OK to proceed.
+      | You’ve reached the total space available in the table view.
+    div.modal-content
+      | You have a few options:
+      ol
+        li
+          | Remove formatting or text in the table, and keep working in this view.
+          a.cancel-link Yes, stay here!
+        li
+          | Continue adding content in the free text space below. This will not display in the table view.
+          a.confirm-link Got it, take me there
     p.dismiss-message
       input#dismissCheckbox(type="checkbox")
       label Got it! Don't show me this message again
-    div.confirm-button
-      | OK
-
   script
     :babel
       const checkbox = document.querySelector('#dismissCheckbox');
       checkbox.addEventListener('change', function() {
         localStorage.setItem('dismiss', checkbox.checked);
-      })
+      });
+
+      const cancelLink = document.querySelector('#overflowModal .cancel-link');
+      cancelLink.addEventListener('click', () => hideOverflowModal());
 
 script
   :babel
@@ -148,7 +155,7 @@ script
       function showOverflowModal(editor) {
         const modal = document.querySelector('#overflowModal');
         modal.classList.remove('hidden');
-        modal.querySelector('.confirm-button').addEventListener('click', () => focusEditor(editor))
+        modal.querySelector('.confirm-link').addEventListener('click', () => focusEditor(editor))
       }
 
       function hideOverflowModal() {
@@ -156,7 +163,7 @@ script
         modal.classList.add('hidden');
 
         // remove event listeners
-        const confirmButton = modal.querySelector('.confirm-button');
+        const confirmButton = modal.querySelector('.confirm-link');
         confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
       }
 
