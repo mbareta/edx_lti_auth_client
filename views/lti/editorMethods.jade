@@ -31,10 +31,10 @@ script
           e.editor.on('change', autosave);
         });
 
-        const editors = document.querySelectorAll('.editor')
+        const editors = document.querySelectorAll('.editor');
 
-        editors.forEach(editor => {
-          // const charLimit = editor.element.$.dataset.limit;
+        for (var i = 0; i < editors.length; i++) {
+          const editor = editors[i];
 
           if (editor.id.indexOf('canvas-') !== -1) {
             CKEDITOR.inline(editor.id, {
@@ -71,7 +71,7 @@ script
               }
             })
           }
-        })
+        }
       }
 
       function autosave(event) {
