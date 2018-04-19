@@ -45,8 +45,8 @@ app.enable('trust proxy');
 
 app.use(favicon(path.join(__dirname, 'public', 'assets', 'images', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: config.uploadLimit }));
+app.use(bodyParser.urlencoded({ extended: false, limit: config.uploadLimit }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // TODO: check what is express session secret
