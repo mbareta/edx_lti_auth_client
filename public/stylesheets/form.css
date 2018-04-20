@@ -248,7 +248,7 @@
 
 .cke_editable_inline {
   padding: 1rem;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .cke_editable_inline * {
