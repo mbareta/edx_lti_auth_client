@@ -21,7 +21,8 @@
     "whitelistRoutes": ["/users/auth", "/users/login"],
     "googleAnalyticsAccount": "UA-97125166-1",
     "bugmuncherApiKey": "cd9d0312a0c59b558394",
-    "redisUrl": "//localhost:6379"
+    "redisUrl": "//localhost:6379",
+    "uploadLimit": "4.13mb"
   },
   "production": {
     "mongoUrl": "mongodb://production-mongo:27017/",
@@ -45,6 +46,7 @@
     "whitelistRoutes": ["/users/auth", "/users/login"],
     "googleAnalyticsAccount": "UA-2096912-36",
     "bugmuncherApiKey": "cd9d0312a0c59b558394",
-    "redisUrl": "//production-redis:6379"
+    "redisUrl": "//production-redis:6379",
+    "uploadLimit": "4.13mb"
   }
 }
