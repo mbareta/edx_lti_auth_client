@@ -16,7 +16,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
-const config = require('./config/main');
+const config = require('./config');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
