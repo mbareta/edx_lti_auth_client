@@ -86,13 +86,8 @@ script
       }
 
       function saveData(form, data=undefined) {
-        const modal = form.querySelector('.confirm-modal-wrapper')
-        if (modal === null) return;
-
         const successMessage = form.querySelector('.success-message')
         const globalSuccessMessage = document.querySelector('.canvas-control-container .success-message')
-        const confirmButton = form.querySelector('.confirm-button')
-        const cancelButton = form.querySelector('.cancel-button')
 
         const xhr = new XMLHttpRequest()
 
@@ -103,7 +98,6 @@ script
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              modal.classList.add('hidden')
               successMessage.classList.remove('hidden')
               if (globalSuccessMessage) {
                 globalSuccessMessage.classList.remove('hidden')
@@ -115,10 +109,6 @@ script
                   globalSuccessMessage.classList.add('hidden')
                 }
               }, 5000)
-
-              // remove event listeners by cloning DOM nodes
-              confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
-              cancelButton.parentNode.replaceChild(cancelButton.cloneNode(true), cancelButton);
 
             } else {
               throw new Error(xhr, xhr.status)
@@ -202,22 +192,7 @@ script
         event.preventDefault()
 
         const form = event.target
-        const modal = form.querySelector('.confirm-modal-wrapper')
-        const confirmButton = form.querySelector('.confirm-button')
-        const cancelButton = form.querySelector('.cancel-button')
-
-        confirmButton.addEventListener('click', () => saveData(form))
-        cancelButton.addEventListener('click', cancelHandler)
-
-        modal.classList.remove('hidden')
-
-        function cancelHandler() {
-          modal.classList.add('hidden')
-
-          // remove event listeners by cloning DOM nodes
-          confirmButton.parentNode.replaceChild(confirmButton.cloneNode(true), confirmButton);
-          cancelButton.parentNode.replaceChild(cancelButton.cloneNode(true), cancelButton);
-        }
+        saveData(form)
       }
 
       function focusEditor(editor) {
