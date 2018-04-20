@@ -1,5 +1,5 @@
 const request = Promise.promisifyAll(require('request').defaults({ jar: true }));
-const config = require('../config/main');
+const config = require('../config');
 const edxCourseApi = require('../lib/edxCourseApi');
 
 const getUserInfo = (req, res, next) => {
