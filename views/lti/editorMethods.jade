@@ -78,7 +78,7 @@ script
         }
       }
 
-      function saveData(form, data=undefined) {
+      function saveData(form) {
         const isCanvasForm = form.classList.contains('canvas-form');
         const successMessage = isCanvasForm
           ? document.querySelector('.canvas-control-container .success-message')
@@ -86,9 +86,9 @@ script
 
         const xhr = new XMLHttpRequest()
 
-        if (!data) {
-          data = form.querySelector('textarea').value
-        }
+        const textareaId = form.querySelector('textarea').id;
+        const editor = CKEDITOR.instances[textareaId];
+        const data = editor.getData();
 
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4) {
@@ -184,15 +184,15 @@ script
 
         this.autosaveTimeoutId = setTimeout(() => {
           const form = event.editor.element.$.parentNode;
-          saveData(form, event.editor.getData());
+          saveData(form);
         }, 5000);
       }
 
       function onEditorSubmit(event) {
         event.preventDefault()
 
-        const form = event.target
-        saveData(form)
+        const form = event.target;
+        saveData(form);
       }
 
       function focusEditor(editor) {
