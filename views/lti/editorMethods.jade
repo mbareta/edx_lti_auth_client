@@ -28,7 +28,11 @@ script
   :babel
     function initializeCKEditor(isBmc = false) {
         CKEDITOR.on('instanceCreated', function (e) {
-          e.editor.on('change', autosave);
+          const bindOnChange = () =>  e.editor.on('change', onEditorChange);
+          const unbindOnChange = () => e.editor.removeListener('change', onEditorChange);
+
+          e.editor.on('focus', bindOnChange);
+          e.editor.on('blur', unbindOnChange);
         });
 
         const editors = document.querySelectorAll('.editor');
@@ -74,20 +78,11 @@ script
         }
       }
 
-      function autosave(event) {
-        if (this.autosaveTimeoutId) {
-          clearTimeout(this.autosaveTimeoutId)
-        }
-
-        this.autosaveTimeoutId = setTimeout(() => {
-          const form = event.editor.element.$.parentNode;
-          saveData(form, event.editor.getData());
-        }, 5000)
-      }
-
       function saveData(form, data=undefined) {
-        const successMessage = form.querySelector('.success-message')
-        const globalSuccessMessage = document.querySelector('.canvas-control-container .success-message')
+        const isCanvasForm = form.classList.contains('canvas-form');
+        const successMessage = isCanvasForm
+          ? document.querySelector('.canvas-control-container .success-message')
+          : form.querySelector('.success-message')
 
         const xhr = new XMLHttpRequest()
 
@@ -98,16 +93,10 @@ script
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              successMessage.classList.remove('hidden')
-              if (globalSuccessMessage) {
-                globalSuccessMessage.classList.remove('hidden')
-              }
+              successMessage.classList.remove('hidden');
 
               setTimeout(() => {
-                successMessage.classList.add('hidden')
-                if (globalSuccessMessage) {
-                  globalSuccessMessage.classList.add('hidden')
-                }
+                successMessage.classList.add('hidden');
               }, 5000)
 
             } else {
@@ -186,6 +175,17 @@ script
 
             bindedEditor.setData(data);
           }, 100)
+      }
+
+      function onEditorChange(event) {
+        if (this.autosaveTimeoutId) {
+          clearTimeout(this.autosaveTimeoutId)
+        }
+
+        this.autosaveTimeoutId = setTimeout(() => {
+          const form = event.editor.element.$.parentNode;
+          saveData(form, event.editor.getData());
+        }, 5000);
       }
 
       function onEditorSubmit(event) {
