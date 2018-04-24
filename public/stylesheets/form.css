@@ -248,6 +248,8 @@
 
 .cke_editable_inline {
   padding: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   word-break: break-word;
 }
 
