@@ -12,6 +12,8 @@ div.canvas-container
   div.canvas-control-container
     div#ckeditor-toolbar
     div.buttons
+      div.success-message.hidden
+        | Your changes are now saved across all your courses.
       div.reset-button-wrapper
           input.reset-button(type='button', value='Cancel')
       div.save-button-wrapper
@@ -142,13 +144,13 @@ div.canvas-container
           event.preventDefault()
           const form = event.target
           const xhr = new XMLHttpRequest()
-          const successModal = form.querySelector('.success-modal-wrapper')
+          const successMessage = document.querySelector('.canvas-control-container .success-message')
 
           xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
               if (xhr.status === 200) {
-                successModal.classList.remove('hidden')
-                setTimeout(() => successModal.classList.add('hidden'), 3000)
+                successMessage.classList.remove('hidden')
+                setTimeout(() => successMessage.classList.add('hidden'), 5000)
               }
               else {
                 throw new Error(xhr, xhr.status)

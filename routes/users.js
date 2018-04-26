@@ -1,6 +1,6 @@
 const express = require('express');
 const { getUserInfo, getUserProfile, cacheUserXBlocks } = require('../middlewares/auth');
-const config = require('../config/main');
+const config = require('../config');
 
 const router = express.Router();
 

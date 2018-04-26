@@ -2,7 +2,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
+  width: 86%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -182,26 +182,29 @@
 
 .canvas-table .row-7,
 .canvas-table .row-3,
-.canvas-table .row-5, {
+.canvas-table .row-5 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
 }
 
 .canvas-table .row-7 {
   height: 500px;
+  width: 100%;
 }
 
 .canvas-table .row-3 {
   height: 242px;
+  width: 100%;
 }
 
 .canvas-table .row-5 {
   height: 250px;
+  width: 100%;
 }
 
 .canvas-table .column-2,

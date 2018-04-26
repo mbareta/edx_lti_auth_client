@@ -1,5 +1,5 @@
 const request = Promise.promisifyAll(require('request').defaults({ jar: true }));
-const config = require('../config/main');
+const config = require('../config');
 const edxCourseApi = require('../lib/edxCourseApi');
 
 const getUserInfo = (req, res, next) => {
@@ -37,6 +37,10 @@ const getUserProfile = (req, res, next) => {
 
 const cacheUserXBlocks = (req, res) => {
   // cache all user blocks in session
+  if (process.env.NODE_ENV !== 'production') {
+    return res.redirect(req.session.redirectToUrl || '/');
+  }
+
   edxCourseApi.getAllUserBlocks(req)
   .then(blocks => { req.session.blocks = blocks; })
   .then(() => res.redirect(req.session.redirectToUrl || '/'));

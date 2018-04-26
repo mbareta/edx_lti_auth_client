@@ -104,8 +104,7 @@
   cursor:pointer;
 }
 
-.confirm-modal-wrapper,
-.success-modal-wrapper {
+.confirm-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -115,12 +114,15 @@
     background-color: whitesmoke;
 }
 
-.confirm-modal-wrapper.hidden,
-.success-modal-wrapper.hidden {
-  display: none;
+.success-message {
+  margin-left: 1.5rem;
+  text-transform: none;
+  font-style: italic;
+  font-weight: bold;
+  color: #9cc320;
 }
 
-.confirm-modal, .success-modal {
+.confirm-modal {
   width: 450px;
 
   position: fixed;
@@ -138,12 +140,7 @@
   height: 215px;
 }
 
-.success-modal {
-  height: 156px;
-}
-
-.confirm-modal h4,
-.success-modal h4 {
+.confirm-modal h4 {
   font-size: 24px;
   line-height: 32px;
   margin: 24px 32px 16px;
@@ -153,8 +150,7 @@
   height: 281px;
 }
 
-.deliverable-container .activity-container .confirm-modal,
-.deliverable-container .activity-container .success-modal {
+.deliverable-container .activity-container .confirm-modal {
   left: 34%;
   bottom: 40%;
 }
@@ -164,9 +160,7 @@
 }
 
 .confirm-modal .modal-title,
-.confirm-modal .modal-content,
-.success-modal .modal-title,
-.success-modal .modal-content {
+.confirm-modal .modal-content {
   margin-left: 32px;
   margin-right: 32px;
 }
@@ -197,7 +191,7 @@
   cursor: pointer;
 }
 
-input.hidden {
+.hidden {
   display: none;
 }
 
@@ -230,4 +224,41 @@ input.hidden {
 
 #overflowModal .confirm-modal {
   white-space: normal;
+}
+
+#overflowModal ol {
+  margin: 1rem;
+}
+
+#overflowModal a {
+  color: #F76B1C;
+  margin-left: .2rem;
+  cursor: pointer;
+}
+
+#overflowModal p.dismiss-message {
+  float: left;
+  margin-left: 1.5rem;
+}
+
+#overflowModal input[type=checkbox] {
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.cke_editable_inline {
+  padding: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.cke_editable_inline * {
+  font-size: 15px;
+  font-family: serif;
+}
+
+.cke_editable_inline ul,
+.cke_editable_inline ol {
+  margin-left: 1rem;
 }
